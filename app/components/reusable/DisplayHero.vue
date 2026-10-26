@@ -198,7 +198,7 @@ onMounted(async () => {
 
 .hero-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   margin-inline: auto;
   gap: var(--space-2);
 }
@@ -335,7 +335,7 @@ onMounted(async () => {
 .tagline-text {
   font-size: var(--text-lg);
   line-height: 1.6;
-  color: var(--shell-muted);
+  color: var(--shell-text);
 }
 
 .hero-actions {

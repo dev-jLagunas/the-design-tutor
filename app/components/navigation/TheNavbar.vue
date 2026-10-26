@@ -17,8 +17,8 @@ function closeDrawer() {
         <img
           :src="
             isDark
-              ? '/images/brand/tdt-logo-transparent-dark.png'
-              : '/images/brand/tdt-logo-transparent.png'
+              ? '/images/brand/tdt-logo-transparent.png'
+              : '/images/brand/tdt-logo-transparent-dark.png'
           "
           alt="The Design Tutor Logo"
           class="brand-logo"
@@ -150,7 +150,13 @@ function closeDrawer() {
   top: 0;
   z-index: 50;
   width: 100%;
-  background-color: var(--shell-surface);
+  background-color: var(--shell-contrast-bg);
+  color: var(--shell-contrast-text);
+  border-bottom: 1px solid var(--shell-contrast-border);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .navbar-container {
@@ -170,7 +176,7 @@ function closeDrawer() {
   align-items: center;
   gap: var(--space-4);
   text-decoration: none;
-  color: var(--shell-text);
+  color: var(--shell-contrast-text);
   min-width: 0;
 }
 
@@ -194,7 +200,7 @@ function closeDrawer() {
 .brand-tagline {
   display: none;
   font-size: var(--text-xs);
-  opacity: 0.7;
+  color: var(--shell-contrast-muted);
 }
 
 /* ==========================================================================
@@ -213,7 +219,7 @@ function closeDrawer() {
 
 .search-input-wrapper {
   width: 100%;
-  border-bottom: 1px solid var(--shell-border);
+  border-bottom: 1px solid var(--shell-contrast-border);
   padding-bottom: var(--space-1);
 }
 
@@ -244,7 +250,7 @@ function closeDrawer() {
 }
 
 .nav-link {
-  color: var(--shell-text);
+  color: var(--shell-contrast-text);
   text-decoration: none;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
@@ -265,8 +271,8 @@ function closeDrawer() {
   height: 40px;
   border-radius: 9999px;
   background: transparent;
-  border: 1px solid var(--shell-border);
-  color: var(--shell-text);
+  border: 1px solid var(--shell-contrast-border);
+  color: var(--shell-contrast-text);
   cursor: pointer;
   font-size: 1.1rem;
 }
@@ -284,7 +290,7 @@ function closeDrawer() {
 .mobile-theme-btn {
   background: transparent;
   border: none;
-  color: var(--shell-text);
+  color: var(--shell-contrast-text);
   font-size: 1.25rem;
   cursor: pointer;
   padding: var(--space-1);
@@ -464,8 +470,13 @@ function closeDrawer() {
     display: flex;
   }
 
+  .brand-logo {
+    height: 64px;
+  }
+
   .desktop-theme-btn {
     display: flex;
+    color: var(--shell-contrast-text);
   }
 
   .mobile-controls {
