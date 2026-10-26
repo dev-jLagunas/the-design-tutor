@@ -197,6 +197,10 @@ function closeDrawer() {
   min-width: 0;
 }
 
+.brand-title {
+  color: var(--shell-contrast-text);
+}
+
 .brand-tagline {
   display: none;
   font-size: var(--text-xs);
@@ -253,7 +257,7 @@ function closeDrawer() {
   color: var(--shell-contrast-text);
   text-decoration: none;
   font-size: 0.8rem;
-  letter-spacing: 0.05em;
+  font-weight: 400;
 }
 
 .nav-link-about:hover {

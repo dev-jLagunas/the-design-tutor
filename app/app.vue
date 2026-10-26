@@ -18,28 +18,7 @@ function handleRandomStyle() {
   <div class="flex-col">
     <NavigationTheNavbar />
     <main class="tutor-shell">
-      <ReusableDisplayHero
-        word1="Learn"
-        word2="Visual"
-        word3="Design"
-        tagline="Explore historical and modern web design movements through interactive, living case studies and technical breakdowns."
-      >
-        <template #actions>
-          <UiActionPair
-            :primary="{
-              label: 'Explore Styles',
-              to: '/#styles-index',
-              icon: 'lucide:arrow-down-right',
-            }"
-            :secondary="{
-              label: 'Random Style',
-              icon: 'lucide:shuffle',
-              title: 'Load a random design movement',
-            }"
-            @secondary-click="handleRandomStyle"
-          />
-        </template>
-      </ReusableDisplayHero>
+      <NuxtPage />
     </main>
   </div>
 </template>
