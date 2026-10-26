@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Young+Serif&display=swap");
+
 /* ==========================================================================
    1. ESSENTIAL RESET (Applies everywhere safely)
    ========================================================================== */
@@ -23,27 +25,96 @@ video {
 }
 
 /* ==========================================================================
-   2. APP SHELL BASE (Controls the tutor platform UI only)
+   2. APP SHELL DESIGN TOKENS
    ========================================================================== */
 :root {
-  --shell-font: system-ui, -apple-system, sans-serif;
-  --shell-bg: #0f1115;
-  --shell-surface: #181b21;
+  /* Colors - Dark Base (Default) */
+  --shell-bg: #131314;
+  --shell-surface: #131314;
   --shell-text: #f3f4f6;
+  --shell-muted: #8b949e;
   --shell-border: #2a2e39;
-  --shell-accent: #3b82f6;
+
+  /* Accent Roles */
+  --shell-accent-gold: #eeba2b;
+  --shell-accent-cyan: #2d9cbd;
+  --shell-accent-coral: #eb5757;
+
+  /* Typography Families */
+  --font-display: "Young Serif", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  /* Systematic Spacing Scale */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.5rem; /* 24px */
+  --space-6: 2rem; /* 32px */
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] {
+  --shell-bg: #fbfbfa;
+  --shell-surface: #f1f1f1;
+  --shell-text: #333333;
+  --shell-muted: #6b7280;
+  --shell-border: #e4e4e7;
 }
 
 body {
-  font-family: var(--shell-font);
+  font-family: var(--font-body);
   background-color: var(--shell-bg);
   color: var(--shell-text);
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================================================================
-   PURE FUNCTIONAL UTILITIES
+   3. TYPOGRAPHY SYSTEM CONTRACTS
+   ========================================================================== */
+
+/* The Display Contract: Always bold, tight tracking, uppercase */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Display Scale Variants */
+.text-display-sm {
+  font-size: 1.25rem;
+}
+
+.text-display-md {
+  font-size: 1.75rem;
+}
+
+.text-display-hero {
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+}
+
+/* The Body Contract: Natural sentence casing, balanced tracking */
+.font-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1.5;
+}
+
+/* Micro-meta/caps utility (strictly for badges, category markers, and tracking) */
+.text-micro-caps {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   4. PURE FUNCTIONAL UTILITIES
    ========================================================================== */
 
 /* --- Centering & Alignment --- */
@@ -56,7 +127,7 @@ body {
   text-align: center;
 }
 
-/* --- Flexbox Alignments (Direction-agnostic shortcuts) --- */
+/* --- Flexbox Alignments --- */
 .flex-center {
   display: flex;
   align-items: center;
@@ -75,7 +146,6 @@ body {
 }
 
 /* --- Positioning & Layering --- */
-/* Stretches an element over its relative parent (great for full-card clickable overlays or backgrounds) */
 .cover-absolute {
   position: absolute;
   inset: 0;
@@ -88,7 +158,6 @@ body {
 }
 
 /* --- Media & Aspect Ratios --- */
-/* Forces an image/video to fill its box without distorting proportions */
 .img-cover {
   width: 100%;
   height: 100%;
@@ -102,14 +171,12 @@ body {
 }
 
 /* --- Text Truncation --- */
-/* Single-line ellipsis */
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Multi-line clamp: requires setting a line-count via inline style or scoped class (e.g., style="--lines: 3") */
 .line-clamp {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -118,7 +185,6 @@ body {
 }
 
 /* --- Interaction & Visibility --- */
-/* Screen-reader only (accessible to screen readers, hidden visually) */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -131,17 +197,14 @@ body {
   border-width: 0;
 }
 
-/* Ignores pointer/click events (lets clicks pass right through overlays or icons) */
 .no-pointer {
   pointer-events: none;
 }
 
-/* Prevents text selection during drags or UI toggles */
 .no-select {
   user-select: none;
 }
 
-/* Smooth transition shortcut for interactive UI */
 .transition-smooth {
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
