@@ -1,0 +1,147 @@
+/* ==========================================================================
+   1. ESSENTIAL RESET (Applies everywhere safely)
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   2. APP SHELL BASE (Controls the tutor platform UI only)
+   ========================================================================== */
+:root {
+  --shell-font: system-ui, -apple-system, sans-serif;
+  --shell-bg: #0f1115;
+  --shell-surface: #181b21;
+  --shell-text: #f3f4f6;
+  --shell-border: #2a2e39;
+  --shell-accent: #3b82f6;
+}
+
+body {
+  font-family: var(--shell-font);
+  background-color: var(--shell-bg);
+  color: var(--shell-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   PURE FUNCTIONAL UTILITIES
+   ========================================================================== */
+
+/* --- Centering & Alignment --- */
+.center {
+  display: grid;
+  place-content: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* --- Flexbox Alignments (Direction-agnostic shortcuts) --- */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Positioning & Layering --- */
+/* Stretches an element over its relative parent (great for full-card clickable overlays or backgrounds) */
+.cover-absolute {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.relative {
+  position: relative;
+}
+
+/* --- Media & Aspect Ratios --- */
+/* Forces an image/video to fill its box without distorting proportions */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --- Text Truncation --- */
+/* Single-line ellipsis */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Multi-line clamp: requires setting a line-count via inline style or scoped class (e.g., style="--lines: 3") */
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--lines, 2);
+  overflow: hidden;
+}
+
+/* --- Interaction & Visibility --- */
+/* Screen-reader only (accessible to screen readers, hidden visually) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Ignores pointer/click events (lets clicks pass right through overlays or icons) */
+.no-pointer {
+  pointer-events: none;
+}
+
+/* Prevents text selection during drags or UI toggles */
+.no-select {
+  user-select: none;
+}
+
+/* Smooth transition shortcut for interactive UI */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
