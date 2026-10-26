@@ -106,18 +106,17 @@ function closeDrawer() {
     <Transition name="drawer-slide">
       <div v-if="isDrawerOpen" class="mobile-drawer flex-col">
         <div class="drawer-top flex-col">
-          <span class="drawer-badge">Navigation</span>
           <nav class="drawer-nav flex-col" aria-label="Mobile Navigation">
             <NuxtLink
               to="/about"
-              class="drawer-link drawer-link-about font-display text-display-hero"
+              class="drawer-link drawer-link-about font-display"
               @click="closeDrawer"
             >
               About
             </NuxtLink>
             <NuxtLink
               to="/contact"
-              class="drawer-link drawer-link-contact font-display text-display-hero"
+              class="drawer-link drawer-link-contact font-display"
               @click="closeDrawer"
             >
               Contact
@@ -129,15 +128,13 @@ function closeDrawer() {
           <div class="drawer-search-wrapper flex-between">
             <input
               type="search"
-              placeholder="SEARCH INDEX..."
+              placeholder="Search Styles..."
               aria-label="Search design styles mobile"
-              class="font-display"
+              class="font-body"
             />
             <span class="search-icon-lg">⚲</span>
           </div>
-          <p class="drawer-credit text-micro-caps">
-            Visual designs analyzed and explained by Juan Lagunas
-          </p>
+          <p class="drawer-credit">Visual designs analyzed and explained.</p>
         </div>
       </div>
     </Transition>
@@ -197,12 +194,8 @@ function closeDrawer() {
 
 .brand-tagline {
   color: var(--shell-muted);
-  font-size: 0.75rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: 0.04em;
-  display: none; /* Appears at >= 768px */
+  display: none;
+  font-size: var(--text-xs);
 }
 
 /* ==========================================================================
@@ -232,12 +225,12 @@ function closeDrawer() {
   outline: none;
   color: var(--shell-text);
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   letter-spacing: 0.04em;
 }
 
 .search-icon {
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   opacity: 0.5;
   transform: rotate(-45deg);
   display: inline-block;
@@ -391,6 +384,7 @@ function closeDrawer() {
   text-decoration: none;
   color: var(--shell-text);
   transition: color 0.2s ease;
+  font-size: var(--text-display-size);
 }
 
 .drawer-link-about:hover {
@@ -417,7 +411,7 @@ function closeDrawer() {
   background: transparent;
   border: none;
   outline: none;
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   color: var(--shell-text);
 }
 
@@ -430,6 +424,7 @@ function closeDrawer() {
 
 .drawer-credit {
   color: var(--shell-muted);
+  font-size: var(--text-sm);
 }
 
 /* Drawer Transitions */

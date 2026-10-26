@@ -44,6 +44,17 @@ video {
   --font-display: "Young Serif", Georgia, serif;
   --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 
+  /* Typography Scale */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-reg: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-display-size: 3.2rem; /* 48px */
+
   /* Systematic Spacing Scale */
   --space-1: 0.25rem; /* 4px */
   --space-2: 0.5rem; /* 8px */
@@ -80,19 +91,6 @@ body {
   letter-spacing: -0.03em;
   text-transform: uppercase;
   line-height: 1;
-}
-
-/* Display Scale Variants */
-.text-display-sm {
-  font-size: 1.25rem;
-}
-
-.text-display-md {
-  font-size: 1.75rem;
-}
-
-.text-display-hero {
-  font-size: clamp(2.5rem, 8vw, 3.5rem);
 }
 
 /* The Body Contract: Natural sentence casing, balanced tracking */
