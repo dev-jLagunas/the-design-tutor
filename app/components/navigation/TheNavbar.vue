@@ -151,7 +151,6 @@ function closeDrawer() {
   z-index: 50;
   width: 100%;
   background-color: var(--shell-surface);
-  border-bottom: 1px solid var(--shell-border);
 }
 
 .navbar-container {
@@ -193,9 +192,9 @@ function closeDrawer() {
 }
 
 .brand-tagline {
-  color: var(--shell-muted);
   display: none;
   font-size: var(--text-xs);
+  opacity: 0.7;
 }
 
 /* ==========================================================================
@@ -209,7 +208,7 @@ function closeDrawer() {
 /* Desktop Search Bar */
 .nav-search-desktop {
   display: none;
-  width: 240px;
+  width: 300px;
 }
 
 .search-input-wrapper {
@@ -366,9 +365,10 @@ function closeDrawer() {
   inset: 0;
   top: 80px;
   z-index: 40;
-  background-color: var(--shell-surface);
   padding: var(--space-6) var(--space-5);
   justify-content: space-between;
+  background-color: var(--shell-surface);
+  color: inherit;
 }
 
 .drawer-badge {
@@ -382,9 +382,9 @@ function closeDrawer() {
 
 .drawer-link {
   text-decoration: none;
-  color: var(--shell-text);
   transition: color 0.2s ease;
   font-size: var(--text-display-size);
+  color: var(--shell-text);
 }
 
 .drawer-link-about:hover {

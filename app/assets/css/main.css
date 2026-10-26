@@ -31,9 +31,14 @@ video {
   /* Colors - Dark Base (Default) */
   --shell-bg: #131314;
   --shell-surface: #131314;
-  --shell-text: #f3f4f6;
+  --shell-border: #f1f1f13e;
+  --shell-text: #f1f1f1;
   --shell-muted: #8b949e;
   --shell-border: #2a2e39;
+  --shell-contrast-bg: #ffffff;
+  --shell-contrast-text: #171718;
+  --shell-contrast-border: #e4e4e7;
+  --shell-contrast-muted: #6b7280;
 
   /* Accent Roles */
   --shell-accent-gold: #eeba2b;
@@ -71,6 +76,10 @@ video {
   --shell-text: #333333;
   --shell-muted: #6b7280;
   --shell-border: #e4e4e7;
+  --shell-contrast-bg: #131314;
+  --shell-contrast-text: #f3f4f6;
+  --shell-contrast-border: #2a2e39;
+  --shell-contrast-muted: #8b949e;
 }
 
 body {
@@ -178,7 +187,6 @@ body {
 .line-clamp {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: var(--lines, 2);
   overflow: hidden;
 }
 
