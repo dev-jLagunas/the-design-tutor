@@ -189,11 +189,15 @@ onMounted(async () => {
    ========================================================================== */
 .display-hero {
   width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   padding: var(--space-6) var(--space-5);
   background-color: var(--shell-surface);
   background-image: radial-gradient(var(--shell-border) 1px, transparent 1px);
-  background-size: 10px 10px;
+  background-size: 20px 20px;
 }
 
 .hero-container {
@@ -224,7 +228,7 @@ onMounted(async () => {
    MASSIVE DISPLAY HEADINGS
    ========================================================================== */
 .hero-word-wrapper {
-  font-size: clamp(3.5rem, 15vw, 14.5rem);
+  font-size: clamp(3.5rem, 14vw, 14.5rem);
   line-height: 0.9;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   display: inline-block;
@@ -237,7 +241,7 @@ onMounted(async () => {
 /* Subtle underlying text matching active theme */
 .base-text {
   color: var(--shell-text);
-  opacity: 0.12;
+  opacity: 0.2;
 }
 
 /* Highlight Color Overlays */
