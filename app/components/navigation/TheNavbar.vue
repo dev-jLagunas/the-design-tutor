@@ -69,13 +69,13 @@ function handleSearch() {
         <nav class="desktop-links" aria-label="Main Navigation">
           <NuxtLink
             to="/about"
-            class="nav-link nav-link-about transition-smooth"
+            class="nav-link nav-link-about font-b-group transition-smooth"
           >
             About
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="nav-link nav-link-contact transition-smooth"
+            class="nav-link nav-link-contact font-b-group transition-smooth"
           >
             Contact
           </NuxtLink>
@@ -127,14 +127,14 @@ function handleSearch() {
           <nav class="drawer-nav flex-col" aria-label="Mobile Navigation">
             <NuxtLink
               to="/about"
-              class="drawer-link drawer-link-about"
+              class="drawer-link drawer-link-about font-b-group"
               @click="closeDrawer"
             >
               <span>About</span>
             </NuxtLink>
             <NuxtLink
               to="/contact"
-              class="drawer-link drawer-link-contact"
+              class="drawer-link drawer-link-contact font-b-group"
               @click="closeDrawer"
             >
               <span>Contact</span>
@@ -241,6 +241,19 @@ function handleSearch() {
 /* ==========================================================================
    INTERACTIVE UTILITY GROUP (SEARCH + LINKS + CONTROLS)
    ========================================================================== */
+/* Where you adjust the "x" cancel button: */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  background-color: var(--shell-accent-coral);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
+    no-repeat center;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
+    no-repeat center;
+  cursor: pointer;
+}
 .nav-utility-group {
   gap: var(--space-5);
   flex-shrink: 0;
@@ -310,8 +323,6 @@ function handleSearch() {
   color: var(--shell-contrast-text);
   text-decoration: none;
   font-size: 1rem;
-  font-weight: 900;
-  font-family: var(--font-body);
 }
 
 .nav-link-about:hover {
@@ -450,8 +461,6 @@ function handleSearch() {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  font-family: var(--font-body);
-  font-weight: 900;
   font-size: var(--text-display-size);
   color: var(--shell-text);
   padding: 0.2rem 0;
@@ -573,6 +582,10 @@ function handleSearch() {
 @media (min-width: 768px) {
   .nav-search-desktop {
     display: block;
+  }
+
+  .drawer-link {
+    font-size: 4rem;
   }
 }
 

@@ -17,9 +17,9 @@ const categories = [
 const mockDesigns = [
   {
     id: "swiss-grid",
-    vol: "VOL_01",
-    edition: "EDITION.2026",
-    category: "Swiss / International",
+    vol: "Style 1",
+    edition: "October 31, 2026",
+    category: "Minimalism",
     title: "International Typographic Style",
     description:
       "Mathematical modular grids, strict asymmetric alignment, and functional hierarchy derived from postwar graphic principles.",
@@ -28,34 +28,6 @@ const mockDesigns = [
     learnRoute: "/styles/swiss-grid",
     liveRoute: "/live/swiss-grid",
     icon: "lucide:layout-grid",
-  },
-  {
-    id: "neo-brutalism",
-    vol: "VOL_02",
-    edition: "EDITION.2026",
-    category: "Brutalism",
-    title: "Raw Digital Brutalism",
-    description:
-      "High-contrast monochromatic surfaces, dense mechanical typography, visible HTML structures, and zero skeuomorphic ornament.",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
-    learnRoute: "/styles/brutalism",
-    liveRoute: "/live/brutalism",
-    icon: "lucide:box",
-  },
-  {
-    id: "retro-computing",
-    vol: "VOL_03",
-    edition: "EDITION.2026",
-    category: "Retro Digital",
-    title: "Early Web & Cyberpunk",
-    description:
-      "Monospaced terminals, scanline overlays, neon accents, and tactile desktop metaphors inspired by late 90s computing aesthetics.",
-    image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80",
-    learnRoute: "/styles/retro-computing",
-    liveRoute: "/live/retro-computing",
-    icon: "lucide:terminal",
   },
 ];
 
@@ -94,10 +66,7 @@ onMounted(() => {
            ==================================================================== -->
       <header class="grid-search-header flex-col">
         <div class="search-meta flex-between">
-          <span class="eyebrow text-micro-caps">Movement Index // Catalog</span>
-          <span class="live-counter text-micro-caps"
-            >03 Systems Documented</span
-          >
+          <p class="eyebrow font-b-group">Search Styles</p>
         </div>
 
         <div class="search-field-wrap relative">
@@ -119,7 +88,7 @@ onMounted(() => {
             v-for="cat in categories"
             :key="cat"
             type="button"
-            class="btn-cat-filter text-micro-caps transition-smooth"
+            class="btn-cat-filter transition-smooth font-b-group"
             :class="{ 'is-active': activeCategory === cat }"
             @click="activeCategory = cat"
           >
@@ -141,8 +110,8 @@ onMounted(() => {
           <!-- Top Card Meta -->
           <div class="card-meta-bar flex-between">
             <div class="card-vol flex-col">
-              <span class="vol-tag text-micro-caps">{{ design.vol }}</span>
-              <span class="edition-tag font-body">{{ design.edition }}</span>
+              <span class="vol-tag font-b-group">{{ design.vol }}</span>
+              <span class="edition-tag font-b-group">{{ design.edition }}</span>
             </div>
             <div class="card-icon-frame flex-center">
               <Icon :name="design.icon" class="movement-icon" />
@@ -156,7 +125,7 @@ onMounted(() => {
               :alt="design.title"
               class="img-cover card-img transition-smooth"
             />
-            <span class="card-category-badge text-micro-caps">
+            <span class="card-category-badge font-b-group">
               {{ design.category }}
             </span>
           </div>
@@ -177,7 +146,7 @@ onMounted(() => {
               :to="design.learnRoute"
               class="btn-card-action btn-gold font-body flex-center transition-smooth"
             >
-              <span>Deconstruct Strategy</span>
+              <span>Educational UI</span>
               <Icon name="lucide:arrow-right" class="action-icon-sm" />
             </NuxtLink>
 
@@ -186,7 +155,7 @@ onMounted(() => {
               class="btn-card-action btn-ghost font-body flex-center transition-smooth"
             >
               <Icon name="lucide:layout" class="action-icon-sm" />
-              <span>Browse Live Canvas</span>
+              <span>Live UI</span>
             </NuxtLink>
           </div>
         </article>
@@ -212,7 +181,7 @@ onMounted(() => {
               alt="Future Movements"
               class="img-cover card-img transition-smooth"
             />
-            <span class="card-category-badge text-micro-caps">
+            <span class="card-category-badge font-b-group">
               Active Pipeline
             </span>
           </div>
@@ -230,7 +199,7 @@ onMounted(() => {
               to="/contact"
               class="btn-card-action btn-gold font-body flex-center transition-smooth"
             >
-              <span>Suggest A Movement</span>
+              <span>Learn More</span>
               <Icon name="lucide:arrow-up-right" class="action-icon-sm" />
             </NuxtLink>
 
@@ -239,7 +208,7 @@ onMounted(() => {
               class="btn-card-action btn-ghost font-body flex-center transition-smooth"
             >
               <Icon name="lucide:book-open" class="action-icon-sm" />
-              <span>Read The Philosophy</span>
+              <span>Get in Touch</span>
             </NuxtLink>
           </div>
         </article>
@@ -273,15 +242,26 @@ onMounted(() => {
 .grid-search-header {
   gap: var(--space-4);
   padding-bottom: var(--space-5);
-  border-bottom: 1px solid var(--shell-border);
 }
 
 .eyebrow {
-  color: var(--shell-accent-gold);
+  color: var(--shell-accent-coral);
 }
 
 .live-counter {
   color: var(--shell-muted);
+}
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  background-color: var(--shell-accent-coral);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
+    no-repeat center;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
+    no-repeat center;
+  cursor: pointer;
 }
 
 .search-field-wrap {
@@ -304,7 +284,7 @@ onMounted(() => {
 
 .search-giant-input::placeholder {
   color: var(--shell-muted);
-  opacity: 0.35;
+  opacity: 0.2;
 }
 
 .search-giant-icon {
@@ -312,7 +292,7 @@ onMounted(() => {
   right: 0;
   font-size: clamp(2rem, 5vw, 4rem);
   color: var(--shell-muted);
-  opacity: 0.35;
+  opacity: 0.2;
   pointer-events: none;
 }
 
@@ -325,11 +305,12 @@ onMounted(() => {
 
 .btn-cat-filter {
   background: transparent;
-  border: 1px solid var(--shell-border);
+  border: 1px solid var(--shell-dots);
   color: var(--shell-muted);
   padding: 0.45rem 1rem;
   border-radius: 4px;
   cursor: pointer;
+  font-size: var(--text-xs);
 }
 
 .btn-cat-filter:hover {
@@ -374,14 +355,14 @@ onMounted(() => {
 }
 
 .vol-tag {
-  color: var(--shell-accent-gold);
+  color: var(--shell-text);
   font-size: 0.7rem;
 }
 
 .edition-tag {
   color: var(--shell-muted);
   font-size: 0.65rem;
-  letter-spacing: 0.08em;
+  font-weight: 100;
 }
 
 .card-icon-frame {
@@ -433,11 +414,11 @@ onMounted(() => {
   position: absolute;
   top: var(--space-2);
   left: var(--space-2);
-  background-color: var(--shell-bg);
-  color: var(--shell-text);
+  background-color: var(--shell-accent-cyan);
+  color: #191919;
   padding: 0.25rem 0.6rem;
   border-radius: 3px;
-  border: 1px solid var(--shell-border);
+
   font-size: 0.65rem;
 }
 
@@ -461,9 +442,7 @@ onMounted(() => {
 .card-summary {
   font-size: var(--text-sm);
   color: var(--shell-muted);
-  line-height: 1.6;
-  border-left: 2px solid var(--shell-border);
-  padding-left: var(--space-3);
+  line-height: 1.5;
   margin-top: var(--space-1);
 }
 
@@ -525,6 +504,7 @@ onMounted(() => {
 @media (max-width: 768px) {
   .cards-layout {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .search-giant-input {
