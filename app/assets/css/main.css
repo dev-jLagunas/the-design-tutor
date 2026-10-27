@@ -34,6 +34,7 @@ video {
   --shell-border: #f1f1f13e;
   --shell-text: #f1f1f1;
   --shell-muted: #8b949e;
+  --shell-dots: #e4e4e716;
   --shell-border: #2a2e39;
   --shell-contrast-bg: #f1f1f1;
   --shell-contrast-text: #333333;
@@ -76,6 +77,7 @@ video {
   --shell-text: #191919;
   --shell-muted: #6b7280;
   --shell-border: #e4e4e7;
+  --shell-dots: #2a2e3910;
   --shell-contrast-bg: #191919;
   --shell-contrast-text: #f1f1f1;
   --shell-contrast-border: #2a2e39;
@@ -118,6 +120,11 @@ body {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+}
+
+.bg-dots {
+  background-image: radial-gradient(var(--shell-dots) 1px, transparent 1px);
+  background-size: 10px 10px;
 }
 
 /* ==========================================================================

@@ -76,9 +76,9 @@ const emit = defineEmits<{
 
 <style scoped>
 .action-pair {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: var(--space-4);
+  flex-direction: row;
+  gap: var(--space-3);
+  display: flex;
 }
 
 .btn-action {
@@ -105,10 +105,10 @@ const emit = defineEmits<{
 
 /* Ghost Secondary */
 .btn-ghost {
-  background-color: transparent;
   color: var(--shell-text);
-  border: 1px solid var(--shell-border);
   gap: var(--space-2);
+  border: 1px solid var(--shell-dots);
+  background-color: transparent;
 }
 
 .btn-ghost:hover {
@@ -125,16 +125,6 @@ const emit = defineEmits<{
   font-size: 0.95rem;
 }
 
-@media (max-width: 640px) {
-  .action-pair {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .btn-action {
-    justify-content: center;
-    width: 100%;
-  }
+@media (max-width: 767px) {
 }
 </style>

@@ -86,7 +86,7 @@ onMounted(() => {
 <template>
   <section
     id="styles-index"
-    class="design-grid-section relative bg-dot-grid no-select"
+    class="design-grid-section relative bg-dots no-select"
   >
     <div class="grid-container flex-col">
       <!-- ====================================================================
@@ -258,11 +258,6 @@ onMounted(() => {
   color: var(--shell-text);
   padding-block: clamp(4rem, 8vw, 6rem);
   padding-inline: var(--space-5);
-}
-
-.bg-dot-grid {
-  background-image: radial-gradient(var(--shell-border) 1px, transparent 1px);
-  background-size: 20px 20px;
 }
 
 .grid-container {

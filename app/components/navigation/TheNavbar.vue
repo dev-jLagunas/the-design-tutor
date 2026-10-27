@@ -122,7 +122,7 @@ function handleSearch() {
 
     <!-- Mobile Slide-In Sidebar -->
     <Transition name="drawer-slide">
-      <div v-if="isDrawerOpen" class="mobile-drawer flex-col">
+      <div v-if="isDrawerOpen" class="mobile-drawer flex-col bg-dots">
         <div class="drawer-top flex-col">
           <nav class="drawer-nav flex-col" aria-label="Mobile Navigation">
             <NuxtLink

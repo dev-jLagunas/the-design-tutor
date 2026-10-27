@@ -64,8 +64,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="display-hero relative flex-col no-select">
-    <div class="hero-container relative flex-col">
+  <section class="display-hero relative no-select bg-dots">
+    <div class="hero-container relative">
       <!-- Line 1: Word 1 (Gold Accent) -->
       <div class="hero-row row-start flex-center">
         <h1 class="hero-word-wrapper relative font-display">
@@ -175,7 +175,7 @@ onMounted(async () => {
             {{ tagline }}
           </p>
         </div>
-        <div class="hero-actions flex-center">
+        <div class="hero-actions">
           <slot name="actions" />
         </div>
       </footer>
@@ -193,11 +193,10 @@ onMounted(async () => {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   padding: var(--space-6) var(--space-5);
   background-color: var(--shell-surface);
-  background-image: radial-gradient(var(--shell-border) 1px, transparent 1px);
-  background-size: 20px 20px;
 }
 
 .hero-container {
@@ -205,6 +204,7 @@ onMounted(async () => {
   max-width: 1600px;
   margin-inline: auto;
   gap: var(--space-2);
+  margin-top: 0.5rem;
 }
 
 /* ==========================================================================
@@ -232,6 +232,7 @@ onMounted(async () => {
   line-height: 0.9;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   display: inline-block;
+  margin-top: 1rem;
 }
 
 .hero-word-wrapper span {
@@ -328,7 +329,6 @@ onMounted(async () => {
 .hero-footer {
   margin-top: var(--space-5);
   gap: var(--space-5);
-  align-items: flex-end;
   flex-wrap: wrap;
 }
 
@@ -338,13 +338,12 @@ onMounted(async () => {
 
 .tagline-text {
   font-size: var(--text-lg);
-  line-height: 1.6;
+  line-height: 1.4;
   color: var(--shell-text);
 }
 
 .hero-actions {
   gap: var(--space-3);
-  margin-left: auto;
 }
 
 /* ==========================================================================
@@ -370,6 +369,12 @@ onMounted(async () => {
   .tagline-text {
     font-size: var(--text-xl);
   }
+
+  .hero-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -379,6 +384,17 @@ onMounted(async () => {
 
   .icon-xl {
     font-size: 4rem;
+  }
+
+  .hero-actions {
+    margin-top: -6rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-actions {
+    margin-top: -7rem;
+    width: 90%;
   }
 }
 </style>
