@@ -554,7 +554,7 @@ onBeforeUnmount(() => {
    CANVAS STAGE 2: CHANNELS MATRIX
    ========================================================================== */
 .matrix-canvas {
-  background-color: var(--shell-bg);
+  background-color: var(--shell-surface);
 }
 
 .matrix-headline-block {

@@ -29,8 +29,7 @@ function handleRandomStyle() {
         />
       </template>
     </ReusableDisplayHero>
-
-    <!-- Future sections (e.g. style grid, movements showcase) will hook in here -->
+    <HomeDesignGrid></HomeDesignGrid>
   </div>
 </template>
 

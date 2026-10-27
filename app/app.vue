@@ -20,6 +20,8 @@ function handleRandomStyle() {
     <main class="tutor-shell">
       <NuxtPage />
     </main>
+    <NavigationTheFooter />
+    <NavigationMobileBottomNav />
   </div>
 </template>
 
