@@ -50,9 +50,9 @@ onMounted(async () => {
     const mm = gsap.matchMedia();
 
     // ========================================================================
-    // DESKTOP & TABLET (> 768px): Bi-directional Parallax & Reveal-Dissolve
+    // DESKTOP (> 1024px): Bi-directional Parallax & Reveal-Dissolve
     // ========================================================================
-    mm.add("(min-width: 769px)", () => {
+    mm.add("(min-width: 1025px)", () => {
       // 1. Dossier Stage: Portrait slides, text block scales in and out.
       const tlDossier = gsap.timeline({
         scrollTrigger: {
@@ -95,75 +95,34 @@ onMounted(async () => {
           0.6,
         );
 
-      // 2. Matrix Stage: Dramatic scroll-driven card roll
-      const tlMatrix = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#canvas-matrix",
-          start: "top 85%",
-          end: "bottom 20%",
-          scrub: 0.8,
+      // 2. Matrix Stage: Simple scroll-triggered reveal
+      gsap.fromTo(
+        ".matrix-headline-block",
+        { y: 45, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power2.out",
+          clearProps: "transform,opacity",
+          scrollTrigger: {
+            trigger: "#canvas-matrix",
+            start: "top 80%",
+            once: true,
+          },
         },
-      });
-
-      tlMatrix
-        // Headline rolls in first
-        .fromTo(
-          ".matrix-headline-block",
-          { y: 100, rotation: -8, opacity: 0 },
-          { y: 0, rotation: 0, opacity: 1, ease: "power2.out" },
-          0,
-        )
-
-        // Cards roll into place with a stagger
-        .fromTo(
-          ".matrix-box",
-          {
-            y: 180,
-            rotation: 12,
-            rotationX: 18,
-            scale: 0.8,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            rotation: 0,
-            rotationX: 0,
-            scale: 1,
-            opacity: 1,
-            stagger: 0.12,
-            ease: "power2.out",
-          },
-          0.1,
-        )
-
-        // Cards roll out as you scroll past the section
-        .to(
-          ".matrix-box",
-          {
-            y: -120,
-            rotation: -8,
-            scale: 0.92,
-            opacity: 0,
-            stagger: 0.06,
-            ease: "power2.in",
-          },
-          0.75,
-        );
+      );
 
       gsap.fromTo(
         ".matrix-box",
-        {
-          y: 40,
-          rotation: 0,
-          opacity: 0,
-        },
+        { y: 90, scale: 0.92, opacity: 0 },
         {
           y: 0,
-          rotation: 0,
+          scale: 1,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.75,
           stagger: 0.1,
-          ease: "power2.out",
+          ease: "power3.out",
           clearProps: "transform,opacity",
           scrollTrigger: {
             trigger: "#canvas-matrix",
@@ -199,9 +158,9 @@ onMounted(async () => {
     });
 
     // ========================================================================
-    // MOBILE (<= 768px): Lightweight Scroll Triggers
+    // TABLET & MOBILE (<= 1024px): Lightweight Scroll Triggers
     // ========================================================================
-    mm.add("(max-width: 768px)", () => {
+    mm.add("(max-width: 1024px)", () => {
       const sections = [
         "#canvas-dossier",
         "#canvas-matrix",
@@ -292,23 +251,23 @@ onBeforeUnmount(() => {
         <div class="stage-dossier-text anim-mobile flex-col">
           <div class="stage-badge flex-center">
             <span class="status-pulse"></span>
-            <span class="text-micro-caps">Active: Documenting Web History</span>
+            <span class="font-b-group">Active: Still Improving My Craft</span>
           </div>
 
           <h2 class="stage-headline font-display">
-            Design is a balance of rigor and expression.
+            Making cool things for the web never gets old.
           </h2>
 
           <p class="stage-bio font-body">
-            I am a product designer obsessed with component mechanics, design
-            tokens, and interface history. <em>The Design Tutor</em> exists to
-            strip away the mystery of complex digital aesthetics, demonstrating
-            how pure structure and CSS hierarchy turn chaotic ideas into
-            production realities.
+            I'm a product designer who genuinely loves tinkering with layouts,
+            motion, and front-end quirks. <em>The Design Tutor</em> is really
+            just my public sandbox: a fun place to break down interesting web
+            styles, figure out why they work, and share the experiments along
+            the way.
           </p>
 
           <div class="stage-stack flex-col">
-            <span class="stack-heading text-micro-caps"
+            <span class="stack-heading font-b-group"
               >Primary Engineering & Design Stack</span
             >
             <div class="stack-row flex-center">
@@ -329,7 +288,7 @@ onBeforeUnmount(() => {
          ==================================================================== -->
     <section
       id="canvas-matrix"
-      class="canvas-section matrix-canvas relative bg-dot-grid"
+      class="canvas-section matrix-canvas relative bg-dots"
     >
       <div class="canvas-boundary flex-col">
         <header class="matrix-headline-block anim-mobile flex-col">
@@ -343,7 +302,7 @@ onBeforeUnmount(() => {
             href="https://github.com/dev-jLagunas"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box card-1 anim-mobile box-cyan flex-col"
+            class="matrix-box card-1 anim-mobile box-coral flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:github" class="box-icon" />
@@ -385,7 +344,7 @@ onBeforeUnmount(() => {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box card-3 anim-mobile box-coral flex-col"
+            class="matrix-box card-3 anim-mobile box-cyan flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:linkedin" class="box-icon" />
@@ -406,7 +365,7 @@ onBeforeUnmount(() => {
             href="https://portfolio.dev-jlagunas.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box card-4 anim-mobile box-cyan flex-col"
+            class="matrix-box card-4 anim-mobile box-gold flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:briefcase" class="box-icon" />
@@ -427,7 +386,7 @@ onBeforeUnmount(() => {
             href="https://amazon.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box card-5 anim-mobile box-gold flex-col"
+            class="matrix-box card-5 anim-mobile box-cyan flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:book-marked" class="box-icon" />
@@ -472,7 +431,7 @@ onBeforeUnmount(() => {
          ==================================================================== -->
     <section
       id="canvas-dispatch"
-      class="canvas-section dispatch-canvas relative bg-dot-grid"
+      class="canvas-section dispatch-canvas relative bg-dots"
     >
       <div class="canvas-boundary flex-between">
         <div class="inquiry-station anim-mobile flex-col">
@@ -565,11 +524,6 @@ onBeforeUnmount(() => {
   position: relative;
 }
 
-.bg-dot-grid {
-  background-image: radial-gradient(var(--shell-border) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
 /* ==========================================================================
    CANVAS STAGE 1: DOSSIER
    ========================================================================== */
@@ -583,6 +537,7 @@ onBeforeUnmount(() => {
 
 .portrait-card {
   width: 100%;
+  max-width: 500px;
   aspect-ratio: 4 / 5;
   border-radius: 8px;
   overflow: hidden;
@@ -614,8 +569,8 @@ onBeforeUnmount(() => {
   padding: 0.4rem 0.95rem;
   background-color: var(--shell-surface);
   border: 1px solid var(--shell-border);
-  border-radius: 9999px;
-  color: var(--shell-text);
+  border-radius: 4px;
+  color: var(--shell-muted);
 }
 
 .status-pulse {
@@ -644,7 +599,7 @@ onBeforeUnmount(() => {
 }
 
 .stack-heading {
-  color: var(--shell-muted);
+  color: var(--shell-accent-coral);
 }
 
 .stack-row {
@@ -777,7 +732,7 @@ onBeforeUnmount(() => {
 
 .box-coral {
   background-color: var(--shell-accent-coral);
-  color: #ffffff;
+  color: #131314;
 }
 
 /* ==========================================================================
