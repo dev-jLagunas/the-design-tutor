@@ -2,10 +2,17 @@
 import { ref } from "vue";
 
 const isDrawerOpen = ref(false);
+const searchQuery = ref("");
 const { isDark, toggleTheme } = useTheme();
 
 function closeDrawer() {
   isDrawerOpen.value = false;
+}
+
+function handleSearch() {
+  if (!searchQuery.value.trim()) return;
+  console.log("Execute search:", searchQuery.value);
+  closeDrawer();
 }
 </script>
 
@@ -37,27 +44,38 @@ function closeDrawer() {
       <div class="nav-utility-group flex-center">
         <!-- Desktop Search Bar (>= 768px) -->
         <div class="nav-search-desktop">
-          <div class="search-input-wrapper flex-between">
+          <form
+            class="search-input-wrapper flex-between"
+            @submit.prevent="handleSearch"
+          >
             <input
+              v-model="searchQuery"
               type="search"
               placeholder="Search Styles..."
               aria-label="Search design styles"
             />
-            <span class="search-icon">⚲</span>
-          </div>
+            <button
+              v-if="searchQuery.trim().length > 0"
+              type="submit"
+              class="search-submit-btn text-micro-caps transition-smooth"
+            >
+              Search
+            </button>
+            <span v-else class="search-icon">⚲</span>
+          </form>
         </div>
 
         <!-- Desktop Navigation Links (>= 1024px) -->
         <nav class="desktop-links" aria-label="Main Navigation">
           <NuxtLink
             to="/about"
-            class="nav-link nav-link-about font-display transition-smooth"
+            class="nav-link nav-link-about transition-smooth"
           >
             About
           </NuxtLink>
           <NuxtLink
             to="/contact"
-            class="nav-link nav-link-contact font-display transition-smooth"
+            class="nav-link nav-link-contact transition-smooth"
           >
             Contact
           </NuxtLink>
@@ -109,31 +127,42 @@ function closeDrawer() {
           <nav class="drawer-nav flex-col" aria-label="Mobile Navigation">
             <NuxtLink
               to="/about"
-              class="drawer-link drawer-link-about font-display"
+              class="drawer-link drawer-link-about"
               @click="closeDrawer"
             >
-              About
+              <span>About</span>
             </NuxtLink>
             <NuxtLink
               to="/contact"
-              class="drawer-link drawer-link-contact font-display"
+              class="drawer-link drawer-link-contact"
               @click="closeDrawer"
             >
-              Contact
+              <span>Contact</span>
             </NuxtLink>
           </nav>
         </div>
 
         <div class="drawer-bottom flex-col">
-          <div class="drawer-search-wrapper flex-between">
+          <form
+            class="drawer-search-wrapper flex-between"
+            @submit.prevent="handleSearch"
+          >
             <input
+              v-model="searchQuery"
               type="search"
               placeholder="Search Styles..."
               aria-label="Search design styles mobile"
               class="font-body"
             />
-            <span class="search-icon-lg">⚲</span>
-          </div>
+            <button
+              v-if="searchQuery.trim().length > 0"
+              type="submit"
+              class="drawer-search-btn text-micro-caps transition-smooth"
+            >
+              Search
+            </button>
+            <span v-else class="search-icon-lg">⚲</span>
+          </form>
           <p class="drawer-credit">Visual designs analyzed and explained.</p>
         </div>
       </div>
@@ -162,7 +191,7 @@ function closeDrawer() {
 .navbar-container {
   width: 100%;
   max-width: 1400px;
-  height: 80px;
+  height: 90px;
   margin-inline: auto;
   padding-inline: var(--space-5);
   gap: var(--space-4);
@@ -174,7 +203,7 @@ function closeDrawer() {
 .brand-link {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-2);
   text-decoration: none;
   color: var(--shell-contrast-text);
   min-width: 0;
@@ -205,6 +234,8 @@ function closeDrawer() {
   display: none;
   font-size: var(--text-xs);
   color: var(--shell-contrast-muted);
+  margin-top: -2px;
+  font-family: var(--font-body);
 }
 
 /* ==========================================================================
@@ -225,6 +256,8 @@ function closeDrawer() {
   width: 100%;
   border-bottom: 1px solid var(--shell-contrast-border);
   padding-bottom: var(--space-1);
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .search-input-wrapper input {
@@ -232,10 +265,30 @@ function closeDrawer() {
   background: transparent;
   border: none;
   outline: none;
-  color: var(--shell-text);
+  color: var(--shell-contrast-text); /* Fixed font color bug */
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   letter-spacing: 0.04em;
+}
+
+.search-input-wrapper input::placeholder {
+  color: var(--shell-contrast-muted);
+}
+
+.search-submit-btn {
+  background-color: var(--shell-contrast-text);
+  color: var(--shell-contrast-bg);
+  border: none;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.search-submit-btn:hover {
+  opacity: 0.85;
 }
 
 .search-icon {
@@ -256,8 +309,9 @@ function closeDrawer() {
 .nav-link {
   color: var(--shell-contrast-text);
   text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 900;
+  font-family: var(--font-body);
 }
 
 .nav-link-about:hover {
@@ -388,21 +442,50 @@ function closeDrawer() {
 .drawer-nav {
   margin-top: var(--space-4);
   gap: var(--space-4);
+  align-items: flex-start;
 }
 
+/* Highlight in from the left hover effect */
 .drawer-link {
+  position: relative;
+  display: inline-block;
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-family: var(--font-body);
+  font-weight: 900;
   font-size: var(--text-display-size);
   color: var(--shell-text);
+  padding: 0.2rem 0;
+  z-index: 1;
+  transition:
+    color 0.25s ease,
+    padding 0.25s ease;
 }
 
-.drawer-link-about:hover {
-  color: var(--shell-accent-gold);
+.drawer-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0;
+  z-index: -1;
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1);
+  border-radius: 4px;
 }
 
-.drawer-link-contact:hover {
-  color: var(--shell-accent-cyan);
+.drawer-link-about::before {
+  background-color: var(--shell-accent-gold);
+}
+
+.drawer-link-contact::before {
+  background-color: var(--shell-accent-cyan);
+}
+
+.drawer-link:hover {
+  color: #191919;
+  padding-inline: var(--space-3);
+}
+
+.drawer-link:hover::before {
+  width: 100%;
 }
 
 .drawer-bottom {
@@ -414,6 +497,8 @@ function closeDrawer() {
 .drawer-search-wrapper {
   border-bottom: 1px solid var(--shell-border);
   padding-bottom: var(--space-3);
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .drawer-search-wrapper input {
@@ -422,7 +507,27 @@ function closeDrawer() {
   border: none;
   outline: none;
   font-size: var(--text-2xl);
-  color: var(--shell-text);
+  color: var(--shell-text); /* Fixed font color */
+}
+
+.drawer-search-wrapper input::placeholder {
+  color: var(--shell-muted);
+}
+
+.drawer-search-btn {
+  background-color: var(--shell-text);
+  color: var(--shell-bg);
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.drawer-search-btn:hover {
+  opacity: 0.85;
 }
 
 .search-icon-lg {
@@ -459,12 +564,14 @@ function closeDrawer() {
 /* ==========================================================================
    BREAKPOINTS
    ========================================================================== */
-@media (min-width: 768px) {
-  .nav-search-desktop {
+@media (min-width: 425px) {
+  .brand-tagline {
     display: block;
   }
+}
 
-  .brand-tagline {
+@media (min-width: 768px) {
+  .nav-search-desktop {
     display: block;
   }
 }
@@ -472,6 +579,10 @@ function closeDrawer() {
 @media (min-width: 1024px) {
   .desktop-links {
     display: flex;
+  }
+
+  .brand-tagline {
+    font-size: var(--text-sm);
   }
 
   .brand-logo {
