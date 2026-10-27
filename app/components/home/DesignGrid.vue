@@ -25,8 +25,8 @@ const mockDesigns = [
       "Mathematical modular grids, strict asymmetric alignment, and functional hierarchy derived from postwar graphic principles.",
     image:
       "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=80",
-    learnRoute: "/styles/swiss-grid",
-    liveRoute: "/live/swiss-grid",
+    // learnRoute: "/styles/swiss-grid",
+    // liveRoute: "/live/swiss-grid",
     icon: "lucide:layout-grid",
   },
 ];
@@ -143,7 +143,6 @@ onMounted(() => {
           <!-- Direct Dual Action Pair (No Selling / Clean CTAs) -->
           <div class="card-actions-group flex-col">
             <NuxtLink
-              :to="design.learnRoute"
               class="btn-card-action btn-gold font-body flex-center transition-smooth"
             >
               <span>Educational UI</span>
@@ -151,7 +150,6 @@ onMounted(() => {
             </NuxtLink>
 
             <NuxtLink
-              :to="design.liveRoute"
               class="btn-card-action btn-ghost font-body flex-center transition-smooth"
             >
               <Icon name="lucide:layout" class="action-icon-sm" />
