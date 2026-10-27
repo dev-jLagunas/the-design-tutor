@@ -22,6 +22,7 @@ function handleRandomStyle() {
     </main>
     <NavigationTheFooter />
     <NavigationMobileBottomNav />
+    <UiBackTop />
   </div>
 </template>
 

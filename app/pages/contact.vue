@@ -46,112 +46,156 @@ onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTriggerInstance = ScrollTrigger;
 
-  // Fix TS error: Pass undefined if pageRoot.value is null
   ctx = gsap.context(() => {
     const mm = gsap.matchMedia();
 
     // ========================================================================
-    // DESKTOP & TABLET (> 768px): Fluid Scrubbed & Staggered Motion
+    // DESKTOP & TABLET (> 768px): Bi-directional Parallax & Reveal-Dissolve
     // ========================================================================
     mm.add("(min-width: 769px)", () => {
-      // Zone 1: Dossier Parallax Assembly
+      // 1. Dossier Stage: Portrait slides, text block scales in and out.
       const tlDossier = gsap.timeline({
         scrollTrigger: {
           trigger: "#canvas-dossier",
-          start: "top 85%",
-          end: "center 35%",
-          scrub: 1,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
         },
       });
 
       tlDossier
-        .from(".stage-portrait", {
-          y: 120,
-          x: -40,
-          rotation: -5,
-          opacity: 0.2,
-          ease: "power2.out",
-        })
-        .from(".stage-badge", { x: 30, opacity: 0, ease: "power2.out" }, "<0.1")
         .from(
-          ".stage-headline",
-          { y: 50, opacity: 0, ease: "power2.out" },
-          "<0.1",
+          ".stage-portrait",
+          { y: 120, x: -60, rotation: -6, opacity: 0.1, ease: "none" },
+          0,
         )
-        .from(".stage-bio", { y: 30, opacity: 0, ease: "power2.out" }, "<0.15")
         .from(
-          ".stage-stack",
-          { y: 20, opacity: 0, ease: "power2.out" },
-          "<0.15",
+          ".stage-dossier-text",
+          {
+            scale: 0.75,
+            transformOrigin: "center center",
+            opacity: 0,
+            ease: "none",
+          },
+          0,
         )
         .from(
           ".stage-pill",
-          {
-            scale: 0.7,
-            opacity: 0,
-            stagger: 0.05,
-            ease: "back.out(1.4)",
-          },
-          "<0.1",
+          { scale: 0.7, opacity: 0, stagger: 0.04, ease: "none" },
+          0.1,
+        )
+        .to(
+          ".stage-portrait",
+          { y: -100, x: -30, rotation: 4, opacity: 0.1, ease: "none" },
+          0.6,
+        )
+        .to(
+          ".stage-dossier-text",
+          { scale: 0.85, opacity: 0, ease: "none" },
+          0.6,
         );
 
-      // Zone 2: Public Channels Cards (Triggered Stagger - Never Stuck)
+      // 2. Matrix Stage: Dramatic scroll-driven card roll
       const tlMatrix = gsap.timeline({
         scrollTrigger: {
           trigger: "#canvas-matrix",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+          start: "top 85%",
+          end: "bottom 20%",
+          scrub: 0.8,
         },
       });
 
       tlMatrix
-        .from(".matrix-headline-block", {
-          y: 30,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        })
-        .from(
+        // Headline rolls in first
+        .fromTo(
+          ".matrix-headline-block",
+          { y: 100, rotation: -8, opacity: 0 },
+          { y: 0, rotation: 0, opacity: 1, ease: "power2.out" },
+          0,
+        )
+
+        // Cards roll into place with a stagger
+        .fromTo(
           ".matrix-box",
           {
-            y: 80,
+            y: 180,
+            rotation: 12,
+            rotationX: 18,
+            scale: 0.8,
             opacity: 0,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power3.out",
-            clearProps: "all", // Automatically cleans up inline styles when done
           },
-          "-=0.3",
+          {
+            y: 0,
+            rotation: 0,
+            rotationX: 0,
+            scale: 1,
+            opacity: 1,
+            stagger: 0.12,
+            ease: "power2.out",
+          },
+          0.1,
+        )
+
+        // Cards roll out as you scroll past the section
+        .to(
+          ".matrix-box",
+          {
+            y: -120,
+            rotation: -8,
+            scale: 0.92,
+            opacity: 0,
+            stagger: 0.06,
+            ease: "power2.in",
+          },
+          0.75,
         );
 
-      // Zone 3: Direct Dispatch Hub
+      gsap.fromTo(
+        ".matrix-box",
+        {
+          y: 40,
+          rotation: 0,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          rotation: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          clearProps: "transform,opacity",
+          scrollTrigger: {
+            trigger: "#canvas-matrix",
+            start: "top 75%",
+            once: true,
+          },
+        },
+      );
+
+      // 3. Dispatch Hub: Enters with spatial perspective, rests, then animates out past the top.
       const tlDispatch = gsap.timeline({
         scrollTrigger: {
           trigger: "#canvas-dispatch",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
         },
       });
 
       tlDispatch
-        .from(".inquiry-station", {
-          x: -50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          clearProps: "all",
-        })
+        .from(
+          ".inquiry-station",
+          { x: -80, y: 100, rotation: -4, opacity: 0, ease: "none" },
+          0,
+        )
         .from(
           ".sponsor-station",
-          {
-            x: 50,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            clearProps: "all",
-          },
-          "<0.2",
-        );
+          { x: 80, y: 100, rotation: 4, opacity: 0, ease: "none" },
+          0,
+        )
+        .to(".inquiry-station", { y: -100, opacity: 0, ease: "none" }, 0.6)
+        .to(".sponsor-station", { y: -100, opacity: 0, ease: "none" }, 0.6);
     });
 
     // ========================================================================
@@ -173,7 +217,7 @@ onMounted(async () => {
           },
           y: 35,
           opacity: 0,
-          stagger: 0.1,
+          stagger: 0.08,
           duration: 0.6,
           ease: "power2.out",
           clearProps: "all",
@@ -193,16 +237,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="pageRoot" class="contact-page relative flex-col no-select">
+  <div ref="pageRoot" class="contact-page relative flex-col no-select bg-dots">
     <!-- ====================================================================
          HERO SECTION
          ==================================================================== -->
     <section class="hero-screen relative flex-col">
       <ReusableDisplayHero
         word1="Wanna"
-        word2="Know"
-        word3="More?"
-        tagline="A visual repository decoding architectural layout logic, motion easing curves, and design systems for the modern web."
+        word2="GetIn"
+        word3="Touch?"
+        tagline="Here is a bit more information about me and my contact information! I am always looking to connect and learn!"
       >
         <template #actions>
           <UiActionPair
@@ -227,15 +271,15 @@ onBeforeUnmount(() => {
          ==================================================================== -->
     <section
       id="canvas-dossier"
-      class="canvas-section dossier-canvas relative bg-dot-grid"
+      class="canvas-section dossier-canvas relative bg-dots"
     >
       <div class="canvas-boundary flex-between">
         <!-- Media Frame -->
         <div class="stage-portrait anim-mobile relative">
           <div class="portrait-card relative">
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80"
-              alt="Creator"
+              src="/images/profile.jpg"
+              alt="Juan Angel Lagunas"
               class="img-cover profile-frame-image"
             />
             <div class="portrait-meta-tag text-micro-caps">
@@ -245,17 +289,17 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- Narrative Content -->
-        <div class="stage-dossier-text flex-col">
-          <div class="stage-badge anim-mobile flex-center">
+        <div class="stage-dossier-text anim-mobile flex-col">
+          <div class="stage-badge flex-center">
             <span class="status-pulse"></span>
             <span class="text-micro-caps">Active: Documenting Web History</span>
           </div>
 
-          <h2 class="stage-headline anim-mobile font-display">
+          <h2 class="stage-headline font-display">
             Design is a balance of rigor and expression.
           </h2>
 
-          <p class="stage-bio anim-mobile font-body">
+          <p class="stage-bio font-body">
             I am a product designer obsessed with component mechanics, design
             tokens, and interface history. <em>The Design Tutor</em> exists to
             strip away the mystery of complex digital aesthetics, demonstrating
@@ -263,7 +307,7 @@ onBeforeUnmount(() => {
             production realities.
           </p>
 
-          <div class="stage-stack anim-mobile flex-col">
+          <div class="stage-stack flex-col">
             <span class="stack-heading text-micro-caps"
               >Primary Engineering & Design Stack</span
             >
@@ -281,7 +325,7 @@ onBeforeUnmount(() => {
     </section>
 
     <!-- ====================================================================
-         CANVAS STAGE 2: PUBLIC CHANNELS MATRIX
+         CANVAS STAGE 2: PUBLIC CHANNELS & WORKS MATRIX (6 CARDS)
          ==================================================================== -->
     <section
       id="canvas-matrix"
@@ -290,15 +334,16 @@ onBeforeUnmount(() => {
       <div class="canvas-boundary flex-col">
         <header class="matrix-headline-block anim-mobile flex-col">
           <span class="eyebrow-accent text-micro-caps">The Network</span>
-          <h2 class="section-title font-display">Public Channels</h2>
+          <h2 class="section-title font-display">Public Channels & Works</h2>
         </header>
 
         <div class="matrix-stage-grid">
+          <!-- Card 1: GitHub -->
           <a
             href="https://github.com/dev-jLagunas"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box anim-mobile box-cyan flex-col transition-smooth"
+            class="matrix-box card-1 anim-mobile box-cyan flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:github" class="box-icon" />
@@ -314,11 +359,12 @@ onBeforeUnmount(() => {
             </div>
           </a>
 
+          <!-- Card 2: Medium -->
           <a
             href="https://medium.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box anim-mobile box-gold flex-col transition-smooth"
+            class="matrix-box card-2 anim-mobile box-gold flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:pen-tool" class="box-icon" />
@@ -328,17 +374,18 @@ onBeforeUnmount(() => {
               <span class="box-meta text-micro-caps">Writing</span>
               <h3 class="box-name font-display">Medium</h3>
               <p class="box-desc font-body">
-                Long-form technical essays covering historical design movements,
-                grid theory, and frontend architecture.
+                Long-form essays covering historical design movements, grid
+                theory, and frontend architecture.
               </p>
             </div>
           </a>
 
+          <!-- Card 3: LinkedIn -->
           <a
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="matrix-box anim-mobile box-coral flex-col transition-smooth"
+            class="matrix-box card-3 anim-mobile box-coral flex-col"
           >
             <div class="box-top flex-between">
               <Icon name="lucide:linkedin" class="box-icon" />
@@ -349,7 +396,70 @@ onBeforeUnmount(() => {
               <h3 class="box-name font-display">LinkedIn</h3>
               <p class="box-desc font-body">
                 Connect for design system advisory, product design contracts,
-                and frontend design architecture.
+                and UI architecture.
+              </p>
+            </div>
+          </a>
+
+          <!-- Card 4: UX Portfolio -->
+          <a
+            href="https://portfolio.dev-jlagunas.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="matrix-box card-4 anim-mobile box-cyan flex-col"
+          >
+            <div class="box-top flex-between">
+              <Icon name="lucide:briefcase" class="box-icon" />
+              <Icon name="lucide:arrow-up-right" class="vector-arrow" />
+            </div>
+            <div class="box-bottom flex-col">
+              <span class="box-meta text-micro-caps">Selected Works</span>
+              <h3 class="box-name font-display">UX Portfolio</h3>
+              <p class="box-desc font-body">
+                In-depth product case studies, mobile UX, component
+                architectures, and digital product workflows.
+              </p>
+            </div>
+          </a>
+
+          <!-- Card 5: The Language Friends -->
+          <a
+            href="https://amazon.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="matrix-box card-5 anim-mobile box-gold flex-col"
+          >
+            <div class="box-top flex-between">
+              <Icon name="lucide:book-marked" class="box-icon" />
+              <Icon name="lucide:arrow-up-right" class="vector-arrow" />
+            </div>
+            <div class="box-bottom flex-col">
+              <span class="box-meta text-micro-caps">Children's Books</span>
+              <h3 class="box-name font-display">Kids Books Series</h3>
+              <p class="box-desc font-body">
+                An illustrated educational book series designed to inspire
+                curiosity, phonetics, and early multilingual communication.
+              </p>
+            </div>
+          </a>
+
+          <!-- Card 6: Instagram -->
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="matrix-box card-6 anim-mobile box-coral flex-col"
+          >
+            <div class="box-top flex-between">
+              <Icon name="lucide:instagram" class="box-icon" />
+              <Icon name="lucide:arrow-up-right" class="vector-arrow" />
+            </div>
+            <div class="box-bottom flex-col">
+              <span class="box-meta text-micro-caps">Visual Log</span>
+              <h3 class="box-name font-display">Instagram</h3>
+              <p class="box-desc font-body">
+                Visual snippets, work-in-progress layouts, motion sketches, and
+                aesthetic explorations from the studio.
               </p>
             </div>
           </a>
@@ -432,6 +542,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100vh;
   min-height: 680px;
+  margin-top: -4rem;
 }
 
 .hero-screen :deep(.display-hero) {
@@ -462,12 +573,12 @@ onBeforeUnmount(() => {
 /* ==========================================================================
    CANVAS STAGE 1: DOSSIER
    ========================================================================== */
-
 .stage-portrait {
   flex: 0 0 38%;
   max-width: 440px;
   width: 100%;
   transform-origin: center center;
+  will-change: transform, opacity;
 }
 
 .portrait-card {
@@ -495,6 +606,7 @@ onBeforeUnmount(() => {
   flex: 0 0 56%;
   gap: var(--space-4);
   align-items: flex-start;
+  will-change: transform, opacity;
 }
 
 .stage-badge {
@@ -548,10 +660,11 @@ onBeforeUnmount(() => {
   border: 1px solid var(--shell-border);
   border-radius: 4px;
   color: var(--shell-text);
+  will-change: transform, opacity;
 }
 
 /* ==========================================================================
-   CANVAS STAGE 2: CHANNELS MATRIX
+   CANVAS STAGE 2: CHANNELS MATRIX (2x3 GRID ON LARGE SCREENS)
    ========================================================================== */
 .matrix-canvas {
   background-color: var(--shell-surface);
@@ -560,6 +673,7 @@ onBeforeUnmount(() => {
 .matrix-headline-block {
   gap: var(--space-1);
   margin-bottom: var(--space-5);
+  will-change: transform, opacity;
 }
 
 .eyebrow-accent {
@@ -576,31 +690,63 @@ onBeforeUnmount(() => {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-5);
   width: 100%;
+  perspective: 1200px;
 }
 
 .matrix-box {
+  transform-origin: center center;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
   padding: var(--space-5);
   border-radius: 8px;
   text-decoration: none;
-  min-height: 320px;
+  min-height: 300px;
   justify-content: space-between;
+  will-change: transform, opacity;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  border: 1px solid transparent;
 }
 
+/* Hover Enhancements */
 .matrix-box:hover {
-  transform: translateY(-6px);
+  transform: translateY(
+    -8px
+  ) !important; /* Overrides GSAP inline transform safely */
+  background-color: var(--shell-bg) !important; /* Neutralize background */
+  color: var(--shell-text) !important;
+  border-color: var(--shell-border);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
 }
 
-.box-icon {
-  font-size: 2.5rem;
-}
-
+.box-icon,
+.box-name,
 .vector-arrow {
-  font-size: 1.5rem;
-  transition: transform 0.25s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.matrix-box:hover .box-icon {
+  transform: scale(1.2);
+}
+
+.matrix-box:hover .box-name {
+  transform: scale(1.1);
+  transform-origin: left center;
 }
 
 .matrix-box:hover .vector-arrow {
-  transform: translate(4px, -4px);
+  transform: translate(6px, -6px) scale(1.1);
+  color: var(--shell-text) !important;
+}
+
+.matrix-box:hover .box-meta,
+.matrix-box:hover .box-desc {
+  color: var(--shell-muted) !important;
 }
 
 .box-bottom {
@@ -618,6 +764,7 @@ onBeforeUnmount(() => {
   opacity: 0.9;
 }
 
+/* Color Tokens */
 .box-cyan {
   background-color: var(--shell-accent-cyan);
   color: #131314;
@@ -643,6 +790,7 @@ onBeforeUnmount(() => {
 .inquiry-station {
   flex: 0 0 52%;
   gap: var(--space-4);
+  will-change: transform, opacity;
 }
 
 .station-heading {
@@ -699,6 +847,7 @@ onBeforeUnmount(() => {
   padding: var(--space-5);
   border-radius: 8px;
   gap: var(--space-4);
+  will-change: transform, opacity;
 }
 
 .coffee-icon {
@@ -755,12 +904,12 @@ onBeforeUnmount(() => {
   }
 
   .matrix-stage-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
   }
 
   .matrix-box {
-    min-height: 220px;
+    min-height: 240px;
   }
 }
 
@@ -768,6 +917,11 @@ onBeforeUnmount(() => {
   .hero-screen {
     height: auto;
     min-height: 100vh;
+    margin-top: 1rem;
+  }
+
+  .matrix-stage-grid {
+    grid-template-columns: 1fr;
   }
 
   .interactive-copy-station {
