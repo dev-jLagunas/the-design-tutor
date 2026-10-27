@@ -1,35 +1,37 @@
+<!-- components/DesignGrid.vue -->
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useShowcaseStore } from "~/stores/useShowcaseStore";
 
-// Self-contained filler data (ready to link to Pinia store later)
+const store = useShowcaseStore();
+
 const searchQuery = ref("");
 const activeCategory = ref("All");
 
 const categories = [
   "All",
-  "Swiss / Grid",
-  "Brutalism",
-  "Retro Digital",
   "Minimalist",
+  "Brutalism",
+  "Swiss / Grid",
+  "Retro Digital",
   "Editorial",
 ];
 
-const mockDesigns = [
-  {
-    id: "swiss-grid",
-    vol: "Style 1",
-    edition: "October 31, 2026",
-    category: "Minimalism",
-    title: "International Typographic Style",
-    description:
-      "Mathematical modular grids, strict asymmetric alignment, and functional hierarchy derived from postwar graphic principles.",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=80",
-    // learnRoute: "/styles/swiss-grid",
-    // liveRoute: "/live/swiss-grid",
-    icon: "lucide:layout-grid",
-  },
-];
+// Dynamically fed from the Pinia Store
+const filteredDesigns = computed(() => {
+  return store.allMovements.filter((item) => {
+    const matchesCategory =
+      activeCategory.value === "All" || item.category === activeCategory.value;
+    const matchesSearch =
+      item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      item.description
+        .toLowerCase()
+        .includes(searchQuery.value.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.value.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+});
 
 // Typewriter Placeholder Logic
 const fullPlaceholder = "START TYPING...";
@@ -101,9 +103,9 @@ onMounted(() => {
            THE DESIGN SYSTEM CARDS
            ==================================================================== -->
       <div class="cards-layout">
-        <!-- Standard Movement Card -->
+        <!-- Dynamically rendered movement cards from Pinia -->
         <article
-          v-for="design in mockDesigns"
+          v-for="design in filteredDesigns"
           :key="design.id"
           class="design-card flex-col transition-smooth"
         >
@@ -140,9 +142,10 @@ onMounted(() => {
             </p>
           </div>
 
-          <!-- Direct Dual Action Pair (No Selling / Clean CTAs) -->
+          <!-- Direct Dual Action Pair with Target View Query Params -->
           <div class="card-actions-group flex-col">
             <NuxtLink
+              :to="`/styles/${design.slug}?view=edu`"
               class="btn-card-action btn-gold font-body flex-center transition-smooth"
             >
               <span>Educational UI</span>
@@ -150,6 +153,7 @@ onMounted(() => {
             </NuxtLink>
 
             <NuxtLink
+              :to="`/styles/${design.slug}?view=live`"
               class="btn-card-action btn-ghost font-body flex-center transition-smooth"
             >
               <Icon name="lucide:layout" class="action-icon-sm" />
@@ -249,6 +253,7 @@ onMounted(() => {
 .live-counter {
   color: var(--shell-muted);
 }
+
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
@@ -416,11 +421,10 @@ input[type="search"]::-webkit-search-cancel-button {
   color: #191919;
   padding: 0.25rem 0.6rem;
   border-radius: 3px;
-
   font-size: 0.65rem;
 }
 
-/* Card Typography (Un-crunched layout) */
+/* Card Typography */
 .card-content-block {
   gap: var(--space-2);
 }
