@@ -204,7 +204,6 @@ onMounted(async () => {
   max-width: 1600px;
   margin-inline: auto;
   gap: var(--space-2);
-  margin-top: 0.5rem;
 }
 
 /* ==========================================================================

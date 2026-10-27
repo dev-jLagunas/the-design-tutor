@@ -22,54 +22,53 @@ let ScrollTriggerInstance: any = null;
 const steps = [
   {
     num: "1",
-    label: "PHASE_01",
-    category: "The Archive",
+    label: "WHAT IS THE BIG IDEA?",
+    category: "A Visual Playbook, Not A Textbook",
     icon: "lucide:library",
-    desc: "A rigorous cataloging of design movements. We analyze the historical context and visual impact of each style, from mathematical Swiss grids to raw Brutalism.",
+    desc: "Think of this as a design museum where you can actually poke around the exhibits. Instead of droning on about optimal CSS architecture, I break down what gives a style its personality: where it came from, the vibe it sets, the font pairings, the palette, and the little motion quirks that make it click.",
     colorTheme: "card-gold",
   },
   {
     num: "2",
-    label: "PHASE_02",
-    category: "The Anatomy",
-    icon: "lucide:fingerprint",
-    desc: "We strip away aesthetic assumptions to isolate structure: breaking down modular typographic scales, grid lane ratios, and variable hierarchies.",
+    label: "WHY DID YOU START THIS?",
+    category: "Staying Sane And Building Cool Stuff",
+    icon: "lucide:hammer",
+    desc: "The job market has been rough, and doom-scrolling job boards gets old real fast. I wanted an excuse to build things without corporate constraints, stay sharp, and just make cool, slightly unhinged web designs while I look for my next role.",
     colorTheme: "card-coral",
   },
   {
     num: "3",
-    label: "PHASE_03",
-    category: "The Pedagogy",
-    icon: "lucide:book-open-check",
-    desc: "Instruction through execution. The interface is the textbook, where every live interaction and breakpoint state becomes a demonstrable lesson.",
+    label: "WHO'S RUNNING THE SHOW?",
+    category: "A Designer Who Likes Messing With Code",
+    icon: "lucide:user",
+    desc: "I am a product designer with a background in linguistics and human-computer psychology. I definitely lean designer first, but I love getting my hands dirty with code to bring weird and fun ideas off the canvas and into the browser.",
     colorTheme: "card-cyan",
   },
   {
     num: "4",
-    label: "PHASE_04",
-    category: "The Logic",
-    icon: "lucide:binary",
-    desc: "Translating graphic rhythm into modular code. Bridging abstract design guidelines with modern Vue, Nuxt, and composable frontend architecture.",
+    label: "HOW DOES A BREAKDOWN WORK?",
+    category: "History, Vibes, And Visual Rhythm",
+    icon: "lucide:sparkles",
+    desc: "Every movement gets a consistent, bite-sized breakdown. We look at its historical roots, when you should actually use it, the fonts and colors that define it, and why certain animations work. Simple, structured, and easy to flip through.",
     colorTheme: "card-gold",
   },
   {
     num: "5",
-    label: "PHASE_05",
-    category: "The Motion",
-    icon: "lucide:move",
-    desc: "Injecting temporal rhythm into static layouts. Dissecting how parametric easing functions and GSAP timelines orchestrate visual storytelling.",
+    label: "WHAT'S THE CATCH?",
+    category: "Zero Catch, Just Good Vibes",
+    icon: "lucide:smile",
+    desc: "No courses, no paid templates, and definitely no pitch for seed funding. It is entirely free and open. If I get to learn a bunch of design history, push some creative boundaries, and share the journey with other curious folks, that is a solid win in my book.",
     colorTheme: "card-coral",
   },
   {
     num: "6",
-    label: "PHASE_06",
-    category: "The System",
-    icon: "lucide:layout-template",
-    desc: "Component ecosystems built for long-term scalability. Constructing composable tokens and styling layers ready for production-grade web applications.",
+    label: "WHAT CAN WE EXPECT NEXT?",
+    category: "Lots Of Wild Layouts",
+    icon: "lucide:compass",
+    desc: "More designs, more eras, and definitely more experimentation. From brutalist grids to retro computer interfaces and weird pop layouts, I am just going to keep building whatever sparks curiosity and dumping the research here.",
     colorTheme: "card-cyan",
   },
 ];
-
 const totalSlides = steps.length + 1; // 1 Hero + 6 Cards = 7 total
 
 const scrollNext = () => {
@@ -188,7 +187,7 @@ onBeforeUnmount(() => {
       <div
         v-for="(step, index) in steps"
         :key="step.num"
-        class="item syllabus-item bg-dot-grid"
+        class="item syllabus-item bg-dots"
         :style="{ zIndex: index + 2 }"
       >
         <div class="item-media flex-center" :class="step.colorTheme">
@@ -198,10 +197,8 @@ onBeforeUnmount(() => {
         <div class="item-content flex-col">
           <div class="meta-block flex-col">
             <Icon :name="step.icon" class="step-icon" />
-            <span class="phase-label text-micro-caps">{{ step.label }}</span>
-            <span class="category-tag text-micro-caps">{{
-              step.category
-            }}</span>
+            <span class="phase-label font-b-group">{{ step.label }}</span>
+            <span class="category-tag font-b-group">{{ step.category }}</span>
           </div>
           <p class="description-text font-body">{{ step.desc }}</p>
         </div>
@@ -224,6 +221,7 @@ onBeforeUnmount(() => {
 
 .deck-wrapper {
   z-index: 1;
+  margin-top: 0;
 }
 
 /* ==========================================================================
@@ -265,16 +263,12 @@ onBeforeUnmount(() => {
   transform-origin: center center;
 }
 
-.bg-dot-grid {
-  background-image: radial-gradient(var(--shell-border) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
 /* Hero Item Layout */
 .hero-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 5rem;
 }
 
 /* Syllabus Cards Layout */
@@ -343,6 +337,7 @@ onBeforeUnmount(() => {
 
 .category-tag {
   color: var(--shell-muted);
+  font-weight: 100;
 }
 
 .description-text {
@@ -393,10 +388,18 @@ onBeforeUnmount(() => {
 /* ==========================================================================
    RESPONSIVE BREAKPOINTS
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .card-indicator {
     top: var(--space-4);
     right: var(--space-4);
+  }
+
+  .deck-wrapper {
+    margin-top: -7rem;
+  }
+
+  .hero-item {
+    padding-bottom: 0;
   }
 
   .syllabus-item,

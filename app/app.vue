@@ -15,7 +15,7 @@ function handleRandomStyle() {
 </script>
 
 <template>
-  <div class="flex-col">
+  <div class="tutor-shell">
     <NavigationTheNavbar />
     <main class="tutor-shell">
       <NuxtPage />
@@ -27,6 +27,6 @@ function handleRandomStyle() {
 
 <style scoped>
 .tutor-shell {
-  min-height: 100vh;
+  padding-bottom: 5rem;
 }
 </style>

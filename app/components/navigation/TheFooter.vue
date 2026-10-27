@@ -74,10 +74,6 @@ function getLetterColorClass(index: number, char: string) {
             An open educational index deconstructing modern UI movements,
             structural CSS architectures, and interactive design systems.
           </p>
-          <span class="status-indicator text-micro-caps flex-center">
-            <span class="status-pulse"></span>
-            <span>Index 2026 // Active Catalog</span>
-          </span>
         </div>
 
         <!-- Col 2: Navigation Links -->
@@ -137,7 +133,7 @@ function getLetterColorClass(index: number, char: string) {
           © 2026 THE DESIGN TUTOR • ALL RIGHTS RESERVED
         </span>
         <span class="colophon-text text-micro-caps">
-          BUILT WITH NUXT 3 + GSAP
+          BUILT WITH NUXT + GSAP
         </span>
       </div>
     </div>
@@ -161,7 +157,7 @@ function getLetterColorClass(index: number, char: string) {
    ========================================================================== */
 .marquee-strip {
   width: 100%;
-  padding-block: var(--space-3);
+  padding-block: 5rem;
   border-bottom: 1px solid var(--shell-border);
   background-color: var(--shell-bg);
 }
@@ -250,25 +246,6 @@ function getLetterColorClass(index: number, char: string) {
   font-size: var(--text-sm);
   color: var(--shell-muted);
   line-height: 1.6;
-}
-
-.status-indicator {
-  gap: var(--space-2);
-  width: fit-content;
-  color: var(--shell-muted);
-  padding: 0.25rem 0.65rem;
-  background-color: var(--shell-bg);
-  border: 1px solid var(--shell-border);
-  border-radius: 9999px;
-  margin-top: var(--space-1);
-}
-
-.status-pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background-color: #10b981;
-  box-shadow: 0 0 6px #10b981;
 }
 
 /* Link Columns */
