@@ -42,45 +42,6 @@ const catalogMeta: MovementMetaCard[] = [
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80",
     icon: "lucide:disc",
   },
-  {
-    id: "kinetic-techno-kinetic",
-    slug: "kinetic-club",
-    vol: "Style 02",
-    edition: "November 15, 2026",
-    category: "Kinetic",
-    title: "Berlin Sub-Bass & Wireframe Brutalism",
-    description:
-      "Strobe-reactive typography, distorted vector grids, and heavy monochrome contrast designed for an industrial underground venue.",
-    image:
-      "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=900&q=80",
-    icon: "lucide:activity",
-  },
-  {
-    id: "swiss-archival-botanics",
-    slug: "swiss-botanics",
-    vol: "Style 03",
-    edition: "December 01, 2026",
-    category: "International Typographic",
-    title: "Alpine Flora & Asymmetric Grid Systems",
-    description:
-      "Strict Akzidenz-Grotesk scales, clinical catalog indices, and high-saturation macro floral photography for an apothecary laboratory.",
-    image:
-      "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=900&q=80",
-    icon: "lucide:grid",
-  },
-  {
-    id: "retro-futurism-aerospace",
-    slug: "retro-aerospace",
-    vol: "Style 04",
-    edition: "December 20, 2026",
-    category: "Retro-Futurism",
-    title: "Mid-Century Avionics & Warm Amber CRT",
-    description:
-      "Phosphor-glow amber displays, brushed titanium bezels, and technical telemetry diagrams applied to a boutique flight instrument workshop.",
-    image:
-      "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=900&q=80",
-    icon: "lucide:gauge",
-  },
 ];
 
 export const useShowcaseStore = defineStore("showcase", () => {

@@ -224,8 +224,14 @@ onMounted(() => {
 /* ==========================================================================
    GRID LAYOUT & SECTION
    ========================================================================== */
+<style scoped>
+/* ==========================================================================
+   GRID LAYOUT & SECTION
+   ========================================================================== */
 .design-grid-section {
   width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   background-color: var(--shell-bg);
   color: var(--shell-text);
   padding-block: clamp(4rem, 8vw, 6rem);
@@ -331,18 +337,18 @@ input[type="search"]::-webkit-search-cancel-button {
 /* ==========================================================================
    CARD SYSTEM MATRIX
    ========================================================================== */
-
-.brand-logo {
-  object-fit: contain;
-}
 .cards-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  /* Swapped min 360px for min 0 so cards collapse cleanly on mobile */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: var(--space-6);
   width: 100%;
 }
 
 .design-card {
+  width: 100%;
+  min-width: 0; /* Prevents flex children from pushing width */
+  box-sizing: border-box;
   background-color: var(--shell-surface);
   border: 1px solid var(--shell-border);
   padding: var(--space-5);
@@ -403,20 +409,28 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Media Showcase */
 .card-image-stage {
   width: 100%;
-  height: 220px;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 10; /* Removed fixed height: 220px to prevent overflow */
   border-radius: 4px;
   border: 1px solid var(--shell-border);
   background-color: var(--shell-bg);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-img {
   filter: grayscale(85%);
   width: 100%;
   height: 100%;
-  max-height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.brand-logo {
+  max-width: 75%;
+  max-height: 75%;
+  object-fit: contain;
   display: block;
 }
 
@@ -439,6 +453,7 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Card Typography */
 .card-content-block {
   gap: var(--space-2);
+  min-width: 0;
 }
 
 .card-heading {
@@ -481,7 +496,6 @@ input[type="search"]::-webkit-search-cancel-button {
   gap: var(--space-2);
 }
 
-/* Yellow Primary Button */
 .btn-gold {
   background-color: var(--shell-accent-gold);
   color: #131314;
@@ -492,7 +506,6 @@ input[type="search"]::-webkit-search-cancel-button {
   filter: brightness(1.08);
 }
 
-/* Ghost Secondary Button */
 .btn-ghost {
   background-color: transparent;
   color: var(--shell-text);
@@ -508,7 +521,6 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 0.95rem;
 }
 
-/* Upcoming Card Theme */
 .card-upcoming {
   border-style: dashed;
 }
@@ -517,9 +529,17 @@ input[type="search"]::-webkit-search-cancel-button {
    RESPONSIVE QUERIES
    ========================================================================== */
 @media (max-width: 768px) {
+  .design-grid-section {
+    padding-inline: var(--space-3);
+  }
+
   .cards-layout {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
+  }
+
+  .design-card {
+    padding: var(--space-4);
   }
 
   .search-giant-input {
