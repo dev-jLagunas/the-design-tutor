@@ -46,7 +46,7 @@
   --font-family-mono: "Space Mono", monospace;
 
   /* Font Sizing Hierarchy */
-  --text-size-hero: clamp(2.75rem, 7vw, 6rem);
+  --text-size-hero: clamp(2.75rem, 9vw, 8rem);
   --text-size-title-lg: clamp(2rem, 4vw, 3.25rem);
   --text-size-title-md: clamp(1.4rem, 2.5vw, 2rem);
   --text-size-title-sm: 1.25rem;

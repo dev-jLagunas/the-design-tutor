@@ -57,7 +57,7 @@ export const editorialPizzaMovement: MovementDefinition = {
   live: {
     // --- Navbar ---
     navbar: {
-      brandMark: "FOUNDRY // KATAMACHI",
+      brandMark: "FOUNDRY",
       subBrandMark: "EST. 2024 // KANAZAWA",
       statusBadge: "DOORS OPEN 18:00 – 02:00",
       navItems: [
@@ -80,7 +80,7 @@ export const editorialPizzaMovement: MovementDefinition = {
     // --- Tier 1: Hero ---
     hero: {
       eyebrow: "RENOVATED COUNTER // 6:00 PM – 2:00 AM",
-      title: "AFTER DARK.",
+      title: "DEEP DISH,",
       titleItalic: "BY THE SLICE.",
       titleSecondary: "DEEP DISH REFRAMED FOR THE NOCTURNAL HOURS.",
       subtitle:
@@ -95,7 +95,7 @@ export const editorialPizzaMovement: MovementDefinition = {
         "Katamachi 2-Chome",
       ],
       primaryAction: {
-        label: "VIEW TONIGHT'S ROTATION",
+        label: "VIEW TONIGHT'S SLICES",
         targetId: "#section03",
         variant: "primary",
       },
@@ -118,12 +118,12 @@ export const editorialPizzaMovement: MovementDefinition = {
           description: "Night service only",
         },
         {
-          value: "18 Seats",
+          value: "18 Seats & Outdoors",
           label: "Steel Counter",
           description: "Walk-ins strictly",
         },
         {
-          value: "4 Slices",
+          value: "4 Varieties",
           label: "Nightly Rotation",
           description: "Fresh from the pan",
         },

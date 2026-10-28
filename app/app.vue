@@ -11,6 +11,9 @@ useHead({
 
 <template>
   <NuxtLayout>
+    <ClientOnly>
+      <GlobalSparkler />
+    </ClientOnly>
     <NuxtPage />
   </NuxtLayout>
 </template>
