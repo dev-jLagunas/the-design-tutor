@@ -232,7 +232,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80",
+            src: "/images/design01/pizza-one.png",
             alt: "Katamachi Classic deep dish slice with thick tomato sauce and fennel sausage",
             caption: "Katamachi Classic slice.",
           },
@@ -258,7 +258,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+            src: "/images/design01/pizza-two.png",
             alt: "Golden four cheese deep dish slice with caramelized frico cheese crown",
             caption: "Quadruple Formaggi slice.",
           },
@@ -285,7 +285,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+            src: "/images/design01/pizza-three.png",
             alt: "Cupping pepperoni deep dish slice glistening with hot honey and red chili oil",
             caption: "Midnight Pepperoni slice.",
           },
@@ -312,7 +312,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?auto=format&fit=crop&w=800&q=80",
+            src: "/images/design01/pizza-four.png",
             alt: "Rustic deep dish slice covered in roasted wild mushrooms and herbs",
             caption: "King Oyster Mushroom slice.",
           },

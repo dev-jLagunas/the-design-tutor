@@ -3,14 +3,21 @@
 import { computed } from "vue";
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 import PizzaSection0 from "./PizzaSectionZero.vue";
+import PizzaSectionOne from "./PizzaSectionOne.vue";
 
 const store = useShowcaseStore();
 const sections = computed(() => store.activeSections);
+const isEdu = computed(() => store.isEduMode);
 </script>
 
 <template>
   <div v-if="sections" class="foundry-landing-root">
     <PizzaSection0 :navbar="sections.navbar" :hero="sections.hero" />
+    <!-- Section 1: The Slices (Live) or Core Characteristics (Edu) -->
+    <PizzaSectionOne
+      :data="isEdu ? sections.section02 : sections.section03"
+      :is-educational="isEdu"
+    />
   </div>
 </template>
 
