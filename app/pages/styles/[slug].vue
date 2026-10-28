@@ -17,12 +17,6 @@ onMounted(() => {
 
 <template>
   <main v-if="store.currentMovement" class="showcase-canvas-root">
-    <!-- Design 01: Japanese Minimalism -->
-    <MovementsMovementMinimalism v-if="slug === 'minimalism'" />
-
-    <!-- Design 02: Brutalism (When we build it) -->
-    <MovementsMovementBrutalismBar v-else-if="slug === 'brutalism'" />
-
     <MovementsDesign01EditorialPizzaLanding
       v-if="route.params.slug === 'editorial-pizza'"
     />

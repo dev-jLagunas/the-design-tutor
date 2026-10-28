@@ -9,63 +9,66 @@ const store = useShowcaseStore();
     class="showcase-hud-root fixed no-select"
     aria-label="Showcase Controls"
   >
-    <!-- Discrete Upper-Left Back Button -->
-    <NuxtLink
-      to="/#styles-index"
-      class="hud-back-btn flex-center"
-      title="Return to Catalog"
-      aria-label="Return to Catalog"
-    >
-      <Icon name="lucide:arrow-left" class="hud-icon" />
-    </NuxtLink>
-
-    <!-- 2x2 Floating Action Grid -->
-    <div class="hud-grid-pod">
-      <!-- Top Row: View Mode Switcher -->
-      <button
-        type="button"
-        class="pod-btn top-left"
-        :class="{ active: store.isEduMode }"
-        title="Curriculum Mode"
-        aria-label="Curriculum Mode"
-        @click="store.setMode('edu')"
+    <div class="hud-vertical-stack">
+      <!-- 1. Discrete Back Button on Top (No bg/border, scales & turns red on hover) -->
+      <NuxtLink
+        to="/#styles-index"
+        class="hud-back-btn flex-center"
+        title="Return to Catalog"
+        aria-label="Return to Catalog"
       >
-        <Icon name="lucide:book-open" class="hud-icon" />
-      </button>
+        <Icon name="lucide:arrow-left" class="hud-icon" />
+      </NuxtLink>
 
-      <button
-        type="button"
-        class="pod-btn top-right"
-        :class="{ active: store.isLiveMode }"
-        title="Live Demo Mode"
-        aria-label="Live Demo Mode"
-        @click="store.setMode('live')"
-      >
-        <Icon name="lucide:eye" class="hud-icon" />
-      </button>
+      <!-- 2. Mode Switchers Pod -->
+      <div class="hud-btn-group">
+        <button
+          type="button"
+          class="pod-btn"
+          :class="{ active: store.isEduMode }"
+          title="Curriculum Mode"
+          aria-label="Curriculum Mode"
+          @click="store.setMode('edu')"
+        >
+          <Icon name="lucide:book-open" class="hud-icon" />
+        </button>
 
-      <!-- Bottom Row: Drawers -->
-      <button
-        type="button"
-        class="pod-btn bottom-left"
-        :class="{ active: store.isCaseStudyOpen }"
-        title="Design Overview"
-        aria-label="Design Overview"
-        @click="store.toggleCaseStudy"
-      >
-        <Icon name="lucide:layers" class="hud-icon" />
-      </button>
+        <button
+          type="button"
+          class="pod-btn"
+          :class="{ active: store.isLiveMode }"
+          title="Live Demo Mode"
+          aria-label="Live Demo Mode"
+          @click="store.setMode('live')"
+        >
+          <Icon name="lucide:eye" class="hud-icon" />
+        </button>
+      </div>
 
-      <button
-        type="button"
-        class="pod-btn bottom-right"
-        :class="{ active: store.isBriefOpen }"
-        title="Client Brief"
-        aria-label="Client Brief"
-        @click="store.toggleBrief"
-      >
-        <Icon name="lucide:file-text" class="hud-icon" />
-      </button>
+      <!-- 3. Drawers Pod (Separated by small vertical space) -->
+      <div class="hud-btn-group">
+        <button
+          type="button"
+          class="pod-btn"
+          :class="{ active: store.isCaseStudyOpen }"
+          title="Design Overview"
+          aria-label="Design Overview"
+          @click="store.toggleCaseStudy"
+        >
+          <Icon name="lucide:layers" class="hud-icon" />
+        </button>
+
+        <button
+          type="button"
+          class="pod-btn"
+          :class="{ active: store.isBriefOpen }"
+          title="Client Brief"
+          aria-label="Client Brief"
+          @click="store.toggleBrief"
+        >
+          <Icon name="lucide:file-text" class="hud-icon" />
+        </button>
+      </div>
     </div>
   </aside>
 </template>
@@ -80,71 +83,75 @@ const store = useShowcaseStore();
   z-index: 9999;
 }
 
-/* Standalone Discrete Back Button */
-.hud-back-btn {
+/* Vertical Stack Pinned to Far-Right Center */
+.hud-vertical-stack {
   pointer-events: auto;
   position: absolute;
-  top: 43%;
-  left: var(--space-4, 1.25rem);
+  top: 50%;
+  right: 8px;
   transform: translateY(-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2, 8px);
+}
+
+/* Standalone Back Button (No background or border, expands and turns red on hover) */
+.hud-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
   color: var(--shell-text, #f5f4f0);
-  opacity: 0.28;
-  backdrop-filter: blur(12px);
+  opacity: 0.35;
   text-decoration: none;
+  cursor: pointer;
   transition:
-    opacity 0.1s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .hud-back-btn:hover,
 .hud-back-btn:focus-visible {
   opacity: 1;
-  border-color: var(--shell-muted, #8a8884);
-  color: var(--shell-accent-coral);
+  color: #ef4444;
+  transform: scale(1.22);
 }
 
-/* 2x2 Cluster Positioned in the Upper-Left (Directly below Back Button) */
-.hud-grid-pod {
-  pointer-events: auto;
-  position: absolute;
-  top: 50%;
-  left: var(--space-4, 1.25rem);
-  transform: translateY(-50%);
-  display: grid;
-  grid-template-columns: repeat(2, 42px);
-  grid-template-rows: repeat(2, 42px);
-  gap: 1px;
+/* Button Pod Enclosures */
+.hud-btn-group {
+  display: flex;
+  flex-direction: column;
   background-color: var(--shell-border, rgba(255, 255, 255, 0.12));
   border: 1px solid var(--shell-border, rgba(255, 255, 255, 0.12));
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(12px);
-  opacity: 0.28;
+  -webkit-backdrop-filter: blur(12px);
+  gap: 1px;
+  opacity: 0.35;
   transition:
     opacity 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.2s ease;
 }
 
-.hud-grid-pod:hover,
-.hud-grid-pod:focus-within {
+.hud-vertical-stack:hover .hud-btn-group,
+.hud-btn-group:focus-within {
   opacity: 1;
   border-color: var(--shell-muted, #8a8884);
 }
 
-/* Individual Grid Buttons */
+/* Individual Vertical Pod Buttons */
 .pod-btn {
   position: relative;
-  width: 42px;
-  height: 42px;
-  background-color: transparent;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(18, 18, 18, 0.65);
   border: none;
   color: var(--shell-muted, #8a8884);
   display: flex;
@@ -159,7 +166,7 @@ const store = useShowcaseStore();
 
 .pod-btn:hover {
   color: var(--shell-text, #f5f4f0);
-  background-color: transparent;
+  background-color: rgba(30, 30, 30, 0.85);
 }
 
 .pod-btn.active {
@@ -168,14 +175,38 @@ const store = useShowcaseStore();
 }
 
 .hud-icon {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
-/* Mobile Alignment: Stays pinned top-left with slightly higher idle opacity */
+/* Mobile Screens: Kept tiny & out of the way to preserve visual immersion */
 @media (max-width: 640px) {
-  .hud-back-btn,
-  .hud-grid-pod {
-    opacity: 0.65;
+  .hud-vertical-stack {
+    right: 4px;
+    gap: 4px;
+  }
+
+  .hud-back-btn {
+    width: 28px;
+    height: 28px;
+    opacity: 0.3;
+  }
+
+  .hud-back-btn .hud-icon {
+    font-size: 0.85rem;
+  }
+
+  .hud-btn-group {
+    border-radius: 4px;
+    opacity: 0.3;
+  }
+
+  .pod-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pod-btn .hud-icon {
+    font-size: 0.85rem;
   }
 }
 </style>

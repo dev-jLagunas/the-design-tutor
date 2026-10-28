@@ -4,6 +4,7 @@ import { computed } from "vue";
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 import PizzaSection0 from "./PizzaSectionZero.vue";
 import PizzaSectionOne from "./PizzaSectionOne.vue";
+import PizzaSectionTwo from "./PizzaSectionTwo.vue";
 
 const store = useShowcaseStore();
 const sections = computed(() => store.activeSections);
@@ -18,6 +19,8 @@ const isEdu = computed(() => store.isEduMode);
       :data="isEdu ? sections.section02 : sections.section03"
       :is-educational="isEdu"
     />
+    <!-- Section 2: Visitor Protocol & Telemetry (Live) or Implementation Cheat Sheet (Edu) -->
+    <PizzaSectionTwo :data="sections.section05" :is-educational="isEdu" />
   </div>
 </template>
 
