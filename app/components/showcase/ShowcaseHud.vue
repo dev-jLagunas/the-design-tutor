@@ -83,19 +83,19 @@ const store = useShowcaseStore();
 .hud-back-btn {
   pointer-events: auto;
   position: absolute;
-  top: var(--space-4, 1.25rem);
+  top: 43%;
   left: var(--space-4, 1.25rem);
+  transform: translateY(-50%);
   width: 42px;
   height: 42px;
   border-radius: 8px;
-  background-color: var(--shell-bg, #121212);
-  border: 1px solid var(--shell-border, rgba(255, 255, 255, 0.12));
+  background-color: transparent;
   color: var(--shell-text, #f5f4f0);
   opacity: 0.28;
   backdrop-filter: blur(12px);
   text-decoration: none;
   transition:
-    opacity 0.2s ease,
+    opacity 0.1s ease,
     border-color 0.2s ease,
     background-color 0.2s ease,
     transform 0.2s ease;
@@ -105,16 +105,16 @@ const store = useShowcaseStore();
 .hud-back-btn:focus-visible {
   opacity: 1;
   border-color: var(--shell-muted, #8a8884);
-  background-color: var(--shell-surface, #1a1a1a);
-  transform: scale(1.04);
+  color: var(--shell-accent-coral);
 }
 
 /* 2x2 Cluster Positioned in the Upper-Left (Directly below Back Button) */
 .hud-grid-pod {
   pointer-events: auto;
   position: absolute;
-  top: calc(var(--space-4, 1.25rem) + 42px + 10px);
+  top: 50%;
   left: var(--space-4, 1.25rem);
+  transform: translateY(-50%);
   display: grid;
   grid-template-columns: repeat(2, 42px);
   grid-template-rows: repeat(2, 42px);
@@ -143,7 +143,7 @@ const store = useShowcaseStore();
   position: relative;
   width: 42px;
   height: 42px;
-  background-color: var(--shell-bg, #121212);
+  background-color: transparent;
   border: none;
   color: var(--shell-muted, #8a8884);
   display: flex;
@@ -158,7 +158,7 @@ const store = useShowcaseStore();
 
 .pod-btn:hover {
   color: var(--shell-text, #f5f4f0);
-  background-color: var(--shell-surface, #1a1a1a);
+  background-color: transparent;
 }
 
 .pod-btn.active {

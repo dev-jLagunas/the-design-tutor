@@ -1,4 +1,6 @@
+<!-- components/movements/design-01/EditorialPizzaLanding.vue -->
 <script setup lang="ts">
+import { computed } from "vue";
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 
 const store = useShowcaseStore();
@@ -6,76 +8,113 @@ const sections = computed(() => store.activeSections);
 </script>
 
 <template>
-  <main v-if="sections" class="movement-root">
-    <!-- 00. State Verification Header -->
-    <header class="debug-bar">
-      <span>{{ sections.navbar.brandMark }}</span>
-      <span>MODE: {{ store.activeMode.toUpperCase() }}</span>
-    </header>
-
-    <!-- 01. Hero Verification -->
-    <section class="test-hero">
-      <h1>
-        {{ sections.hero.title }} <em>{{ sections.hero.titleItalic }}</em>
-      </h1>
-      <p>{{ sections.hero.subtitle }}</p>
-    </section>
-
-    <!-- 02. Slot Outline Placeholders -->
-    <div class="test-slots">
-      <div>02: {{ sections.section02.title }}</div>
-      <div>03: {{ sections.section03.title }}</div>
-      <div>04: {{ sections.section04.title }}</div>
-      <div>05: {{ sections.section05.title }}</div>
-      <div>FOOTER: {{ sections.footer.brandColophon }}</div>
-    </div>
-  </main>
+  <div v-if="sections" class="foundry-landing-root">
+    <p>stuff goes here</p>
+  </div>
 </template>
 
 <style scoped>
-.movement-root {
+/* =============================================================================
+   SCOPED DESIGN SYSTEM TOKENS
+   Pure variables only — no pre-built components or restrictive utilities.
+   ============================================================================= */
+
+.foundry-landing-root {
+  /* ---------------------------------------------------------------------------
+     1. COLOR PALETTE
+     --------------------------------------------------------------------------- */
+  --bg-canvas: #121212;
+  --bg-surface: #1a1a1a;
+  --bg-elevated: #242424;
+
+  --text-primary: #f5f4f0;
+  --text-body: #d0cfca;
+  --text-muted: #8a8884;
+  --text-dim: #54524f;
+
+  --accent-amber: #e5a93c;
+  --accent-amber-subtle: #5a4828;
+
+  --line-border: #2e2e2e;
+  --line-subtle: rgba(255, 255, 255, 0.08);
+
+  /* ---------------------------------------------------------------------------
+     2. TYPOGRAPHY FAMILIES
+     --------------------------------------------------------------------------- */
+  --font-display: "Bodoni Moda", "Playfair Display", Georgia, serif;
+  --font-body:
+    "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Space Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---------------------------------------------------------------------------
+     3. TYPE SCALE
+     --------------------------------------------------------------------------- */
+  --text-display-xl: clamp(2.75rem, 7.5vw, 6rem);
+  --text-display-lg: clamp(2rem, 4.5vw, 3.5rem);
+  --text-display-md: clamp(1.4rem, 2.5vw, 2rem);
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-base: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+  --text-micro: 0.68rem;
+
+  /* ---------------------------------------------------------------------------
+     4. STANDARD 4PX/8PX SPACING SCALE
+     --------------------------------------------------------------------------- */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.5rem; /* 24px */
+  --space-6: 2rem; /* 32px */
+  --space-7: 3rem; /* 48px */
+  --space-8: 4rem; /* 64px */
+  --space-9: 6rem; /* 96px */
+  --space-10: 8rem; /* 128px */
+
+  /* ---------------------------------------------------------------------------
+     5. BORDERS & RADII
+     --------------------------------------------------------------------------- */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 9999px;
+
+  --border-hairline: 1px solid var(--line-border);
+  --border-subtle: 1px solid var(--line-subtle);
+
+  /* ---------------------------------------------------------------------------
+     6. MOTION
+     --------------------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+
+  /* ---------------------------------------------------------------------------
+     7. CONTAINER BOUNDS
+     --------------------------------------------------------------------------- */
+  --container-max: 1200px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Host Scope Reset */
   min-height: 100vh;
-  padding: 2rem;
-  background-color: #121212;
-  color: #f5f4f0;
-  font-family: sans-serif;
+  width: 100%;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  box-sizing: border-box;
 }
 
-.debug-bar {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  font-family: monospace;
-  font-size: 0.85rem;
-  color: #8a8884;
+/* Scoped child box-sizing reset */
+.foundry-landing-root *,
+.foundry-landing-root *::before,
+.foundry-landing-root *::after {
+  box-sizing: border-box;
 }
-
-.test-hero {
-  margin: 3rem 0;
-}
-
-.test-hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.test-hero em {
-  font-style: italic;
-  color: #e5a93c;
-}
-
-.test-slots {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  font-family: monospace;
-  font-size: 0.85rem;
-  color: #8a8884;
-}
-
-.test-slots div {
-  padding: 0.5rem;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+.foundry-landing-root {
+  background-color: var(--accent-amber);
 }
 </style>
