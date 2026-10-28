@@ -72,11 +72,12 @@ const store = useShowcaseStore();
 
 <style scoped>
 .showcase-hud-root {
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 90;
+  z-index: 9999;
 }
 
 /* Standalone Discrete Back Button */

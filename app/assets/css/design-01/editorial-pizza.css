@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+.foundry-landing-root {
+  /* ===========================================================================
+     1. NEUTRAL COLOR PALETTE (Dark-to-Light scale)
+     =========================================================================== */
+  --neutral-100: #0a0a0a; /* Deepest black / Canvas */
+  --neutral-200: #121212; /* Dark surface / Cards */
+  --neutral-300: #1c1c1c; /* Elevated surface / Inputs */
+  --neutral-400: #2a2a2a; /* Borders / Dividers */
+  --neutral-500: #555555; /* Subdued / Disabled */
+  --neutral-600: #888888; /* Muted text / Meta */
+  --neutral-700: #b0b0b0; /* Secondary text */
+  --neutral-800: #e0e0e0; /* Body text */
+  --neutral-900: #ffffff; /* High-contrast white / Titles */
+
+  /* ===========================================================================
+     2. SEMANTIC COLOR SLOTS (Neutral placeholders to map later)
+     =========================================================================== */
+  --color-canvas: var(--neutral-100);
+  --color-surface: var(--neutral-200);
+  --color-surface-hover: var(--neutral-300);
+
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-800);
+  --color-text-muted: var(--neutral-600);
+
+  --color-border: var(--neutral-400);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Primary Accent Slots (Set to high-contrast monochrome for now) */
+  --color-primary-1: #ffffff;
+  --color-primary-2: #e0e0e0;
+  --color-primary-3: #121212;
+
+  /* Secondary Accent Slots */
+  --color-secondary-1: #888888;
+  --color-secondary-2: #555555;
+  --color-secondary-3: #222222;
+
+  /* ===========================================================================
+     3. TYPOGRAPHY SCALES & STYLES
+     =========================================================================== */
+  --font-family-display: "Bodoni Moda", Georgia, serif;
+  --font-family-body: "Space Grotesk", sans-serif;
+  --font-family-mono: "Space Mono", monospace;
+
+  /* Font Sizing Hierarchy */
+  --text-size-hero: clamp(2.75rem, 7vw, 6rem);
+  --text-size-title-lg: clamp(2rem, 4vw, 3.25rem);
+  --text-size-title-md: clamp(1.4rem, 2.5vw, 2rem);
+  --text-size-title-sm: 1.25rem;
+  --text-size-body-lg: 1.125rem;
+  --text-size-body: 1rem;
+  --text-size-sm: 0.875rem;
+  --text-size-xs: 0.75rem;
+  --text-size-micro: 0.68rem;
+
+  /* Line Heights */
+  --leading-none: 0.95;
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* Tracking / Letter Spacing */
+  --tracking-tight: -0.04em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+  --tracking-widest: 0.16em;
+
+  /* ===========================================================================
+     4. UNIFIED SPACING SCALE (Margins, Paddings, Gaps)
+     =========================================================================== */
+  --space-0: 0px;
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.5rem; /* 24px */
+  --space-6: 2rem; /* 32px */
+  --space-7: 3rem; /* 48px */
+  --space-8: 4rem; /* 64px */
+  --space-9: 6rem; /* 96px */
+  --space-10: 8rem; /* 128px */
+
+  /* ===========================================================================
+     5. BOUNDS & GEOMETRY
+     =========================================================================== */
+  --layout-container-max: 1240px;
+  --layout-gutter: clamp(1rem, 4vw, 3rem);
+
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-pill: 9999px;
+
+  --border-width-hairline: 1px;
+  --border-width-thick: 2px;
+
+  /* ===========================================================================
+     6. Z-INDEX LAYERING
+     =========================================================================== */
+  --layer-base: 1;
+  --layer-above: 10;
+  --layer-sticky: 20;
+  --layer-drawer: 100;
+  --layer-scrim: 90;
+}
