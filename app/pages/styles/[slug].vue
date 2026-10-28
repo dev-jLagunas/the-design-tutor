@@ -23,7 +23,8 @@ onMounted(() => {
     <!-- Design 02: Brutalism (When we build it) -->
     <MovementsMovementBrutalismBar v-else-if="slug === 'brutalism'" />
 
-    <!-- Design 03: Retro Cyber / Flash (When we build it) -->
-    <MovementsMovementRetroDigital v-else-if="slug === 'retro-digital'" />
+    <MovementsDesign01EditorialPizzaLanding
+      v-if="route.params.slug === 'editorial-pizza'"
+    />
   </main>
 </template>

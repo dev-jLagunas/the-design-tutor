@@ -5,10 +5,10 @@ import type {
   ViewMode,
   MovementSections,
   ClientBrief,
+  CaseStudyRationale,
 } from "~/types/movement";
 
-import { minimalismMovement } from "~/content/movements/minimalism";
-import { brutalismMovement } from "~/content/movements/brutalism";
+import { editorialPizzaMovement } from "~/content/movements/editorial_pizza";
 
 export interface MovementMetaCard {
   id: string;
@@ -24,37 +24,23 @@ export interface MovementMetaCard {
 
 // 1. Single source of truth registry for complete movement definitions
 const movementRegistry: Record<string, MovementDefinition> = {
-  minimalism: minimalismMovement,
-  brutalism: brutalismMovement,
+  "editorial-pizza": editorialPizzaMovement,
 };
 
 // 2. Card catalog metadata for the homepage index
 const catalogMeta: MovementMetaCard[] = [
   {
-    id: "minimalism-ishikawa",
-    slug: "minimalism",
-    vol: "Style 01",
-    edition: "Launch Release",
-    category: "Minimalist",
-    title: "Japanese Minimalism & Spatial Ma (間)",
+    id: "editorial-noir-foundry",
+    slug: "editorial-pizza",
+    vol: "Style 03",
+    edition: "Revision 01",
+    category: "Editorial",
+    title: "Downtown Editorial Noir & Cast-Iron Craft",
     description:
-      "Radical negative space, strict asymmetric balance, and muted natural materials applied to an artisanal Ishikawa confectionery.",
+      "Severe Didone serifs, brushed steel textures, and high-contrast flash photography applied to a late-night Katamachi pizza and vinyl counter.",
     image:
-      "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80",
-    icon: "lucide:circle-dot",
-  },
-  {
-    id: "brutalism-sd-music",
-    slug: "brutalism",
-    vol: "Style 02",
-    edition: "Revision 02",
-    category: "Brutalism",
-    title: "Digital Brutalism & Structural Rawness",
-    description:
-      "Harsh monospaced typography, 3px solid black borders, hazard accents, and anti-polish aesthetics applied to an underground San Diego venue.",
-    image:
-      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=80",
-    icon: "lucide:square",
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80",
+    icon: "lucide:disc",
   },
 ];
 
@@ -65,10 +51,12 @@ export const useShowcaseStore = defineStore("showcase", () => {
   const currentMovement = ref<MovementDefinition | null>(null);
   const activeMode = ref<ViewMode>("edu");
   const isBriefOpen = ref<boolean>(false);
+  const isCaseStudyOpen = ref<boolean>(false);
 
   // Expose catalog cards
   const allMovements = computed(() => catalogMeta);
 
+  // Active section data switching based on HUD mode
   const activeSections = computed<MovementSections | null>(() => {
     if (!currentMovement.value) return null;
     return activeMode.value === "edu"
@@ -76,8 +64,14 @@ export const useShowcaseStore = defineStore("showcase", () => {
       : currentMovement.value.live;
   });
 
+  // Client Brief getter
   const activeBrief = computed<ClientBrief | null>(() => {
     return currentMovement.value?.brief ?? null;
+  });
+
+  // Case study / Designer rationale getter
+  const activeCaseStudy = computed<CaseStudyRationale | null>(() => {
+    return currentMovement.value?.caseStudy ?? null;
   });
 
   const isEduMode = computed(() => activeMode.value === "edu");
@@ -126,13 +120,27 @@ export const useShowcaseStore = defineStore("showcase", () => {
     isBriefOpen.value = !isBriefOpen.value;
   }
 
+  function openCaseStudy() {
+    isCaseStudyOpen.value = true;
+  }
+
+  function closeCaseStudy() {
+    isCaseStudyOpen.value = false;
+  }
+
+  function toggleCaseStudy() {
+    isCaseStudyOpen.value = !isCaseStudyOpen.value;
+  }
+
   return {
     allMovements,
     currentMovement,
     activeMode,
     isBriefOpen,
+    isCaseStudyOpen,
     activeSections,
     activeBrief,
+    activeCaseStudy,
     isEduMode,
     isLiveMode,
     loadMovement,
@@ -141,5 +149,8 @@ export const useShowcaseStore = defineStore("showcase", () => {
     openBrief,
     closeBrief,
     toggleBrief,
+    openCaseStudy,
+    closeCaseStudy,
+    toggleCaseStudy,
   };
 });

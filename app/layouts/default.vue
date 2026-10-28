@@ -1,9 +1,5 @@
 <!-- layouts/default.vue -->
-<script setup lang="ts">
-function handleRandomStyle() {
-  console.log("Random style triggered");
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="tutor-shell">
