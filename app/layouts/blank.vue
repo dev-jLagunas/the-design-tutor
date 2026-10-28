@@ -5,7 +5,7 @@
 
     <!-- Slide-over Brief Drawer -->
     <ShowcaseBriefModal />
-
+    <ShowcaseOverviewModal />
     <!-- Page Content (Pure Blank Slate) -->
     <slot />
   </div>

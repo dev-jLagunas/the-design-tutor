@@ -1,4 +1,3 @@
-<!-- components/showcase/ShowcaseHud.vue -->
 <script setup lang="ts">
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 
@@ -7,57 +6,65 @@ const store = useShowcaseStore();
 
 <template>
   <aside
-    class="showcase-hud-root fixed flex-center no-select"
+    class="showcase-hud-root fixed no-select"
     aria-label="Showcase Controls"
   >
-    <div class="hud-pill flex-between">
-      <!-- Back to Main Directory -->
-      <NuxtLink
-        to="/#styles-index"
-        class="hud-action-btn flex-center"
-        title="Return to Styles Archive"
-      >
-        <Icon name="lucide:arrow-left" class="hud-icon" />
-        <span class="hud-label text-micro-caps">Catalog</span>
-      </NuxtLink>
+    <!-- Discrete Upper-Left Back Button -->
+    <NuxtLink
+      to="/#styles-index"
+      class="hud-back-btn flex-center"
+      title="Return to Catalog"
+      aria-label="Return to Catalog"
+    >
+      <Icon name="lucide:arrow-left" class="hud-icon" />
+    </NuxtLink>
 
-      <div class="hud-divider"></div>
-
-      <!-- Live vs Edu Mode Switcher -->
-      <div class="mode-switch-group flex-center">
-        <button
-          type="button"
-          class="mode-toggle-btn text-micro-caps transition-smooth"
-          :class="{ active: store.isEduMode }"
-          @click="store.setMode('edu')"
-        >
-          <Icon name="lucide:book-open" class="btn-sub-icon" />
-          <span>Curriculum</span>
-        </button>
-
-        <button
-          type="button"
-          class="mode-toggle-btn text-micro-caps transition-smooth"
-          :class="{ active: store.isLiveMode }"
-          @click="store.setMode('live')"
-        >
-          <Icon name="lucide:eye" class="btn-sub-icon" />
-          <span>Live Demo</span>
-        </button>
-      </div>
-
-      <div class="hud-divider"></div>
-
-      <!-- Client Brief Trigger -->
+    <!-- 2x2 Floating Action Grid -->
+    <div class="hud-grid-pod">
+      <!-- Top Row: View Mode Switcher -->
       <button
         type="button"
-        class="hud-action-btn brief-btn flex-center transition-smooth"
+        class="pod-btn top-left"
+        :class="{ active: store.isEduMode }"
+        title="Curriculum Mode"
+        aria-label="Curriculum Mode"
+        @click="store.setMode('edu')"
+      >
+        <Icon name="lucide:book-open" class="hud-icon" />
+      </button>
+
+      <button
+        type="button"
+        class="pod-btn top-right"
+        :class="{ active: store.isLiveMode }"
+        title="Live Demo Mode"
+        aria-label="Live Demo Mode"
+        @click="store.setMode('live')"
+      >
+        <Icon name="lucide:eye" class="hud-icon" />
+      </button>
+
+      <!-- Bottom Row: Drawers -->
+      <button
+        type="button"
+        class="pod-btn bottom-left"
+        :class="{ active: store.isCaseStudyOpen }"
+        title="Design Overview"
+        aria-label="Design Overview"
+        @click="store.toggleCaseStudy"
+      >
+        <Icon name="lucide:layers" class="hud-icon" />
+      </button>
+
+      <button
+        type="button"
+        class="pod-btn bottom-right"
         :class="{ active: store.isBriefOpen }"
-        title="View Client Brief"
+        title="Client Brief"
+        aria-label="Client Brief"
         @click="store.toggleBrief"
       >
         <Icon name="lucide:file-text" class="hud-icon" />
-        <span class="hud-label text-micro-caps">Brief</span>
       </button>
     </div>
   </aside>
@@ -65,109 +72,109 @@ const store = useShowcaseStore();
 
 <style scoped>
 .showcase-hud-root {
-  top: var(--space-4);
-  left: 50%;
-  transform: translateX(-50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 90;
-  width: auto;
-  pointer-events: none; /* Let page underneath be clickable */
 }
 
-.hud-pill {
+/* Standalone Discrete Back Button */
+.hud-back-btn {
   pointer-events: auto;
-  background-color: var(--shell-bg);
-  border: 1px solid var(--shell-border);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
-  border-radius: 9999px;
-  padding: 0.35rem 0.6rem;
-  gap: var(--space-2);
+  position: absolute;
+  top: var(--space-4, 1.25rem);
+  left: var(--space-4, 1.25rem);
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: var(--shell-bg, #121212);
+  border: 1px solid var(--shell-border, rgba(255, 255, 255, 0.12));
+  color: var(--shell-text, #f5f4f0);
+  opacity: 0.28;
   backdrop-filter: blur(12px);
-}
-
-.hud-divider {
-  width: 1px;
-  height: 20px;
-  background-color: var(--shell-border);
-}
-
-.hud-action-btn {
-  background: transparent;
-  border: none;
-  color: var(--shell-muted);
-  gap: 0.4rem;
-  padding: 0.45rem 0.75rem;
-  border-radius: 9999px;
-  cursor: pointer;
   text-decoration: none;
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.hud-action-btn:hover,
-.hud-action-btn.active {
-  color: var(--shell-text);
-  background-color: var(--shell-surface);
+.hud-back-btn:hover,
+.hud-back-btn:focus-visible {
+  opacity: 1;
+  border-color: var(--shell-muted, #8a8884);
+  background-color: var(--shell-surface, #1a1a1a);
+  transform: scale(1.04);
+}
+
+/* 2x2 Cluster Positioned in the Upper-Left (Directly below Back Button) */
+.hud-grid-pod {
+  pointer-events: auto;
+  position: absolute;
+  top: calc(var(--space-4, 1.25rem) + 42px + 10px);
+  left: var(--space-4, 1.25rem);
+  display: grid;
+  grid-template-columns: repeat(2, 42px);
+  grid-template-rows: repeat(2, 42px);
+  gap: 1px;
+  background-color: var(--shell-border, rgba(255, 255, 255, 0.12));
+  border: 1px solid var(--shell-border, rgba(255, 255, 255, 0.12));
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+  opacity: 0.28;
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hud-grid-pod:hover,
+.hud-grid-pod:focus-within {
+  opacity: 1;
+  border-color: var(--shell-muted, #8a8884);
+}
+
+/* Individual Grid Buttons */
+.pod-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  background-color: var(--shell-bg, #121212);
+  border: none;
+  color: var(--shell-muted, #8a8884);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.pod-btn:hover {
+  color: var(--shell-text, #f5f4f0);
+  background-color: var(--shell-surface, #1a1a1a);
+}
+
+.pod-btn.active {
+  background-color: var(--shell-accent-gold, #e5a93c);
+  color: #121212;
 }
 
 .hud-icon {
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 
-.hud-label {
-  font-size: 0.68rem;
-}
-
-/* Mode Switch Tabs */
-.mode-switch-group {
-  background-color: var(--shell-surface);
-  border: 1px solid var(--shell-border);
-  border-radius: 9999px;
-  padding: 2px;
-  gap: 2px;
-}
-
-.mode-toggle-btn {
-  background: transparent;
-  border: none;
-  color: var(--shell-muted);
-  padding: 0.4rem 0.85rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.68rem;
-}
-
-.btn-sub-icon {
-  font-size: 0.85rem;
-}
-
-.mode-toggle-btn:hover {
-  color: var(--shell-text);
-}
-
-.mode-toggle-btn.active {
-  background-color: var(--shell-accent-gold);
-  color: #131314;
-  font-weight: 700;
-}
-
+/* Mobile Alignment: Stays pinned top-left with slightly higher idle opacity */
 @media (max-width: 640px) {
-  .showcase-hud-root {
-    top: auto;
-    bottom: var(--space-4);
-    width: calc(100% - 2rem);
-  }
-
-  .hud-pill {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .hud-label {
-    display: none;
+  .hud-back-btn,
+  .hud-grid-pod {
+    opacity: 0.65;
   }
 }
 </style>
