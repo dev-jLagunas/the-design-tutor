@@ -4,6 +4,7 @@ import { ref, computed, onMounted } from "vue";
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 
 const store = useShowcaseStore();
+const { isDark, toggleTheme } = useTheme();
 
 const searchQuery = ref("");
 const activeCategory = ref("All");
@@ -125,7 +126,7 @@ onMounted(() => {
             <img
               :src="design.image"
               :alt="design.title"
-              class="img-cover card-img transition-smooth"
+              class="card-img transition-smooth"
             />
             <span class="card-category-badge font-b-group">
               {{ design.category }}
@@ -137,7 +138,7 @@ onMounted(() => {
             <h2 class="card-heading font-display">
               {{ design.title }}
             </h2>
-            <p class="card-summary font-body">
+            <p class="card-summary">
               {{ design.description }}
             </p>
           </div>
@@ -166,8 +167,8 @@ onMounted(() => {
         <article class="design-card card-upcoming flex-col transition-smooth">
           <div class="card-meta-bar flex-between">
             <div class="card-vol flex-col">
-              <span class="vol-tag text-micro-caps">VOL_NEXT</span>
-              <span class="edition-tag font-body">IN DEVELOPMENT</span>
+              <span class="vol-tag font-b-group">MORE INFO</span>
+              <span class="edition-tag font-b-group">IN DEVELOPMENT</span>
             </div>
             <div class="card-icon-frame flex-center">
               <Icon
@@ -179,20 +180,20 @@ onMounted(() => {
 
           <div class="card-image-stage relative overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800"
-              alt="Future Movements"
-              class="img-cover card-img transition-smooth"
+              :src="
+                isDark
+                  ? '/images/brand/tdt-logo-transparent-dark.png'
+                  : '/images/brand/tdt-logo-transparent.png'
+              "
+              alt="The Design Tutor Logo"
+              class="card-image-stage brand-logo"
             />
-            <span class="card-category-badge font-b-group">
-              Active Pipeline
-            </span>
           </div>
 
           <div class="card-content-block flex-col">
-            <h2 class="card-heading font-display">More Movements Decoding</h2>
+            <h2 class="card-heading font-display">More Designs Coming Soon</h2>
             <p class="card-summary font-body">
-              New design system deconstructions are drafted and pushed
-              periodically. From De Stijl geometry to 90s Flash maximalism.
+              I design and break down a new website design every month or two.
             </p>
           </div>
 
@@ -330,6 +331,10 @@ input[type="search"]::-webkit-search-cancel-button {
 /* ==========================================================================
    CARD SYSTEM MATRIX
    ========================================================================== */
+
+.brand-logo {
+  object-fit: contain;
+}
 .cards-layout {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -398,14 +403,21 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Media Showcase */
 .card-image-stage {
   width: 100%;
+  height: 220px;
   aspect-ratio: 16 / 10;
   border-radius: 4px;
   border: 1px solid var(--shell-border);
   background-color: var(--shell-bg);
+  flex-shrink: 0;
 }
 
 .card-img {
   filter: grayscale(85%);
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .design-card:hover .card-img {
@@ -442,6 +454,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .card-summary {
+  font-family: var(--font-body);
   font-size: var(--text-sm);
   color: var(--shell-muted);
   line-height: 1.5;
@@ -459,7 +472,7 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
   padding: 0.75rem var(--space-3);
   border-radius: 4px;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.05em;
   text-decoration: none;
