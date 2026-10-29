@@ -130,73 +130,70 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
     },
 
-    // --- Tier 2: Section 02 (The Renovation Narrative) ---
+    // --- Tier 2: Section 02 (The Foundry Story & Social Dispatches) ---
     section02: {
-      sectionNumber: "01",
+      sectionNumber: "05",
       sectionAnchorId: "section02",
-      eyebrow: "THE 2-YEAR EVOLUTION // 2024–2026",
-      title: "Stripped to the",
-      titleHighlight: "Steel & Stone.",
+      eyebrow: "BRAND ORIGIN // COMMUNITY & ARCHIVE",
+      title: "Built in Katamachi,",
+      titleHighlight: "Forged After Dark.",
       subtitle:
-        "We demolished our traditional dining room to build an intimate, nocturnal listening counter where deep dish is swift, intense, and social.",
-      paragraphs: [
-        "When Foundry opened two years ago, we fought the common misconception that Chicago deep dish requires a 45-minute wait at a family table. We loved the caramelization and structural chew of cast-iron baking, but we hated the sluggish pace.",
-        "This winter, we took a sledgehammer to the old layout. We installed an 18-seat continuous brushed stainless steel bar, custom low-end acoustic baffling, and dual direct-drive turntables. Today, our stone deck ovens run continuously throughout the night, yielding slices that drop onto your plate within two minutes of sitting down.",
+        "Foundry began as an obsession with Chicago cast-iron baking and evolved into an unapologetic nocturnal counter ritual anchored in local craft and sound.",
+      storyParagraphs: [
+        "We never set out to open a conventional dining room. We wanted a raw, high-focus enclave where late-night creative workers, night owls, and vinyl lovers could pull up to cold steel at midnight, get a piping-hot slice within two minutes, and hear uncompromised analog sound.",
+        "Everything we do stems from two convictions: uncompromising baking discipline—slow-fermented local dough baked in seasoned cast iron—and zero pretense. No reservations, no delivery courier line-ups, and no shortcuts.",
       ],
-      pullquote: {
-        text: "Deep dish shouldn't be a sit-down ordeal. It should be hot, immediate, eaten off raw metal with a dry glass of orange wine while the needle drops.",
-        attribution: "Kenji Sato",
-        role: "Founder & Head Baker",
-      },
-      metrics: [
+      coreValues: [
         {
-          value: "18",
-          label: "Bar Seats",
-          description: "Seamless brushed steel counter",
+          index: "01",
+          label: "DISCIPLINE",
+          title: "Cast-Iron Conviction",
+          description:
+            "Every pan is seasoned in-house. 48-hour cold fermentation yields a crust that holds structural chew without feeling sluggish.",
         },
         {
-          value: "48 HR",
-          label: "Cold Ferment",
-          description: "Signature high-hydration crust",
+          index: "02",
+          label: "COMMUNITY",
+          title: "The Katamachi Orbit",
+          description:
+            "We collaborate exclusively with local Ishikawa producers, micro-roasters, and independent vinyl collectors to keep late hours vital.",
         },
         {
-          value: "2 MIN",
-          label: "Counter Delivery",
-          description: "Piping hot slice turnaround",
+          index: "03",
+          label: "IMMERSION",
+          title: "Physical Spaces Only",
+          description:
+            "No delivery apps or ghost kitchen setups. The experience requires the room, the needle drop, and the heat off the deck oven.",
         },
       ],
-      featurePillars: [
+      socialChannels: [
         {
-          id: "p1",
-          tag: "BAKE RITUAL",
-          label: "Cast-Iron Seasoned Pans",
-          description:
-            "450°F stone deck convection creates crisp, caramelized frico cheese edges.",
+          platform: "Instagram",
+          handle: "@foundrypizzabar",
+          label: "DAILY ROTATIONS & BAKE DISPATCHES",
+          url: "https://instagram.com",
         },
         {
-          id: "p2",
-          tag: "SOUND ETHOS",
-          label: "Rotational Analog Audio",
-          description:
-            "Curated jazz, dub, and post-punk records played exclusively on vinyl.",
+          platform: "Spotify",
+          handle: "Foundry Vinyl Archive",
+          label: "DIGITAL ARCHIVE OF PHYSICAL SPINS",
+          url: "https://spotify.com",
         },
         {
-          id: "p3",
-          tag: "POURS",
-          label: "Unfiltered Pairings",
-          description:
-            "Natural macerated wines, local Ishikawa craft beers, and amaro nightcaps.",
+          platform: "Substack",
+          handle: "The Katamachi Counter",
+          label: "BAKING LOGS, LINER NOTES & ESSAYS",
+          url: "https://substack.com",
         },
       ],
       media: {
         src: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
-        alt: "Renovated dark concrete interior with glowing amber halogen backlights and brushed steel bar",
-        caption: "The renovated Katamachi room at midnight.",
-        badge: "INTERIOR ARCHIVE",
-        aspectRatio: "16:9",
+        alt: "Midnight counter culture at Foundry with guests gathered along the steel bar",
+        caption: "Late-night service along the steel counter.",
+        badge: "ARCHIVAL LOG",
       },
-      closingNote:
-        "No reservations. No takeout delivery apps. In-person counter service only.",
+      closingManifesto:
+        "We are here for the craft, the neighborhood, and the nocturnal hours. Follow the dispatch, listen to the records, or just step through the door.",
     },
 
     // --- Tier 3: Section 03 (The Rotating Slice Board) ---
@@ -327,64 +324,38 @@ export const editorialPizzaMovement: MovementDefinition = {
         variant: "secondary",
       },
     },
-
-    // --- Tier 4: Section 04 (Sound & Night Vibe) ---
+    // --- Tier 4: Section 04 (Sound & Vibe) ---
     section04: {
       sectionNumber: "03",
       sectionAnchorId: "section04",
-      eyebrow: "ACOUSTIC PROGRAMMING // VINYL ARCHIVE",
-      title: "Needle on Wax.",
-      titleHighlight: "Crust in the Pan.",
+      eyebrow: "ANALOG SOUND // ROOM ATMOSPHERE",
+      title: "Needle on Wax,",
+      titleHighlight: "Poured Concrete.",
       subtitle:
-        "Our renovated space is tuned for warm, physical listening. We spin original vinyl pressings from 18:00 through the final 2:00 AM pour.",
-      primaryStreamTitle: "TONIGHT'S ROTATION LIST",
-      primaryStreamSubtitle: "Albums playing on our Technics 1200MK7s tonight",
-      primaryItems: [
+        "We rebuilt the room around warm acoustic dispersion and uninterrupted vinyl sessions from 18:00 through the final 2:00 AM pour.",
+      leadCopy:
+        "The renovation stripped away the dining booths in favor of an intimate listening bar: custom low-end acoustic baffling, dual Technics 1200 turntables, and direct-flash 35mm prints along the back wall.",
+      vibePillars: [
         {
-          index: "SPIN 01",
-          title: "Head Hunters",
-          secondaryTitle: "Herbie Hancock (1973, Columbia)",
+          index: "01",
+          label: "AUDIO HARDWARE",
+          title: "Rotational Analog Sound",
           description:
-            "Heavy analogue funk, ARP synthesizers, and pocket basslines.",
-          tag: "JAZZ FUNK",
+            "Original pressings of late-night jazz, dub, and ambient techno played through tube amps tuned for clear conversation without shouting.",
         },
         {
-          index: "SPIN 02",
-          title: "Selected Ambient Works 85-92",
-          secondaryTitle: "Aphex Twin (1992, R&S Records)",
+          index: "02",
+          label: "COUNTER DISCIPLINE",
+          title: "Clean Air, Fast Flow",
           description:
-            "Warm, nocturnal electronic soundscapes for the post-midnight crowd.",
-          tag: "ANALOG ELECTRONIC",
+            "Strictly smoke-free indoors with an open stainless pass. Order at the grate, grab your pour, and settle into the physical sound.",
         },
         {
-          index: "SPIN 03",
-          title: "Scientist Rids the World of Evil Vampires",
-          secondaryTitle: "Scientist (1981, Greensleeves)",
+          index: "03",
+          label: "SPACE ARCHITECTURE",
+          title: "Steel, Stone & Halogen",
           description:
-            "Spacious dub reverbs that bounce off raw concrete and steel surfaces.",
-          tag: "DUB REGGAE",
-        },
-      ],
-      secondaryStreamTitle: "HOUSE COUNTER ETIQUETTE",
-      secondaryStreamSubtitle: "How we keep the room cohesive and focused",
-      secondaryItems: [
-        {
-          title: "Respect the Needle",
-          body: "Our bar is tuned for sound fidelity. We welcome conversation, but we avoid shouting. Let the analog acoustics carry the room.",
-          authorOrMeta: "SOUND RULE 01",
-          badge: "ACOUSTICS",
-        },
-        {
-          title: "Counter Flow",
-          body: "When you finish your slice and drink, please look behind you. If night owls are waiting at the rail, settle up and let the counter turn.",
-          authorOrMeta: "HOSPITALITY RULE 02",
-          badge: "ETIQUETTE",
-        },
-        {
-          title: "One Check, One Card",
-          body: "We process payments swiftly at the register grate so the baker can stay on the oven line without interruption.",
-          authorOrMeta: "REGISTER RULE 03",
-          badge: "OPERATIONS",
+            "18 stools along a single continuous steel counter under focused amber pinpoints, framed by framed archival photography and exposed masonry.",
         },
       ],
       media: {
@@ -392,8 +363,9 @@ export const editorialPizzaMovement: MovementDefinition = {
         alt: "Vinyl record needle resting in the dark under a warm halogen pinpoint beam",
         caption: "Analog playback station behind the beer taps.",
         badge: "SOUND STATION",
-        aspectRatio: "16:9",
       },
+      footerNote:
+        "No digital streaming playlists. Music runs continuously from physical vinyl until doors lock at 02:00.",
     },
 
     // --- Tier 5: Section 05 (Action Protocol & Arrival) ---
@@ -569,62 +541,60 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
     },
 
-    // --- Tier 2: Section 02 (Core Visual Characteristics) ---
+    // --- Tier 2: Section 02 (Core Visual Characteristics & Reference Dispatches) ---
     section02: {
-      sectionNumber: "01",
+      sectionNumber: "05",
       sectionAnchorId: "section02",
       eyebrow: "01 // ANATOMY OF EDITORIAL NOIR",
-      title: "Severe contrast, unbracketed",
-      titleHighlight: "geometry, and controlled shadows.",
+      title: "Severe Contrast,",
+      titleHighlight: "Unbracketed Geometry.",
       subtitle:
-        "Three non-negotiable structural rules that separate authentic editorial modernism from generic dark-mode websites.",
-      paragraphs: [
-        "Editorial Noir rejects the sterile uniformity of modern SaaS dashboards and the cozy warmth of rustic retro design. It operates on deliberate visual friction: pairing refined editorial luxury (fashion-grade italic serifs set with negative tracking) against utilitarian workspace typography (unadorned monospace timestamps, coordinates, and prices).",
-        "By enforcing 1px hairline structural dividers and eliminating all rounded corners, elements sit as framed printing plates rather than floating interactive software cards. Depth is generated through surface luminance shifts—charcoal, concrete, and bone—rather than synthetic CSS box-shadows.",
+        "Three non-negotiable structural rules that separate authentic editorial modernism from generic dark-mode interfaces.",
+      storyParagraphs: [
+        "Editorial Noir rejects both the sterile uniformity of modern SaaS dashboards and the cozy nostalgia of rustic retro design. It operates on deliberate aesthetic friction: pairing refined editorial luxury (fashion-grade italic serifs set with negative tracking) against utilitarian workspace typography (unadorned monospace timestamps, coordinates, and specs).",
+        "By enforcing 1px hairline structural boundaries and eliminating all softened corner radii, elements sit as framed architectural printing plates rather than floating software cards. Depth is achieved strictly through surface luminance shifts—charcoal, concrete, and bone—rather than synthetic drop shadows.",
       ],
-      pullquote: {
-        text: "Typography in high-contrast editorial systems is not merely a vehicle for text. The silhouette of the letterform is itself a primary architectural element.",
-        attribution: "Robert Bringhurst",
-        role: "The Elements of Typographic Style",
-      },
-      metrics: [
+      coreValues: [
         {
-          value: "6.5 : 1",
-          label: "Scale Contrast",
-          description: "Headline to body font size jump",
+          index: "01",
+          label: "TYPOGRAPHY",
+          title: "Extreme Stroke Modulation",
+          description:
+            "Didone display serifs pair hairline horizontal strokes with heavy vertical stems, creating a dramatic silhouette of luxury and rigor at large scales.",
         },
         {
-          value: "0px",
-          label: "Border Radius",
-          description: "No softened container corners",
+          index: "02",
+          label: "FRAMING",
+          title: "Hairlines & 0px Radii",
+          description:
+            "Boundaries are defined exclusively by 1px rules in low-contrast steel grays (#2A2A2A to #3A3A3A). Containers strictly avoid rounded bubbles or blurred drop shadows.",
         },
         {
-          value: "1px Solid",
-          label: "Hairline Rules",
-          description: "Sole visual boundary marker",
+          index: "03",
+          label: "CHROMATICS",
+          title: "Low-Key Ambient Gamut",
+          description:
+            "The canvas avoids digital pure black (#000000), using smoked charcoal (#121212) and poured concrete (#1A1A1A) accented by warm halogen amber (#E5A93C).",
         },
       ],
-      featurePillars: [
+      socialChannels: [
         {
-          id: "rule-1",
-          tag: "PILLAR 01",
-          label: "Extreme Stroke Modulation",
-          description:
-            "Didone display serifs feature hairline horizontal serifs paired with heavy vertical stems. At large display scales, this creates an unmistakable silhouette of luxury and rigor.",
+          platform: "Typography",
+          handle: "Typewolf // Bodoni Guide",
+          label: "DISPLAY SERIF SCALE RULES & OPTICAL SIZING",
+          url: "https://www.typewolf.com",
         },
         {
-          id: "rule-2",
-          tag: "PILLAR 02",
-          label: "Hairline Spatial Framing",
-          description:
-            "Boundaries are defined exclusively by 1px rules in low-contrast steel grays (#2A2A2A to #3A3A3A). Containers never use rounded bubbles or blurred drop shadows.",
+          platform: "Archive",
+          handle: "Letterform Archive",
+          label: "MID-CENTURY EDITORIAL PRINT & SPECIMENS",
+          url: "https://oa.letterformarchive.org",
         },
         {
-          id: "rule-3",
-          tag: "PILLAR 03",
-          label: "Low-Key Ambient Gamut",
-          description:
-            "The canvas avoids pure digital black (#000000), using smoked charcoal (#121212) and poured concrete (#1A1A1A) accented by warm halogen amber (#E5A93C) to emulate late-night interior illumination.",
+          platform: "Specimen",
+          handle: "Fonts In Use // Didone",
+          label: "CURATED CONTEMPORARY USAGE OF HIGH-CONTRAST SERIFS",
+          url: "https://fontsinuse.com",
         },
       ],
       media: {
@@ -632,10 +602,9 @@ export const editorialPizzaMovement: MovementDefinition = {
         alt: "Sharp architectural shadow casting geometric lines across a concrete wall",
         caption: "Architectural chiaroscuro and spatial tension.",
         badge: "LIGHTING STUDY",
-        aspectRatio: "16:9",
       },
-      closingNote:
-        "Every element must feel either like an expensive art print or a raw technical spec sheet. There is no middle ground.",
+      closingManifesto:
+        "Every element must read either as an expensive archival art print or a raw technical spec sheet. In high-contrast editorial systems, there is no neutral middle ground.",
     },
 
     // --- Tier 3: Section 03 (Application Matrix: When to Use vs Avoid) ---
@@ -790,61 +759,34 @@ export const editorialPizzaMovement: MovementDefinition = {
     section04: {
       sectionNumber: "03",
       sectionAnchorId: "section04",
-      eyebrow: "03 // HISTORICAL ARCHAEOLOGY",
-      title: "From 18th-Century Paris",
+      eyebrow: "HISTORICAL ARCHAEOLOGY // ARCHIVAL ROOTS",
+      title: "From 18th-Century Paris,",
       titleHighlight: "to Soho Basements.",
       subtitle:
-        "The historical lineage of Didone serifs and how downtown subcultures stripped away classicism to create raw nocturnal editorial.",
-      primaryStreamTitle: "HISTORICAL MILESTONES & LINEAGE",
-      primaryStreamSubtitle:
-        "Key cultural turning points that forged this visual language",
-      primaryItems: [
+        "How Enlightenment typographic rigor was stripped of classicism by late-20th-century nocturnal countercultures to forge modern Editorial Noir.",
+      leadCopy:
+        "The movement survives on friction: merging the royal elegance of Giambattista Bodoni and Firmin Didot with raw newsprint, direct-flash 35mm club photography, and industrial zero-radius framing.",
+      vibePillars: [
         {
-          index: "1788",
-          title: "The Didone Revolution",
-          secondaryTitle: "Giambattista Bodoni (Parma) & Firmin Didot (Paris)",
+          index: "01",
+          label: "TYPOGRAPHIC ORIGIN",
+          title: "The Didone Rationalism (1788)",
           description:
-            "Designers discarded old humanist calligraphic serifs in favor of severe mathematical strokes, flat hairline serifs, and high contrast, representing the Enlightenment's passion for rationality and luxury.",
-          tag: "ORIGIN",
+            "Designers discarded humanist calligraphic serifs for unbracketed hairlines and heavy vertical stems, creating the high-contrast luxury silhouette that defines modern display scale.",
         },
         {
-          index: "1940s",
-          title: "The Golden Era of Magazine Editorial",
-          secondaryTitle: "Alexey Brodovitch (Harper's Bazaar)",
+          index: "02",
+          label: "EDITORIAL PACING",
+          title: "Brodovitch & White Space (1940s)",
           description:
-            "Pioneered cinematic white/black spatial pacing, pairing Didone typography with dramatic, full-bleed fashion photography and asymmetric column rhythms.",
-          tag: "EDITORIAL",
+            "Alexey Brodovitch pioneered asymmetric column tension and cinematic contrast in print, setting severe Didone typography alongside full-bleed chiaroscuro photography.",
         },
         {
-          index: "1970s",
-          title: "Downtown Soho & Post-Punk Underground",
-          secondaryTitle: "Andy Warhol's Interview Magazine & NYC Indie Zines",
+          index: "03",
+          label: "UNDERGROUND NOIR",
+          title: "Soho Indie Zines & Flash (1970s)",
           description:
-            "Subcultures appropriated luxury Didone type, setting it on cheap newsprint alongside direct-flash 35mm photos from nocturnal clubs (Studio 54, CBGB), creating the 'Noir' tension.",
-          tag: "NOIR",
-        },
-      ],
-      secondaryStreamTitle: "CURATED DESIGN TRIVIA & PHENOMENA",
-      secondaryStreamSubtitle:
-        "Physical mechanics that explain web typography bugs",
-      secondaryItems: [
-        {
-          title: "The 'Dazzle' Optical Phenomenon",
-          body: "Didone serifs have horizontal strokes so razor-thin that when viewed at small sizes or high contrast, they physically shimmer and disappear into the canvas. This is why Didones must never be used below 24px in digital design.",
-          authorOrMeta: "TYPOGRAPHY TRIVIA",
-          badge: "OPTICS",
-        },
-        {
-          title: "The Direct-Flash Aesthetic",
-          body: "The stark, high-contrast flash photography associated with Editorial Noir came from 1980s point-and-shoot 35mm cameras used in dark clubs. What was originally an equipment limitation became the defining texture of underground luxury.",
-          authorOrMeta: "PHOTOGRAPHY TRIVIA",
-          badge: "LIGHTING",
-        },
-        {
-          title: "The Zero-Radius Philosophy",
-          body: "Rounded UI corners were popularized by consumer software to look 'friendly and tactile.' Editorial Noir strictly uses 0px corners to evoke industrial razor-cut paper edges and cold architectural steel sheets.",
-          authorOrMeta: "INTERFACE TRIVIA",
-          badge: "ARCHITECTURE",
+            "Post-punk publications paired high-fashion typefaces with raw point-and-shoot flash photos, establishing the high-low aesthetic tension of nocturnal luxury.",
         },
       ],
       media: {
@@ -853,8 +795,9 @@ export const editorialPizzaMovement: MovementDefinition = {
         caption:
           "Cast metal type blocks showing high-contrast modern letterforms.",
         badge: "ARCHIVAL PRINT",
-        aspectRatio: "16:9",
       },
+      footerNote:
+        "Rule of thumb: Didone display strokes shimmer and vanish below 24px ('dazzle'). Use them strictly for display scales and counterbalance with monospace metadata.",
     },
 
     // --- Tier 5: Section 05 (Implementation Cheat Sheet) ---

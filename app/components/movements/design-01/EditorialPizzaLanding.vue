@@ -5,6 +5,9 @@ import { useShowcaseStore } from "~/stores/useShowcaseStore";
 import PizzaSection0 from "./PizzaSectionZero.vue";
 import PizzaSectionOne from "./PizzaSectionOne.vue";
 import PizzaSectionTwo from "./PizzaSectionTwo.vue";
+import PizzaSectionThree from "./PizzaSectionThree.vue";
+import PizzaBackToTop from "./PizzaBackToTop.vue";
+import PizzaSectionFour from "./PizzaSectionFour.vue";
 
 const store = useShowcaseStore();
 const sections = computed(() => store.activeSections);
@@ -21,6 +24,14 @@ const isEdu = computed(() => store.isEduMode);
     />
     <!-- Section 2: Visitor Protocol & Telemetry (Live) or Implementation Cheat Sheet (Edu) -->
     <PizzaSectionTwo :data="sections.section05" :is-educational="isEdu" />
+
+    <!-- Section 3: Sound & Night Vibe (Live) or Archival Roots & Trivia (Edu) -->
+    <PizzaSectionThree :data="sections.section04" :is-educational="isEdu" />
+
+    <!-- Section 4: Fullscreen Horizontal Image Reel -->
+    <PizzaSectionFour />
+
+    <PizzaBackToTop />
   </div>
 </template>
 
