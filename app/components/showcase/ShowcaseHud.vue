@@ -1,3 +1,4 @@
+<!-- components/common/ShowcaseHud.vue -->
 <script setup lang="ts">
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 
@@ -21,7 +22,7 @@ const store = useShowcaseStore();
       </NuxtLink>
 
       <!-- 2. Mode Switchers Pod -->
-      <div class="hud-btn-group">
+      <div class="hud-btn-group hud-attention-pulse">
         <button
           type="button"
           class="pod-btn"
@@ -46,7 +47,7 @@ const store = useShowcaseStore();
       </div>
 
       <!-- 3. Drawers Pod (Separated by small vertical space) -->
-      <div class="hud-btn-group">
+      <div class="hud-btn-group hud-attention-pulse">
         <button
           type="button"
           class="pod-btn"
@@ -136,14 +137,54 @@ const store = useShowcaseStore();
   gap: 1px;
   opacity: 0.35;
   transition:
-    opacity 0.2s ease,
-    border-color 0.2s ease;
+    opacity 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
+/* 10-Second Attention Flare Keyframe Loop */
+.hud-attention-pulse {
+  animation: hud-beacon 10s infinite cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes hud-beacon {
+  0% {
+    opacity: 1;
+    transform: translateX(-3px);
+    border-color: rgba(229, 169, 60, 0.65);
+    box-shadow: 0 0 16px -2px rgba(229, 169, 60, 0.45);
+  }
+  14% {
+    opacity: 1;
+    transform: translateX(-3px);
+    border-color: rgba(229, 169, 60, 0.65);
+    box-shadow: 0 0 16px -2px rgba(229, 169, 60, 0.45);
+  }
+  22% {
+    opacity: 0.35;
+    transform: translateX(0);
+    border-color: var(--shell-border, rgba(255, 255, 255, 0.12));
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.65);
+  }
+  100% {
+    opacity: 0.35;
+    transform: translateX(0);
+    border-color: var(--shell-border, rgba(255, 255, 255, 0.12));
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* Pause beacon and hold full opacity while user hovers or interacts */
+/* Pause beacon, kill the keyframe override, and apply hover styles cleanly */
 .hud-vertical-stack:hover .hud-btn-group,
+.hud-btn-group:hover,
 .hud-btn-group:focus-within {
-  opacity: 1;
+  animation: none !important;
+  opacity: 1 !important;
+  transform: translateX(-4px);
   border-color: var(--shell-muted, #8a8884);
+  box-shadow: 0 14px 32px -4px rgba(0, 0, 0, 0.75);
 }
 
 /* Individual Vertical Pod Buttons */
@@ -178,7 +219,7 @@ const store = useShowcaseStore();
   font-size: 1.05rem;
 }
 
-/* Mobile Screens: Kept tiny & out of the way to preserve visual immersion */
+/* Mobile Screens */
 @media (max-width: 640px) {
   .hud-vertical-stack {
     right: 4px;

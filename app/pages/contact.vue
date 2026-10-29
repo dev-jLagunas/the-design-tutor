@@ -18,7 +18,7 @@ const copied = ref(false);
 let ctx: any = null;
 let ScrollTriggerInstance: any = null;
 
-const emailAddress = "hello@thedesigntutor.com";
+const emailAddress = "dev.jlagunas@gmail.com";
 
 const copyEmail = async () => {
   try {
@@ -320,7 +320,7 @@ onBeforeUnmount(() => {
 
           <!-- Card 2: Medium -->
           <a
-            href="https://medium.com"
+            href="https://medium.com/@dev.jlagunas"
             target="_blank"
             rel="noopener noreferrer"
             class="matrix-box card-2 anim-mobile box-gold flex-col"
@@ -341,7 +341,7 @@ onBeforeUnmount(() => {
 
           <!-- Card 3: LinkedIn -->
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/juan-lagunas/"
             target="_blank"
             rel="noopener noreferrer"
             class="matrix-box card-3 anim-mobile box-cyan flex-col"
@@ -362,7 +362,7 @@ onBeforeUnmount(() => {
 
           <!-- Card 4: UX Portfolio -->
           <a
-            href="https://portfolio.dev-jlagunas.com"
+            href="https://juan-lagunas.com/#/"
             target="_blank"
             rel="noopener noreferrer"
             class="matrix-box card-4 anim-mobile box-gold flex-col"
@@ -383,7 +383,7 @@ onBeforeUnmount(() => {
 
           <!-- Card 5: The Language Friends -->
           <a
-            href="https://amazon.com"
+            href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AJoe%2BLapalo&s=relevancerank&language=en&text=Joe+Lapalo&ref=dp_byline_sr_ebooks_1"
             target="_blank"
             rel="noopener noreferrer"
             class="matrix-box card-5 anim-mobile box-cyan flex-col"
@@ -404,7 +404,7 @@ onBeforeUnmount(() => {
 
           <!-- Card 6: Instagram -->
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/j.lag_works/"
             target="_blank"
             rel="noopener noreferrer"
             class="matrix-box card-6 anim-mobile box-coral flex-col"

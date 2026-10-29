@@ -146,19 +146,18 @@ onMounted(() => {
           <!-- Direct Dual Action Pair with Target View Query Params -->
           <div class="card-actions-group flex-col">
             <NuxtLink
-              :to="`/styles/${design.slug}?view=edu`"
-              class="btn-card-action btn-gold font-body flex-center transition-smooth"
-            >
-              <span>Educational UI</span>
-              <Icon name="lucide:arrow-right" class="action-icon-sm" />
-            </NuxtLink>
-
-            <NuxtLink
               :to="`/styles/${design.slug}?view=live`"
-              class="btn-card-action btn-ghost font-body flex-center transition-smooth"
+              class="btn-card-action btn-gold font-body flex-center transition-smooth"
             >
               <Icon name="lucide:layout" class="action-icon-sm" />
               <span>Live UI</span>
+            </NuxtLink>
+            <NuxtLink
+              :to="`/styles/${design.slug}?view=edu`"
+              class="btn-card-action btn-ghost font-body flex-center transition-smooth"
+            >
+              <span>Educational UI</span>
+              <Icon name="lucide:arrow-right" class="action-icon-sm" />
             </NuxtLink>
           </div>
         </article>
@@ -500,6 +499,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .btn-gold:hover {
   filter: brightness(1.08);
+  transform: translateY(-4px);
 }
 
 .btn-ghost {
