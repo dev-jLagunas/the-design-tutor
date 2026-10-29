@@ -31,7 +31,7 @@ export interface MetricItem {
 }
 
 export interface TaggedItem {
-  id: string;
+  id?: string;
   tag?: string; // Category or state: e.g., "DAILY", "RULE 01"
   label: string;
   description?: string;
@@ -90,23 +90,43 @@ export interface HeroSectionContent {
   liveStats?: MetricItem[]; // Real-time counter metrics or diagnostics
 }
 
-// --- Slot 02: Tier 2 Section 02 (Narrative & Characteristics) ---
+// --- Slot 02: Tier 2 Section 02 (The Story, Core Values & Social Dispatches) ---
+export interface CoreValueItem {
+  index: string; // "01", "02", "03"
+  label: string; // "DISCIPLINE", "TYPOGRAPHY", etc.
+  title: string;
+  description: string;
+}
+
+export interface SocialChannelItem {
+  platform: string; // "Instagram", "Spotify", "Substack"
+  handle: string; // "@foundrypizzabar"
+  label: string; // "DAILY ROTATIONS & BAKE DISPATCHES"
+  url: string;
+}
+
 export interface Section02Content {
-  sectionNumber: string; // e.g., "01"
-  sectionAnchorId: string; // e.g., "section02" (used for scroll-spy & navbar)
+  sectionNumber: string; // e.g., "05" or "01"
+  sectionAnchorId: string; // e.g., "section02"
   eyebrow?: string;
   title: string;
   titleHighlight?: string;
   subtitle?: string;
-  paragraphs: string[]; // Multi-paragraph narrative or academic deconstruction
-  featurePillars?: TaggedItem[]; // The 3 defining visual/operational pillars
+  // Refactored properties (Foundry Story & Noir Anatomy)
+  storyParagraphs?: string[];
+  coreValues?: CoreValueItem[];
+  socialChannels?: SocialChannelItem[];
+  closingManifesto?: string;
+  media?: MediaAsset;
+  // Optional legacy properties preserved for backward compatibility
+  paragraphs?: string[];
+  featurePillars?: TaggedItem[];
   pullquote?: {
     text: string;
     attribution: string;
-    role?: string; // e.g., "Head Baker" or "Design Theorist"
+    role?: string;
   };
-  metrics?: MetricItem[]; // 3-item stat strip
-  media?: MediaAsset;
+  metrics?: MetricItem[];
   closingNote?: string;
 }
 
@@ -143,13 +163,20 @@ export interface Section03Content {
   globalAction?: ActionLink;
 }
 
-// --- Slot 04: Tier 4 Section 04 (Atmosphere & Historical Lineage) ---
+// --- Slot 04: Tier 4 Section 04 (Sound & Vibe / Room Atmosphere) ---
+export interface VibePillarItem {
+  index: string; // "01", "02", "03"
+  label: string; // "AUDIO HARDWARE", "TYPOGRAPHIC ORIGIN"
+  title: string;
+  description: string;
+}
+
 export interface PrimaryListItem {
   index: string; // "01", "1788", "TRACK 01"
   title: string;
-  secondaryTitle?: string; // Artist, publication, era, or geographical origin
+  secondaryTitle?: string;
   description: string;
-  tag?: string; // "VINYL", "SEMINAL WORK", "REVISION"
+  tag?: string;
   media?: MediaAsset;
   link?: ActionLink;
 }
@@ -157,7 +184,7 @@ export interface PrimaryListItem {
 export interface SecondaryListItem {
   title: string;
   body: string;
-  authorOrMeta?: string; // "DJ FIELD NOTE", "CRITICAL TRIVIA", "STUDIO RULE"
+  authorOrMeta?: string;
   badge?: string;
 }
 
@@ -168,15 +195,18 @@ export interface Section04Content {
   title: string;
   titleHighlight?: string;
   subtitle?: string;
-  // Left Column / Primary Stream (e.g., Tracklist or Historical Timeline)
-  primaryStreamTitle: string;
-  primaryStreamSubtitle?: string;
-  primaryItems: PrimaryListItem[];
-  // Right Column / Secondary Stream (e.g., House Rules or Design Trivia)
-  secondaryStreamTitle: string;
-  secondaryStreamSubtitle?: string;
-  secondaryItems: SecondaryListItem[];
+  // Refactored properties (Sound & Room Vibe layout)
+  leadCopy?: string;
+  vibePillars?: VibePillarItem[];
+  footerNote?: string;
   media?: MediaAsset;
+  // Optional legacy stream properties preserved for backward compatibility
+  primaryStreamTitle?: string;
+  primaryStreamSubtitle?: string;
+  primaryItems?: PrimaryListItem[];
+  secondaryStreamTitle?: string;
+  secondaryStreamSubtitle?: string;
+  secondaryItems?: SecondaryListItem[];
 }
 
 // --- Slot 05: Tier 5 Section 05 (Action Protocol & Implementation Cheat Sheet) ---
