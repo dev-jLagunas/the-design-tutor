@@ -147,66 +147,66 @@ export const editorialPizzaMovement: MovementDefinition = {
     section02: {
       sectionNumber: "05",
       sectionAnchorId: "section-story",
-      eyebrow: "BRAND ORIGIN // COMMUNITY & ARCHIVE",
+      eyebrow: "OUR STORY",
       title: "Built in Katamachi,",
-      titleHighlight: "Forged After Dark.",
+      titleHighlight: "made for late nights.",
       subtitle:
-        "Foundry began as an obsession with Chicago cast-iron baking and evolved into an unapologetic nocturnal counter ritual anchored in local craft and sound.",
+        "We started with a simple goal: make really good deep dish pizza and create a place where anyone can grab a drink, listen to records, and feel welcome.",
       storyParagraphs: [
-        "We never set out to open a conventional dining room. We wanted a raw, high-focus enclave where late-night creative workers, night owls, and vinyl lovers could pull up to cold steel at midnight, get a piping-hot slice within two minutes, and hear uncompromised analog sound.",
-        "Everything we do stems from two convictions: uncompromising baking discipline—slow-fermented local dough baked in seasoned cast iron—and zero pretense. No reservations, no delivery courier line-ups, and no shortcuts.",
+        "We didn't want a stiff, quiet dining room. We wanted a relaxed counter spot where you can pull up a chair after work, grab a hot slice in a couple of minutes, and just hang out while great music plays in the background.",
+        "Everything comes down to doing the basics right. We take our time with our dough, bake in cast iron pans, and keep the vibe casual. No reservations, no rush—just walk in whenever you're hungry.",
       ],
       coreValues: [
         {
           index: "01",
-          label: "DISCIPLINE",
-          title: "Cast-Iron Conviction",
+          label: "THE FOOD",
+          title: "Good Ingredients, No Shortcuts",
           description:
-            "Every pan is seasoned in-house. 48-hour cold fermentation yields a crust that holds structural chew without feeling sluggish.",
+            "We let our dough rest for two days and season our pans by hand. It takes time, but that's how you get a crust that's crisp, light, and actually tastes good.",
         },
         {
           index: "02",
-          label: "COMMUNITY",
-          title: "The Katamachi Orbit",
+          label: "THE NEIGHBORHOOD",
+          title: "Rooted in Katamachi",
           description:
-            "We collaborate exclusively with local Ishikawa producers, micro-roasters, and independent vinyl collectors to keep late hours vital.",
+            "We work with local shops, roasters, and friends around Ishikawa whenever we can. We love this area and want to add something fun to the street.",
         },
         {
           index: "03",
-          label: "IMMERSION",
-          title: "Physical Spaces Only",
+          label: "THE VIBE",
+          title: "Come As You Are",
           description:
-            "No delivery apps or ghost kitchen setups. The experience requires the room, the needle drop, and the heat off the deck oven.",
+            "Whether you're stopping by for a quick slice on your way home or sticking around for a drink and a conversation, everyone is welcome at the counter.",
         },
       ],
       socialChannels: [
         {
           platform: "Instagram",
           handle: "@foundrypizzabar",
-          label: "DAILY ROTATIONS & BAKE DISPATCHES",
+          label: "DAILY SLICES & NIGHTLY ROTATIONS",
           url: "https://instagram.com",
         },
         {
           platform: "Spotify",
           handle: "Foundry Vinyl Archive",
-          label: "DIGITAL ARCHIVE OF PHYSICAL SPINS",
+          label: "SONGS WE PLAY AT THE SHOP",
           url: "https://spotify.com",
         },
         {
           platform: "Substack",
           handle: "The Katamachi Counter",
-          label: "BAKING LOGS, LINER NOTES & ESSAYS",
+          label: "RECIPES, NOTES & UPDATES",
           url: "https://substack.com",
         },
       ],
       media: {
         src: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
-        alt: "Midnight counter culture at Foundry with guests gathered along the steel bar",
-        caption: "Late-night service along the steel counter.",
-        badge: "ARCHIVAL LOG",
+        alt: "Guests gathered around the counter sharing pizza and drinks",
+        caption: "Late-night slice counter service.",
+        badge: "KATAMACHI COUNTER",
       },
       closingManifesto:
-        "We are here for the craft, the neighborhood, and the nocturnal hours. Follow the dispatch, listen to the records, or just step through the door.",
+        "Good food, good records, and a warm stool waiting for you. Stop by anytime.",
     },
 
     // --- Tier 3: Section 03 (The Rotating Slice Board) -> Mounted at PizzaSectionOne ---
@@ -445,26 +445,26 @@ export const editorialPizzaMovement: MovementDefinition = {
 
     // --- Bottom Tier: Footer ---
     footer: {
-      brandColophon: "FOUNDRY PIZZA BAR © 2026 // KATAMACHI, KANAZAWA",
+      brandColophon: "Foundry Pizza Bar © 2026 — Katamachi, Kanazawa",
       legalNotice:
-        "ALL RIGHTS RESERVED. ARCHITECTURE & VISUAL IDENTITY CRAFTED FOR THE DESIGN TUTOR.",
+        "All rights reserved. Built as an educational design case study for The Design Tutor.",
       operationalDetails: [
-        "Hours: 18:00 – 02:00 (Wed–Mon)",
-        "Counter Capacity: 18 Seats",
-        "Katamachi, Kanazawa, Ishikawa",
+        "Open Wed–Mon, 6:00 PM – 2:00 AM (Closed Tuesdays)",
+        "18 counter seats (walk-ins only)",
+        "2-21-12 Katamachi, Kanazawa, Ishikawa",
       ],
       secondaryLinks: [
         {
-          label: "Instagram @foundrypizzabar",
+          label: "Instagram",
           href: "https://instagram.com",
           isExternal: true,
         },
         {
-          label: "Vinyl Archive Spotify",
+          label: "Spotify Playlist",
           href: "https://spotify.com",
           isExternal: true,
         },
-        { label: "Colophon", targetId: "#hero" },
+        { label: "Back to top ↑", targetId: "#hero" },
       ],
     },
   },

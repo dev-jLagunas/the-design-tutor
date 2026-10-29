@@ -53,20 +53,8 @@ const scrollToTop = () => {
       <div class="footer-masthead-row">
         <div class="colophon-pill bg-border">
           <span class="status-pulse-dot"></span>
-          <span class="colophon-text font-display">{{
-            data.brandColophon
-          }}</span>
+          <span class="colophon-text">{{ data.brandColophon }}</span>
         </div>
-
-        <button
-          type="button"
-          class="back-top-trigger bg-border font-mono"
-          aria-label="Scroll back to top"
-          @click="scrollToTop"
-        >
-          <span>TOP</span>
-          <Icon name="lucide:arrow-up" class="trigger-icon" />
-        </button>
       </div>
 
       <!-- Center Dynamic Grid -->
@@ -167,8 +155,7 @@ const scrollToTop = () => {
 <style scoped>
 .bg-border {
   background-color: rgba(10, 10, 10, 0.6);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+
   border: var(--border-width-hairline) solid var(--color-border);
   box-sizing: border-box;
 }

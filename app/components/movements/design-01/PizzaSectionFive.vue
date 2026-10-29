@@ -23,6 +23,7 @@ const initAnimations = async () => {
   await nextTick();
   if (gsapCtx) gsapCtx.revert();
   if (!sectionRef.value) return;
+
   gsapCtx = gsap.context(() => {
     // 1. Entrance Trigger
     const enterTl = gsap.timeline({
@@ -47,15 +48,15 @@ const initAnimations = async () => {
         "-=0.7",
       )
       .fromTo(
-        [".orbit-left-quadrant", ".orbit-right-quadrant"],
+        [".story-narrative-container", ".core-values-matrix"],
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 0.9, stagger: 0.15 },
         "-=0.8",
       )
       .fromTo(
-        [".socials-pod-strip", ".manifesto-block"],
+        ".manifesto-block",
         { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.75, stagger: 0.1 },
+        { opacity: 1, y: 0, duration: 0.75 },
         "-=0.5",
       );
 
@@ -70,8 +71,12 @@ const initAnimations = async () => {
       },
     });
 
-    scrollTl.to(".orbit-left-quadrant", { yPercent: -12, ease: "none" }, 0);
-    scrollTl.to(".orbit-right-quadrant", { yPercent: 12, ease: "none" }, 0);
+    scrollTl.to(
+      ".story-narrative-container",
+      { yPercent: -10, ease: "none" },
+      0,
+    );
+    scrollTl.to(".core-values-matrix", { yPercent: 10, ease: "none" }, 0);
     scrollTl.to(".spinning-pie-img", { rotate: "+=90", ease: "none" }, 0);
     scrollTl.to(".technical-bg-canvas", { yPercent: 6, ease: "none" }, 0);
   }, sectionRef.value);
@@ -97,7 +102,7 @@ onBeforeUnmount(() => {
 <template>
   <section ref="sectionRef" id="section-story" class="story-stage">
     <!-- =======================================================================
-         1. ARCHITECTURAL RETICLE & DRIFTING DRAFT LINES (SECTION 3 REUSE)
+         1. ARCHITECTURAL RETICLE & DRIFTING DRAFT LINES
          ======================================================================= -->
     <div class="technical-bg-canvas" aria-hidden="true">
       <div class="anim-line anim-line-h-1"></div>
@@ -161,14 +166,11 @@ onBeforeUnmount(() => {
       <header class="section-header-block">
         <div class="eyebrow-row">
           <span class="eyebrow-badge bg-border">{{ data.eyebrow }}</span>
-          <span class="header-index bg-border"
-            >STAGE {{ data.sectionNumber }}</span
-          >
         </div>
 
         <h2 class="section-headline font-display">
           <span>{{ data.title }}</span>
-          <em v-if="'titleHighlight' in data" class="headline-italic">
+          <em v-if="data.titleHighlight" class="headline-italic">
             {{ data.titleHighlight }}
           </em>
         </h2>
@@ -177,35 +179,13 @@ onBeforeUnmount(() => {
       </header>
 
       <!-- =====================================================================
-           RADIAL PIZZA ORBIT ARENA
+           STORY SPREAD ARENA (NARRATIVE + ROTATING PIE + CORE VALUES)
            ===================================================================== -->
-      <div class="orbit-arena">
-        <!-- Center Spinning Whole Deep Dish Pie (Top-Down View) -->
-        <div class="pie-stage" aria-label="Rotating Whole Pan Deep Dish Pizza">
-          <div class="pie-disc-wrap">
-            <img
-              src="/images/design01/whole-pizza-img.png"
-              alt="Freshly baked cast-iron 14-inch whole deep dish pizza viewed from top"
-              class="spinning-pie-img"
-            />
-            <div class="pie-ambient-shadow"></div>
-            <div class="pie-reticle-ring"></div>
-          </div>
-
-          <!-- Pan Status Tag -->
-          <div class="pie-hud-pill bg-border font-mono">
-            <span class="status-dot dot-baking"></span>
-            <span>14" CAST-IRON BAKE ROTATION</span>
-          </div>
-        </div>
-
-        <!-- Left Orbit Quadrant: Story Narrative -->
-        <div class="orbit-left-quadrant">
-          <article
-            v-if="data.storyParagraphs?.length"
-            class="orbit-story-card bg-border"
-          >
-            <div class="card-meta-line font-mono">
+      <div class="story-spread-arena">
+        <!-- 1. Left Wing: Narrative Block -->
+        <div class="story-narrative-container">
+          <article v-if="data.storyParagraphs?.length" class="orbit-story-card">
+            <div class="card-meta-line">
               <Icon name="lucide:flame" class="meta-icon" />
               <span>THE FOUNDRY NARRATIVE</span>
             </div>
@@ -219,95 +199,53 @@ onBeforeUnmount(() => {
               </p>
             </div>
           </article>
-
-          <!-- Core Value 01 -->
-          <article
-            v-if="data.coreValues?.[0]"
-            class="orbit-value-card bg-border"
-          >
-            <div class="value-header">
-              <span class="value-num font-mono">{{
-                data.coreValues[0].index
-              }}</span>
-              <span class="value-tag font-mono">{{
-                data.coreValues[0].label
-              }}</span>
-            </div>
-            <h3 class="value-title font-display">
-              {{ data.coreValues[0].title }}
-            </h3>
-            <p class="value-desc">{{ data.coreValues[0].description }}</p>
-          </article>
         </div>
 
-        <!-- Right Orbit Quadrant: Core Values 02 & 03 -->
-        <div class="orbit-right-quadrant">
-          <article
-            v-if="data.coreValues?.[1]"
-            class="orbit-value-card bg-border"
-          >
-            <div class="value-header">
-              <span class="value-num font-mono">{{
-                data.coreValues[1].index
-              }}</span>
-              <span class="value-tag font-mono">{{
-                data.coreValues[1].label
-              }}</span>
-            </div>
-            <h3 class="value-title font-display">
-              {{ data.coreValues[1].title }}
-            </h3>
-            <p class="value-desc">{{ data.coreValues[1].description }}</p>
-          </article>
+        <!-- 2. Center Wing: Spinning Whole Cast-Iron Deep Dish Pie -->
+        <div class="pie-stage" aria-label="Rotating Whole Pan Deep Dish Pizza">
+          <div class="pie-disc-wrap">
+            <img
+              src="/images/design01/whole-pizza-img.png"
+              alt="Freshly baked cast-iron 14-inch whole deep dish pizza viewed from top"
+              class="spinning-pie-img"
+            />
+            <div class="pie-ambient-shadow"></div>
+            <div class="pie-reticle-ring"></div>
+          </div>
 
+          <!-- Pan Status Tag -->
+          <div class="pie-hud-pill bg-border">
+            <span class="status-dot dot-baking"></span>
+            <span>14" READY TO GO</span>
+          </div>
+        </div>
+
+        <!-- 3. Right Wing: Core Values Matrix -->
+        <div v-if="data.coreValues?.length" class="core-values-matrix">
           <article
-            v-if="data.coreValues?.[2]"
+            v-for="(val, idx) in data.coreValues"
+            :key="idx"
             class="orbit-value-card bg-border"
           >
             <div class="value-header">
-              <span class="value-num font-mono">{{
-                data.coreValues[2].index
-              }}</span>
-              <span class="value-tag font-mono">{{
-                data.coreValues[2].label
-              }}</span>
+              <span class="value-num">{{ val.index }}</span>
+              <span class="value-tag">{{ val.label }}</span>
             </div>
-            <h3 class="value-title font-display">
-              {{ data.coreValues[2].title }}
-            </h3>
-            <p class="value-desc">{{ data.coreValues[2].description }}</p>
+            <h3 class="value-title font-display">{{ val.title }}</h3>
+            <p class="value-desc">{{ val.description }}</p>
           </article>
         </div>
       </div>
 
       <!-- =====================================================================
-           SOCIAL CHANNELS & COMMUNITY DISPATCH PODS
+           CLOSING HOUSE COMMITMENT BANNER
            ===================================================================== -->
-      <div v-if="data.socialChannels?.length" class="socials-pod-strip">
-        <a
-          v-for="(channel, sIdx) in data.socialChannels"
-          :key="sIdx"
-          :href="channel.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="social-pod bg-border"
-        >
-          <div class="pod-header">
-            <span class="pod-platform font-mono">{{ channel.platform }}</span>
-            <Icon name="lucide:arrow-up-right" class="pod-arrow" />
-          </div>
-          <div class="pod-handle font-display">{{ channel.handle }}</div>
-          <div class="pod-label font-mono">{{ channel.label }}</div>
-        </a>
-      </div>
-
-      <!-- Closing Manifesto Banner -->
       <footer v-if="data.closingManifesto" class="manifesto-block bg-border">
-        <div class="manifesto-indicator font-mono">
+        <div class="manifesto-indicator">
           <Icon name="lucide:shield-check" class="manifesto-icon" />
           <span>HOUSE COMMITMENT</span>
         </div>
-        <p class="manifesto-text font-mono">{{ data.closingManifesto }}</p>
+        <p class="manifesto-text">{{ data.closingManifesto }}</p>
       </footer>
     </div>
   </section>
@@ -326,7 +264,7 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   PURE CSS ARCHITECTURAL GRID BACKGROUND (SECTION 3 REUSE)
+   PURE CSS ARCHITECTURAL GRID BACKGROUND
    ============================================================================= */
 .technical-bg-canvas {
   position: absolute;
@@ -548,7 +486,6 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   padding: var(--space-1) var(--space-3);
-  font-family: var(--font-family-body);
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
@@ -569,6 +506,7 @@ onBeforeUnmount(() => {
 .headline-italic {
   font-style: italic;
   font-weight: 300;
+  padding-left: 1rem;
   color: var(--color-text-primary);
 }
 
@@ -582,20 +520,18 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   RADIAL PIZZA ORBIT ARENA
+   STORY SPREAD ARENA (3-WING COMPOSITION)
    ============================================================================= */
-.orbit-arena {
+.story-spread-arena {
   position: relative;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr minmax(320px, 420px) 1fr;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-6);
-  min-height: 480px;
 }
 
 /* -----------------------------------------------------------------------------
-   CENTER SPINNING REALISTIC PIZZA DISC
+   CENTER SPINNING PIZZA DISC
    ----------------------------------------------------------------------------- */
 .pie-stage {
   display: flex;
@@ -656,7 +592,6 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
-/* Pan Status Tag */
 .pie-hud-pill {
   display: inline-flex;
   align-items: center;
@@ -696,14 +631,10 @@ onBeforeUnmount(() => {
 }
 
 /* -----------------------------------------------------------------------------
-   ORBITING COPY QUADRANTS (LEFT & RIGHT)
+   NARRATIVE & VALUE CARDS
    ----------------------------------------------------------------------------- */
-.orbit-left-quadrant,
-.orbit-right-quadrant {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  z-index: 3;
+.story-narrative-container {
+  width: 100%;
 }
 
 .orbit-story-card,
@@ -715,6 +646,10 @@ onBeforeUnmount(() => {
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.25s ease;
+}
+
+.orbit-story-card {
+  border: none;
 }
 
 .orbit-story-card:hover,
@@ -750,6 +685,14 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
+/* Core Values Matrix */
+.core-values-matrix {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
 .value-header {
   display: flex;
   justify-content: space-between;
@@ -765,7 +708,7 @@ onBeforeUnmount(() => {
 .value-tag {
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
-  color: var(--color-text-muted);
+  color: var(--color-highlight);
 }
 
 .value-title {
@@ -785,73 +728,6 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   SOCIAL DISPATCH PODS
-   ============================================================================= */
-.socials-pod-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
-  width: 100%;
-}
-
-.social-pod {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-5);
-  text-decoration: none;
-  transition:
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.25s ease,
-    background-color 0.2s ease;
-}
-
-.social-pod:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-primary-1);
-  background-color: rgba(25, 25, 25, 0.7);
-}
-
-.pod-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pod-platform {
-  font-size: var(--text-size-micro);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.pod-arrow {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease;
-}
-
-.social-pod:hover .pod-arrow {
-  color: var(--color-primary-1);
-  transform: translate(2px, -2px);
-}
-
-.pod-handle {
-  font-size: var(--text-size-title-sm);
-  color: var(--color-text-primary);
-  letter-spacing: var(--tracking-tight);
-}
-
-.pod-label {
-  font-size: var(--text-size-micro);
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-}
-
-/* =============================================================================
    CLOSING MANIFESTO BANNER
    ============================================================================= */
 .manifesto-block {
@@ -860,6 +736,7 @@ onBeforeUnmount(() => {
   gap: var(--space-4);
   padding: var(--space-3) var(--space-5);
   width: 100%;
+  margin-top: 2rem;
 }
 
 .manifesto-indicator {
@@ -885,43 +762,65 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   RESPONSIVE OVERRIDES
+   RESPONSIVE DESIGN SYSTEM
    ============================================================================= */
-@media (max-width: 1024px) {
-  .orbit-arena {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
+
+/* TABLET BREAKPOINT (768px - 1199px): 2 on top, 1 spanning bottom */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .core-values-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
   }
 
+  .core-values-matrix .orbit-value-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .pie-disc-wrap {
+    max-width: 300px;
+  }
+}
+
+/* DESKTOP BREAKPOINT (>= 1200px): 3-Column Asymmetric Spread */
+@media (min-width: 1200px) {
+  .story-spread-arena {
+    display: grid;
+    grid-template-columns: 1fr minmax(320px, 380px) 1.15fr;
+    align-items: center;
+    gap: var(--space-6);
+    min-height: 520px;
+  }
+
+  .core-values-matrix {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .core-values-matrix .orbit-value-card:last-child {
+    grid-column: auto;
+  }
+}
+
+/* MOBILE REFINEMENTS (< 768px) */
+@media (max-width: 767px) {
   .pie-stage {
     order: -1;
   }
 
   .pie-disc-wrap {
-    max-width: 280px;
+    max-width: 240px;
   }
 
-  .socials-pod-strip {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-  }
-
-  .anim-line-v-1,
-  .anim-line-v-2,
-  .drafting-cross {
-    display: none;
-  }
-}
-
-@media (max-width: 640px) {
   .manifesto-block {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-2);
   }
 
-  .pie-disc-wrap {
-    max-width: 230px;
+  .anim-line-v-1,
+  .anim-line-v-2,
+  .drafting-cross {
+    display: none;
   }
 }
 </style>
