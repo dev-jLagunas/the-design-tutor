@@ -9,6 +9,7 @@ import PizzaSectionThree from "./PizzaSectionThree.vue";
 import PizzaBackToTop from "./PizzaBackToTop.vue";
 import PizzaSectionFour from "./PizzaSectionFour.vue";
 import PizzaSectionFive from "./PizzaSectionFive.vue";
+import PizzaFooter from "./PizzaFooter.vue";
 
 const store = useShowcaseStore();
 const sections = computed(() => store.activeSections);
@@ -34,6 +35,9 @@ const isEdu = computed(() => store.isEduMode);
 
     <!-- Section 5: The Foundry Story, Core Values & Socials -->
     <PizzaSectionFive :data="sections.section02" :is-educational="isEdu" />
+
+    <!-- Footer: Colophon, Operational Metrics & Archives -->
+    <PizzaFooter :data="sections.footer" :is-educational="isEdu" />
 
     <PizzaBackToTop />
   </div>

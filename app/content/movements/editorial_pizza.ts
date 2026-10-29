@@ -458,7 +458,6 @@ export const editorialPizzaMovement: MovementDefinition = {
         },
         { label: "Colophon", targetId: "#hero" },
       ],
-      backToTopText: "BACK TO THE TOP ↑",
     },
   },
 
@@ -903,7 +902,6 @@ export const editorialPizzaMovement: MovementDefinition = {
             "Scale recommendations and web font rendering considerations.",
         },
       ],
-      backToTopText: "BACK TO THE TOP ↑",
     },
   },
 

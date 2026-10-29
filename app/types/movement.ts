@@ -259,7 +259,6 @@ export interface FooterContent {
   operationalDetails?: string[]; // Operating days, hours, contact strings
   resourceLinks?: ResourceLink[]; // "In the Wild" real-world references
   secondaryLinks?: ActionLink[]; // Standard privacy, terms, colophon links
-  backToTopText: string; // e.g., "BACK TO TOP ↑"
 }
 
 // =============================================================================
