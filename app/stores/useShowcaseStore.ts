@@ -1,5 +1,7 @@
 // stores/useShowcaseStore.ts
 import { defineStore } from "pinia";
+import { ref, computed, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import type {
   MovementDefinition,
   ViewMode,
@@ -38,8 +40,7 @@ const catalogMeta: MovementMetaCard[] = [
     title: "Downtown Editorial Noir & Cast-Iron Craft",
     description:
       "Severe Didone serifs, brushed steel textures, and high-contrast flash photography applied to a late-night Katamachi pizza and vinyl counter.",
-    image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80",
+    image: "/images/design01/design-01-screenshot.png",
     icon: "lucide:disc",
   },
 ];
@@ -55,6 +56,17 @@ export const useShowcaseStore = defineStore("showcase", () => {
 
   // Expose catalog cards
   const allMovements = computed(() => catalogMeta);
+
+  // Sync mode whenever URL query changes during client-side navigation
+  watch(
+    () => route.query.view,
+    (newView) => {
+      if (newView === "live" || newView === "edu") {
+        activeMode.value = newView;
+      }
+    },
+    { immediate: true },
+  );
 
   // Active section data switching based on HUD mode
   const activeSections = computed<MovementSections | null>(() => {
@@ -77,7 +89,7 @@ export const useShowcaseStore = defineStore("showcase", () => {
   const isEduMode = computed(() => activeMode.value === "edu");
   const isLiveMode = computed(() => activeMode.value === "live");
 
-  function loadMovement(slug: string) {
+  function loadMovement(slug: string, explicitView?: ViewMode) {
     const movement = movementRegistry[slug];
     if (movement) {
       currentMovement.value = movement;
@@ -86,12 +98,14 @@ export const useShowcaseStore = defineStore("showcase", () => {
       currentMovement.value = null;
     }
 
-    const initialView = route.query.view;
-    if (initialView === "live" || initialView === "edu") {
-      activeMode.value = initialView;
-    } else {
-      activeMode.value = "edu";
-    }
+    // Determine target mode: parameter > current URL query > fallback "edu"
+    const targetView =
+      explicitView ||
+      (route.query.view === "live" || route.query.view === "edu"
+        ? (route.query.view as ViewMode)
+        : "edu");
+
+    activeMode.value = targetView;
   }
 
   function setMode(mode: ViewMode) {

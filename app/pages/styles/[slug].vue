@@ -11,7 +11,10 @@ const store = useShowcaseStore();
 const slug = computed(() => route.params.slug as string);
 
 onMounted(() => {
-  store.loadMovement(slug.value);
+  store.loadMovement(
+    route.params.slug as string,
+    route.query.view as "live" | "edu",
+  );
 });
 </script>
 

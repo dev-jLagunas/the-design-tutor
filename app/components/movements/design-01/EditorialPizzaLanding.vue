@@ -1,6 +1,7 @@
 <!-- components/movements/design-01/EditorialPizzaLanding.vue -->
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
+import { useRoute } from "vue-router";
 import { useShowcaseStore } from "~/stores/useShowcaseStore";
 import PizzaSection0 from "./PizzaSectionZero.vue";
 import PizzaSectionOne from "./PizzaSectionOne.vue";
@@ -11,7 +12,17 @@ import PizzaSectionFour from "./PizzaSectionFour.vue";
 import PizzaSectionFive from "./PizzaSectionFive.vue";
 import PizzaFooter from "./PizzaFooter.vue";
 
+const route = useRoute();
 const store = useShowcaseStore();
+
+watch(
+  () => route.query.view,
+  (view) => {
+    store.setMode(view === "live" ? "live" : "edu");
+  },
+  { immediate: true },
+);
+
 const sections = computed(() => store.activeSections);
 const isEdu = computed(() => store.isEduMode);
 </script>
