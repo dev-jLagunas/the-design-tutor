@@ -102,9 +102,8 @@ onBeforeUnmount(() => {
 <template>
   <section
     ref="sectionRef"
-    :id="data.sectionAnchorId || 'section04'"
+    :id="data.sectionAnchorId || 'section-sound'"
     class="vibe-stage"
-    aria-label="Sound, Vinyl Rotation, and Room Atmosphere"
   >
     <!-- =======================================================================
          1. PURE CSS RETICLE & FLOATING LINE BACKGROUND

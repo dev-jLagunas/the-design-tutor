@@ -160,9 +160,8 @@ onBeforeUnmount(() => {
 <template>
   <section
     ref="pinContainerRef"
-    id="section04-gallery"
+    id="section-gallery"
     class="horizontal-gallery-stage"
-    aria-label="Nocturnal Interior & Food Archive"
   >
     <!-- =======================================================================
          1. EDITORIAL RETICLE GUIDE LINES

@@ -32,8 +32,7 @@
   --color-primary-1: #ffffff;
   --color-primary-2: #e0e0e0;
   --color-primary-3: #121212;
-
-  /* Secondary Accent Slots */
+  --color-highlight: #e86a33; /* Secondary Accent Slots */
   --color-secondary-1: #888888;
   --color-secondary-2: #555555;
   --color-secondary-3: #222222;

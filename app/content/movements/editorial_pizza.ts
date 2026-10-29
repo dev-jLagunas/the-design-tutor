@@ -61,18 +61,31 @@ export const editorialPizzaMovement: MovementDefinition = {
       subBrandMark: "EST. 2024 // KANAZAWA",
       statusBadge: "DOORS OPEN 18:00 – 02:00",
       navItems: [
-        { label: "CONCEPT", targetId: "#section02", indexNumber: "01" },
-        { label: "THE SLICES", targetId: "#section03", indexNumber: "02" },
-        { label: "SOUND & VIBE", targetId: "#section04", indexNumber: "03" },
         {
-          label: "WALK-IN PROTOCOL",
-          targetId: "#section05",
+          label: "PIZZA SLICES",
+          targetId: "#section-slices",
+          indexNumber: "01",
+        },
+        {
+          label: "VISITOR INFORMATION",
+          targetId: "#section-protocol",
+          indexNumber: "02",
+        },
+        {
+          label: "SOUND & VIBE",
+          targetId: "#section-sound",
+          indexNumber: "03",
+        },
+        {
+          label: "IMAGE GALLERY",
+          targetId: "#section-gallery",
           indexNumber: "04",
         },
+        { label: "OUR STORY", targetId: "#section-story", indexNumber: "05" },
       ],
       ctaAction: {
         label: "CURRENT PIES",
-        targetId: "#section03",
+        targetId: "#section-slices",
         variant: "primary",
       },
     },
@@ -96,12 +109,12 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
       primaryAction: {
         label: "VIEW TONIGHT'S SLICES",
-        targetId: "#section03",
+        targetId: "#section-slices",
         variant: "primary",
       },
       secondaryAction: {
         label: "HOURS & LOCATION",
-        targetId: "#section05",
+        targetId: "#section-protocol",
         variant: "outline",
       },
       media: {
@@ -130,10 +143,10 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
     },
 
-    // --- Tier 2: Section 02 (The Foundry Story & Social Dispatches) ---
+    // --- Tier 2: Section 02 (The Foundry Story & Social Dispatches) -> Mounted at PizzaSectionFive ---
     section02: {
       sectionNumber: "05",
-      sectionAnchorId: "section02",
+      sectionAnchorId: "section-story",
       eyebrow: "BRAND ORIGIN // COMMUNITY & ARCHIVE",
       title: "Built in Katamachi,",
       titleHighlight: "Forged After Dark.",
@@ -196,36 +209,35 @@ export const editorialPizzaMovement: MovementDefinition = {
         "We are here for the craft, the neighborhood, and the nocturnal hours. Follow the dispatch, listen to the records, or just step through the door.",
     },
 
-    // --- Tier 3: Section 03 (The Rotating Slice Board) ---
+    // --- Tier 3: Section 03 (The Rotating Slice Board) -> Mounted at PizzaSectionOne ---
     section03: {
-      sectionNumber: "02",
-      sectionAnchorId: "section03",
-      eyebrow: "THE NIGHTLY BOARD // ROTATION #44",
-      title: "Four Slices.",
-      titleHighlight: "Zero Compromises.",
+      sectionNumber: "01",
+      sectionAnchorId: "section-slices",
+      eyebrow: "WHAT'S IN THE OVEN",
+      title: "Four fresh slices,",
+      titleHighlight: "ready when you sit down.",
       subtitle:
-        "Baked continuously in seasoned deep-dish steel pans. Sold strictly by the slice with targeted drink pairings.",
+        "We keep four different deep-dish pans running through the night. Pick a slice, grab a drink, and you're good to go.",
       leadCopy:
-        "Every slice is built on our 48-hour fermented dough, layered Wisconsin whole-milk mozzarella beneath crushed San Marzano plum tomatoes, and finished with Maldon sea salt.",
+        "Our dough rests in the cold for two days so it bakes up crisp and airy, not heavy. Every slice gets whole-milk mozzarella, simple crushed tomatoes, and a quick finish of sea salt.",
       cards: [
         {
           id: "slice-01",
-          badge: "FOUNDRY SIGNATURE",
+          badge: "OUR FAVORITE",
           title: "The Katamachi Classic",
-          subtitle:
-            "House fennel sausage, sweet crushed peppers, aged provolone",
+          subtitle: "Pork fennel sausage, sweet peppers, and provolone",
           category: "RED PIE",
           description:
-            "Our flagship Chicago-style profile. Coarse ground pork sausage spiked with toasted fennel and crushed chili, baked under a thick blanket of bright, acidic tomato sauce.",
+            "Our take on traditional Chicago deep dish. Hearty house sausage with plenty of fennel and sweet peppers under a rich, bright tomato sauce.",
           specs: [
             { label: "CRUST", value: "Cornmeal & Olive Oil Crunch" },
-            { label: "FERMENT", value: "48 Hours Cold" },
-            { label: "PAIRING", value: "Domaine Brand Macerated Orange Wine" },
+            { label: "DOUGH", value: "48-Hour Cold Rest" },
+            { label: "PAIRING", value: "Skin-contact orange wine" },
           ],
           priceOrMetric: "¥850 / SLICE",
           action: {
-            label: "INSPECT TASTING NOTES",
-            targetId: "#section05",
+            label: "CHECK DRINKS & HOURS",
+            targetId: "#section-protocol",
             variant: "link",
           },
           media: {
@@ -239,19 +251,19 @@ export const editorialPizzaMovement: MovementDefinition = {
           id: "slice-02",
           badge: "CHEESE PULL",
           title: "Quadruple Formaggi",
-          subtitle: "Mozzarella, gorgonzola dolce, smoked scamorza, parmigiano",
+          subtitle: "Four cheeses, wild honey, and cracked black pepper",
           category: "WHITE & GOLD",
           description:
-            "A decadent white deep dish. A rich base of smoked curd and pungent gorgonzola countered with wild wildflower honey and fresh cracked black tellicherry pepper.",
+            "A rich white slice loaded with melted mozzarella, sweet gorgonzola, smoked scamorza, and parmesan, balanced with local honey and coarse black pepper.",
           specs: [
             { label: "CRUST", value: "Toasted Butter Rim" },
-            { label: "FERMENT", value: "54 Hours Cold" },
-            { label: "PAIRING", value: "Kanazawa Craft Stout / Dark Lager" },
+            { label: "DOUGH", value: "48-Hour Cold Rest" },
+            { label: "PAIRING", value: "Local craft stout or dark lager" },
           ],
           priceOrMetric: "¥900 / SLICE",
           action: {
-            label: "INSPECT TASTING NOTES",
-            targetId: "#section05",
+            label: "CHECK DRINKS & HOURS",
+            targetId: "#section-protocol",
             variant: "link",
           },
           media: {
@@ -263,22 +275,21 @@ export const editorialPizzaMovement: MovementDefinition = {
         },
         {
           id: "slice-03",
-          badge: "SPICY & ACIDIC",
+          badge: "LITTLE KICK",
           title: "Midnight Pepperoni & Hot Honey",
-          subtitle:
-            "Natural casing cup pepperoni, Calabrian chili oil, Mike's hot honey",
+          subtitle: "Crispy cup pepperoni, chili oil, and spicy honey",
           category: "RED PIE",
           description:
-            "Charred, cupped pepperoni slices that pool flavorful paprika oil, cut with sweet heat hot honey drizzle and fragrant fresh oregano leaves.",
+            "Loaded with natural-casing pepperoni that curls up into crispy cups in the pan, finished with a light drizzle of chili oil and hot honey.",
           specs: [
-            { label: "CRUST", value: "Extra Char Frico Edge" },
-            { label: "FERMENT", value: "48 Hours Cold" },
-            { label: "PAIRING", value: "Dry Pét-Nat Sparkling Rosé" },
+            { label: "CRUST", value: "Extra Crispy Cheese Edge" },
+            { label: "DOUGH", value: "48-Hour Cold Rest" },
+            { label: "PAIRING", value: "Chilled sparkling rosé" },
           ],
           priceOrMetric: "¥950 / SLICE",
           action: {
-            label: "INSPECT TASTING NOTES",
-            targetId: "#section05",
+            label: "CHECK DRINKS & HOURS",
+            targetId: "#section-protocol",
             variant: "link",
           },
           media: {
@@ -290,22 +301,21 @@ export const editorialPizzaMovement: MovementDefinition = {
         },
         {
           id: "slice-04",
-          badge: "VEGAN PROFILE",
+          badge: "PLANT-BASED",
           title: "Charred King Oyster & Confit Garlic",
-          subtitle:
-            "Noto maitake, king oyster mushrooms, slow-cooked garlic paste",
+          subtitle: "Pan-roasted mushrooms, garlic paste, and fresh thyme",
           category: "EARTH & HERB",
           description:
-            "Earthy regional mushrooms pan-roasted in cast iron with rosemary and confit garlic oil, topped with nutritional yeast crisps and fresh thyme sprigs.",
+            "Local mushrooms cooked down in cast iron with rosemary and slow-roasted garlic oil, finished with crispy nutritional yeast and fresh herbs.",
           specs: [
-            { label: "CRUST", value: "EVOO & Black Sesame Edge" },
-            { label: "FERMENT", value: "48 Hours Cold" },
-            { label: "PAIRING", value: "Earthy Jura Savagnin or Amber Ale" },
+            { label: "CRUST", value: "Olive Oil & Toasted Sesame" },
+            { label: "DOUGH", value: "48-Hour Cold Rest" },
+            { label: "PAIRING", value: "Dry white wine or amber ale" },
           ],
           priceOrMetric: "¥850 / SLICE",
           action: {
-            label: "INSPECT TASTING NOTES",
-            targetId: "#section05",
+            label: "CHECK DRINKS & HOURS",
+            targetId: "#section-protocol",
             variant: "link",
           },
           media: {
@@ -317,17 +327,18 @@ export const editorialPizzaMovement: MovementDefinition = {
         },
       ],
       footerNote:
-        "Slices rotate out when the pan empties. Once a bake is gone for the night, the oven moves to the next profile.",
+        "Our slice lineup changes on the first of every month with new regional ingredients and seasonal rotations.",
       globalAction: {
-        label: "CURRENT OVEN QUEUE STATUS",
-        targetId: "#section05",
+        label: "CHECK CURRENT SEATS & ARRIVAL",
+        targetId: "#section-protocol",
         variant: "secondary",
       },
     },
-    // --- Tier 4: Section 04 (Sound & Vibe) ---
+
+    // --- Tier 4: Section 04 (Sound & Vibe) -> Mounted at PizzaSectionThree ---
     section04: {
       sectionNumber: "03",
-      sectionAnchorId: "section04",
+      sectionAnchorId: "section-sound",
       eyebrow: "ANALOG SOUND // ROOM ATMOSPHERE",
       title: "Needle on Wax,",
       titleHighlight: "Poured Concrete.",
@@ -368,13 +379,13 @@ export const editorialPizzaMovement: MovementDefinition = {
         "No digital streaming playlists. Music runs continuously from physical vinyl until doors lock at 02:00.",
     },
 
-    // --- Tier 5: Section 05 (Action Protocol & Arrival) ---
+    // --- Tier 5: Section 05 (Action Protocol & Arrival) -> Mounted at PizzaSectionTwo ---
     section05: {
-      sectionNumber: "04",
-      sectionAnchorId: "section05",
-      eyebrow: "SERVICE DIRECTIVES // KATAMACHI",
-      title: "How to Visit.",
-      titleHighlight: "Zero Friction.",
+      sectionNumber: "02",
+      sectionAnchorId: "section-protocol",
+      eyebrow: "KATAMACHI",
+      title: "Visitor Information",
+      titleHighlight: "Have other questions?",
       subtitle:
         "No reservations, no waiting outside in the rain. Step through the heavy steel door, check the board, and claim a stool.",
       steps: [
@@ -407,15 +418,13 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
       terminal: {
         eyebrow: "LIVE VENUE COORDINATES & STATUS",
-        headline: "KATAMACHI 2-CHOME // FOUNDRY PIZZA BAR",
+        headline: "2-21-12 Katamachi, Kanazawa, Ishikawa 920-0981",
         subheadline: "Directly behind the central Katamachi Scramble",
         codeLines: [
-          "LAT / LONG: 36.5594° N, 136.6521° E",
-          "ADDRESS: 2-21-12 Katamachi, Kanazawa, Ishikawa 920-0981",
           "SERVICE HOURS: Wednesday – Monday // 18:00 – 02:00",
           "REGULAR CLOSING: Tuesdays (Deep clean & pan seasoning)",
           "PAYMENT: Cash, Visa/Mastercard/Amex, Apple Pay, IC Transit",
-          "STATUS: RENOVATED COUNTER ACTIVE // WALK-INS WELCOME",
+          "STATUS: Walk ins Welcome",
         ],
         action: {
           label: "OPEN GOOGLE MAPS PIN",
@@ -471,18 +480,35 @@ export const editorialPizzaMovement: MovementDefinition = {
       subBrandMark: "SPEC-003 // VERIFIED ACADEMIC STANDARD",
       statusBadge: "ACADEMIC ANALYSIS // 6-BEAT BREAKDOWN",
       navItems: [
-        { label: "THE THESIS", targetId: "#section02", indexNumber: "01" },
-        { label: "CHARACTERISTICS", targetId: "#section03", indexNumber: "02" },
-        { label: "USE MATRIX", targetId: "#section04", indexNumber: "03" },
         {
-          label: "LINEAGE & TRIVIA",
-          targetId: "#section05",
+          label: "CHARACTERISTICS",
+          targetId: "#section-slices",
+          indexNumber: "01",
+        },
+        {
+          label: "CHEAT SHEET",
+          targetId: "#section-protocol",
+          indexNumber: "02",
+        },
+        {
+          label: "LINEAGE & ROOTS",
+          targetId: "#section-sound",
+          indexNumber: "03",
+        },
+        {
+          label: "VISUAL ARCHIVE",
+          targetId: "#section-gallery",
           indexNumber: "04",
+        },
+        {
+          label: "SYSTEM ANATOMY",
+          targetId: "#section-story",
+          indexNumber: "05",
         },
       ],
       ctaAction: {
         label: "CHEAT SHEET",
-        targetId: "#section05",
+        targetId: "#section-protocol",
         variant: "primary",
       },
     },
@@ -506,12 +532,12 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
       primaryAction: {
         label: "READ SYSTEM RULES",
-        targetId: "#section02",
+        targetId: "#section-slices",
         variant: "primary",
       },
       secondaryAction: {
         label: "INSPECT TYPOGRAPHY",
-        targetId: "#section05",
+        targetId: "#section-protocol",
         variant: "outline",
       },
       media: {
@@ -540,76 +566,137 @@ export const editorialPizzaMovement: MovementDefinition = {
       ],
     },
 
-    // --- Tier 2: Section 02 (Core Visual Characteristics & Reference Dispatches) ---
+    // --- Tier 2: Section 02 -> Mounted at PizzaSectionOne in Edu Mode AND PizzaSectionFive ---
+    // --- Tier 2: Section 02 (The Core Characteristics) -> Mounted at PizzaSectionOne in Edu Mode ---
     section02: {
-      sectionNumber: "05",
-      sectionAnchorId: "section02",
+      sectionNumber: "01",
+      sectionAnchorId: "section-slices",
       eyebrow: "01 // ANATOMY OF EDITORIAL NOIR",
-      title: "Severe Contrast,",
-      titleHighlight: "Unbracketed Geometry.",
+      title: "Severe contrast,",
+      titleHighlight: "unbracketed geometry.",
       subtitle:
-        "Three non-negotiable structural rules that separate authentic editorial modernism from generic dark-mode interfaces.",
-      storyParagraphs: [
-        "Editorial Noir rejects both the sterile uniformity of modern SaaS dashboards and the cozy nostalgia of rustic retro design. It operates on deliberate aesthetic friction: pairing refined editorial luxury (fashion-grade italic serifs set with negative tracking) against utilitarian workspace typography (unadorned monospace timestamps, coordinates, and specs).",
-        "By enforcing 1px hairline structural boundaries and eliminating all softened corner radii, elements sit as framed architectural printing plates rather than floating software cards. Depth is achieved strictly through surface luminance shifts—charcoal, concrete, and bone—rather than synthetic drop shadows.",
-      ],
-      coreValues: [
+        "The core structural rules that separate authentic editorial modernism from generic dark-mode interfaces.",
+      leadCopy:
+        "Editorial Noir thrives on friction: pairing luxury fashion serifs with raw industrial framing. Rather than softening the interface, it treats every container like a rigid, ink-stamped printing plate.",
+      cards: [
         {
-          index: "01",
-          label: "TYPOGRAPHY",
-          title: "Extreme Stroke Modulation",
+          id: "rule-01",
+          badge: "RULE 01 // TYPE",
+          title: "Extreme Stroke Contrast",
+          subtitle: "Didone display serifs paired with utilitarian monospace",
+          category: "TYPOGRAPHY",
           description:
-            "Didone display serifs pair hairline horizontal strokes with heavy vertical stems, creating a dramatic silhouette of luxury and rigor at large scales.",
+            "Display headlines use razor-thin horizontal hairlines against heavy vertical stems. We balance that dramatic luxury by setting technical body details in bare monospace.",
+          specs: [
+            { label: "DISPLAY", value: "Bodoni Moda (-0.04em)" },
+            { label: "MONO", value: "Space Mono / Uppercase" },
+            { label: "CONTRAST", value: "14.2:1 Optical Ratio" },
+          ],
+          priceOrMetric: "SCALE: 6.5 : 1",
+          action: {
+            label: "INSPECT SPECIMEN",
+            targetId: "#section-protocol",
+            variant: "link",
+          },
+          media: {
+            src: "/images/design01/extra-img-6.jpg",
+            alt: "Extreme stroke modulation on Didone serif letterforms",
+            caption: "Bodoni display specimen.",
+          },
+          tags: ["Bodoni", "Didone", "Italic Serifs"],
         },
         {
-          index: "02",
-          label: "FRAMING",
-          title: "Hairlines & 0px Radii",
+          id: "rule-02",
+          badge: "RULE 02 // STRUCTURE",
+          title: "1px Hairlines & 0px Radii",
+          subtitle: "Strict grid dividers without rounded corners",
+          category: "FRAMING",
           description:
-            "Boundaries are defined exclusively by 1px rules in low-contrast steel grays (#2A2A2A to #3A3A3A). Containers strictly avoid rounded bubbles or blurred drop shadows.",
+            "Every card and container is locked to sharp, 90-degree corners. We completely skip modern rounded bubbles and drop shadows in favor of 1px solid steel hairlines.",
+          specs: [
+            { label: "CORNER RADIUS", value: "Strict 0px" },
+            { label: "HAIRLINE", value: "1px Solid Border" },
+            { label: "SHADOWS", value: "None // Flat Plates" },
+          ],
+          priceOrMetric: "RADIUS: 0px",
+          action: {
+            label: "CHECK TOKEN SYSTEM",
+            targetId: "#section-protocol",
+            variant: "link",
+          },
+          media: {
+            src: "/images/design01/extra-img-2.jpg",
+            alt: "Architectural 1px lines and crisp edges without rounded radii",
+            caption: "Zero-radius framing rules.",
+          },
+          tags: ["Hairlines", "0px Corners", "Print Grid"],
         },
         {
-          index: "03",
-          label: "CHROMATICS",
-          title: "Low-Key Ambient Gamut",
+          id: "rule-03",
+          badge: "RULE 03 // COLOR",
+          title: "Low-Key Smoked Canvas",
+          subtitle: "Smoked charcoal, concrete, and halogen amber",
+          category: "CHROMATICS",
           description:
-            "The canvas avoids digital pure black (#000000), using smoked charcoal (#121212) and poured concrete (#1A1A1A) accented by warm halogen amber (#E5A93C).",
+            "Pure digital black (#000000) is avoided. We build visual depth using smoked charcoal (#121212) and poured concrete (#1A1A1A), accented with warm amber (#E5A93C).",
+          specs: [
+            { label: "CANVAS", value: "Smoked Charcoal #121212" },
+            { label: "SURFACE", value: "Poured Concrete #1A1A1A" },
+            { label: "ACCENT", value: "Halogen Amber #E5A93C" },
+          ],
+          priceOrMetric: "DEPTH: 92% DARK",
+          action: {
+            label: "INSPECT PALETTE",
+            targetId: "#section-protocol",
+            variant: "link",
+          },
+          media: {
+            src: "/images/design01/extra-img-4.jpg",
+            alt: "Low-key charcoal tones lit by warm incandescent halogen light",
+            caption: "Low-light chromatic balance.",
+          },
+          tags: ["Smoked Charcoal", "Amber Accent", "Low Key"],
+        },
+        {
+          id: "rule-04",
+          badge: "RULE 04 // LIGHT",
+          title: "Direct-Flash Photography",
+          subtitle: "Harsh chiaroscuro and authentic night-owl scenes",
+          category: "IMAGERY",
+          description:
+            "Soft, diffuse studio lighting is replaced with direct 35mm camera flash. High-contrast highlights and deep, inky shadows give scenes a tangible, late-night grit.",
+          specs: [
+            { label: "SOURCE", value: "Direct Flash / 35mm" },
+            { label: "SHADOWS", value: "Hard Edge Falloff" },
+            { label: "MOOD", value: "Unedited Nightlife" },
+          ],
+          priceOrMetric: "ISO: 800 GRAIN",
+          action: {
+            label: "VIEW PHOTO ARCHIVE",
+            targetId: "#section-gallery",
+            variant: "link",
+          },
+          media: {
+            src: "/images/design01/hero-img-pizza.jpg",
+            alt: "Direct flash capture of counter dining with harsh shadows",
+            caption: "Chiaroscuro photo technique.",
+          },
+          tags: ["Direct Flash", "Chiaroscuro", "35mm Analog"],
         },
       ],
-      socialChannels: [
-        {
-          platform: "Typography",
-          handle: "Typewolf // Bodoni Guide",
-          label: "DISPLAY SERIF SCALE RULES & OPTICAL SIZING",
-          url: "https://www.typewolf.com",
-        },
-        {
-          platform: "Archive",
-          handle: "Letterform Archive",
-          label: "MID-CENTURY EDITORIAL PRINT & SPECIMENS",
-          url: "https://oa.letterformarchive.org",
-        },
-        {
-          platform: "Specimen",
-          handle: "Fonts In Use // Didone",
-          label: "CURATED CONTEMPORARY USAGE OF HIGH-CONTRAST SERIFS",
-          url: "https://fontsinuse.com",
-        },
-      ],
-      media: {
-        src: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80",
-        alt: "Sharp architectural shadow casting geometric lines across a concrete wall",
-        caption: "Architectural chiaroscuro and spatial tension.",
-        badge: "LIGHTING STUDY",
+      footerNote:
+        "Every element should read either as an archival print or an industrial spec sheet—avoid generic digital grey midtones.",
+      globalAction: {
+        label: "GO TO CSS IMPLEMENTATION CHEAT SHEET",
+        targetId: "#section-protocol",
+        variant: "secondary",
       },
-      closingManifesto:
-        "Every element must read either as an expensive archival art print or a raw technical spec sheet. In high-contrast editorial systems, there is no neutral middle ground.",
     },
 
-    // --- Tier 3: Section 03 (Application Matrix: When to Use vs Avoid) ---
+    // --- Tier 3: Section 03 (Application Matrix) ---
     section03: {
       sectionNumber: "02",
-      sectionAnchorId: "section03",
+      sectionAnchorId: "section-matrix",
       eyebrow: "02 // APPLICATION MATRIX",
       title: "Strategic Selection.",
       titleHighlight: "Aligning Style with Mental Models.",
@@ -638,7 +725,7 @@ export const editorialPizzaMovement: MovementDefinition = {
           priceOrMetric: "AFFINITY: 98%",
           action: {
             label: "VIEW LIVE IMPLEMENTATION",
-            targetId: "#section02",
+            targetId: "#section-slices",
             variant: "link",
           },
           media: {
@@ -670,7 +757,7 @@ export const editorialPizzaMovement: MovementDefinition = {
           priceOrMetric: "AFFINITY: 94%",
           action: {
             label: "VIEW LIVE IMPLEMENTATION",
-            targetId: "#section02",
+            targetId: "#section-slices",
             variant: "link",
           },
           media: {
@@ -702,7 +789,7 @@ export const editorialPizzaMovement: MovementDefinition = {
           priceOrMetric: "FAILURE RISK: HIGH",
           action: {
             label: "READ TYPOGRAPHIC RULES",
-            targetId: "#section05",
+            targetId: "#section-protocol",
             variant: "link",
           },
           media: {
@@ -734,7 +821,7 @@ export const editorialPizzaMovement: MovementDefinition = {
           priceOrMetric: "FAILURE RISK: SEVERE",
           action: {
             label: "READ TYPOGRAPHIC RULES",
-            targetId: "#section05",
+            targetId: "#section-protocol",
             variant: "link",
           },
           media: {
@@ -749,15 +836,15 @@ export const editorialPizzaMovement: MovementDefinition = {
         "Rule of thumb: If the user is trying to finish a chore, avoid this style. If the user is savoring an experience, embrace it.",
       globalAction: {
         label: "GO TO DEVELOPER CHEAT SHEET",
-        targetId: "#section05",
+        targetId: "#section-protocol",
         variant: "secondary",
       },
     },
 
-    // --- Tier 4: Section 04 (Historical Roots, Lineage & Trivia) ---
+    // --- Tier 4: Section 04 (Historical Roots, Lineage & Trivia) -> Mounted at PizzaSectionThree ---
     section04: {
       sectionNumber: "03",
-      sectionAnchorId: "section04",
+      sectionAnchorId: "section-sound",
       eyebrow: "HISTORICAL ARCHAEOLOGY // ARCHIVAL ROOTS",
       title: "From 18th-Century Paris,",
       titleHighlight: "to Soho Basements.",
@@ -799,10 +886,10 @@ export const editorialPizzaMovement: MovementDefinition = {
         "Rule of thumb: Didone display strokes shimmer and vanish below 24px ('dazzle'). Use them strictly for display scales and counterbalance with monospace metadata.",
     },
 
-    // --- Tier 5: Section 05 (Implementation Cheat Sheet) ---
+    // --- Tier 5: Section 05 (Implementation Cheat Sheet) -> Mounted at PizzaSectionTwo ---
     section05: {
-      sectionNumber: "04",
-      sectionAnchorId: "section05",
+      sectionNumber: "02",
+      sectionAnchorId: "section-protocol",
       eyebrow: "04 // FRONT-END EXECUTION RULES",
       title: "The Implementation",
       titleHighlight: "Cheat Sheet.",

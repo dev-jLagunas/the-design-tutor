@@ -95,12 +95,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section
-    ref="sectionRef"
-    :id="data.sectionAnchorId || 'section02'"
-    class="story-stage"
-    aria-label="The Foundry Story, Core Values, and Social Dispatches"
-  >
+  <section ref="sectionRef" id="section-story" class="story-stage">
     <!-- =======================================================================
          1. ARCHITECTURAL RETICLE & DRIFTING DRAFT LINES (SECTION 3 REUSE)
          ======================================================================= -->

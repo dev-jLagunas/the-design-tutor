@@ -111,9 +111,8 @@ onBeforeUnmount(() => {
 <template>
   <section
     ref="sectionRef"
-    :id="data.sectionAnchorId || 'section05'"
+    :id="data.sectionAnchorId || 'section-protocol'"
     class="protocol-stage"
-    aria-label="Visitor Information and Directives"
   >
     <!-- =======================================================================
          1. 8 EDITORIAL GUIDE LINES
@@ -177,9 +176,6 @@ onBeforeUnmount(() => {
       <header class="section-header-block">
         <div class="eyebrow-row">
           <span class="eyebrow-badge bg-border">{{ data.eyebrow }}</span>
-          <span class="header-index bg-border"
-            >STAGE {{ data.sectionNumber }}</span
-          >
         </div>
 
         <h2 class="section-headline font-display">
@@ -202,7 +198,7 @@ onBeforeUnmount(() => {
           class="step-card bg-border"
         >
           <div class="step-card-header">
-            <span class="step-index font-mono">{{ step.stepNumber }}</span>
+            <span class="step-index">{{ step.stepNumber }}</span>
             <span v-if="step.tag" class="step-tag bg-border">{{
               step.tag
             }}</span>
@@ -220,35 +216,13 @@ onBeforeUnmount(() => {
            TERMINAL DISPATCH: COORDINATES, SERVICE HOURS, LOGISTICS
            =================================================================== -->
       <div v-if="data.terminal" class="terminal-panel bg-border">
-        <div class="terminal-bar">
-          <div class="terminal-eyebrow font-mono">
-            <Icon name="lucide:terminal" class="terminal-icon" />
-            <span>{{ data.terminal.eyebrow }}</span>
-          </div>
-
-          <div
-            v-if="data.terminal.statusIndicator"
-            class="terminal-status bg-border font-mono"
-          >
-            <span
-              class="status-dot"
-              :class="
-                data.terminal.statusIndicator.isActive
-                  ? 'dot-open'
-                  : 'dot-closed'
-              "
-            ></span>
-            <span>{{ data.terminal.statusIndicator.label }}</span>
-          </div>
-        </div>
-
         <div class="terminal-main-grid">
           <!-- Terminal Left: Headline, Subheadline & Action -->
           <div class="terminal-meta-block">
             <h3 class="terminal-headline font-display">
               {{ data.terminal.headline }}
             </h3>
-            <p class="terminal-subheadline font-mono">
+            <p class="terminal-subheadline">
               {{ data.terminal.subheadline }}
             </p>
 
@@ -309,7 +283,7 @@ onBeforeUnmount(() => {
    REUSABLE BACKDROP UTILITIES
    ============================================================================= */
 .bg-border {
-  background-color: rgba(10, 10, 10, 0.45);
+  background-color: rgba(10, 10, 10, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: var(--border-width-hairline) solid var(--color-border);
@@ -455,12 +429,14 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  font-weight: 800;
 }
 
 .headline-italic {
   font-style: italic;
   font-weight: 300;
   color: var(--color-text-primary);
+  padding-left: 1rem;
 }
 
 .section-subtitle {
@@ -508,10 +484,10 @@ onBeforeUnmount(() => {
 }
 
 .step-index {
-  font-family: var(--font-family-mono);
   font-size: var(--text-size-title-sm);
   color: var(--color-primary-1);
   font-weight: 700;
+  font-family: var(--font-family-body);
 }
 
 .step-tag {
@@ -519,7 +495,7 @@ onBeforeUnmount(() => {
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-highlight);
 }
 
 .step-card-body {
@@ -671,7 +647,8 @@ onBeforeUnmount(() => {
   color: var(--color-text-muted);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  margin: 0;
+  font-family: var(--font-family-body);
+  margin-top: -8px;
 }
 
 .terminal-cta-wrap {

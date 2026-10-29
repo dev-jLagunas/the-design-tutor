@@ -41,6 +41,37 @@ const isDoorsOpen = computed(() => {
   return hour >= 18 || hour < 2;
 });
 
+// =============================================================================
+// AUDIO PLAYER ENGINE (bg-beats.mp3)
+// =============================================================================
+const audioRef = ref<HTMLAudioElement | null>(null);
+const isPlaying = ref(false);
+const isMuted = ref(false);
+
+const togglePlay = () => {
+  if (!audioRef.value) return;
+  if (isPlaying.value) {
+    audioRef.value.pause();
+    isPlaying.value = false;
+  } else {
+    audioRef.value
+      .play()
+      .then(() => {
+        isPlaying.value = true;
+      })
+      .catch(() => {
+        // Browser autoplay restriction handling
+        isPlaying.value = false;
+      });
+  }
+};
+
+const toggleMute = () => {
+  if (!audioRef.value) return;
+  isMuted.value = !isMuted.value;
+  audioRef.value.muted = isMuted.value;
+};
+
 // GSAP context and ScrollTrigger setup
 const sectionRef = ref<HTMLElement | null>(null);
 let gsapCtx: any = null;
@@ -68,7 +99,6 @@ const initAnimations = async () => {
           filter: "brightness(1)",
           duration: 1.6,
           onComplete: () => {
-            // Initiate extremely slow, subtle continuous zoom
             gsap.to(".hero-bg-image", {
               scale: 1.05,
               duration: 20,
@@ -78,7 +108,7 @@ const initAnimations = async () => {
         },
       )
       .fromTo(
-        [".masthead-brand", ".nav-trigger-btn"],
+        [".masthead-brand", ".masthead-player", ".nav-trigger-btn"],
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 },
         "-=1.2",
@@ -126,20 +156,13 @@ const initAnimations = async () => {
       },
       0,
     );
-
-    scrollTl.to(
-      ".masthead-floating",
-      {
-        yPercent: -15,
-        opacity: 0.4,
-        ease: "none",
-      },
-      0,
-    );
   }, sectionRef.value);
 };
 
 onMounted(() => {
+  if (audioRef.value) {
+    audioRef.value.volume = 0.22; // Low, subtle listening bar background volume
+  }
   initAnimations();
 });
 
@@ -153,11 +176,22 @@ watch(
 
 onBeforeUnmount(() => {
   if (gsapCtx) gsapCtx.revert();
+  if (audioRef.value) {
+    audioRef.value.pause();
+  }
 });
 </script>
 
 <template>
   <header ref="sectionRef" class="hero-stage">
+    <!-- Hidden HTML5 Audio Element -->
+    <audio
+      ref="audioRef"
+      src="/sounds/bg-beats.mp3"
+      loop
+      preload="auto"
+    ></audio>
+
     <!-- =======================================================================
          8 EDITORIAL GUIDE LINES (SUBTLE CAMERA/CANVAS RETICLE)
          ======================================================================= -->
@@ -167,7 +201,6 @@ onBeforeUnmount(() => {
       preserveAspectRatio="none"
       aria-hidden="true"
     >
-      <!-- Group A: 3 lines from the left (~25% down) slanting down toward the pizza (~58% down, ~72% across) -->
       <line x1="0" y1="24.5" x2="100" y2="70" class="guide-line" />
       <line
         x1="0"
@@ -184,7 +217,6 @@ onBeforeUnmount(() => {
         class="guide-line guide-line-faint"
       />
 
-      <!-- Group B: 3 lines from the top-right (~80% across) slanting down toward the bottom-left -->
       <line x1="80" y1="0" x2="-20" y2="100" class="guide-line" />
       <line
         x1="81.5"
@@ -221,13 +253,53 @@ onBeforeUnmount(() => {
     <div class="guide-line guide-line-side-v" aria-hidden="true"></div>
 
     <!-- =======================================================================
-         FLOATING TOP MASTHEAD
+         STICKY TOP MASTHEAD (PERSISTENT NAVIGATIONAL BAR)
          ======================================================================= -->
     <nav class="masthead-floating" aria-label="Primary Navigation">
       <div class="masthead-brand">
         <div class="brand-text bg-border">
           <span class="brand-name">{{ navbar.brandMark }}</span>
         </div>
+      </div>
+
+      <!-- DESKTOP AUDIO PLAYER (HORIZONTAL VINYL + TELEMETRY) -->
+      <div class="masthead-player bg-border font-mono desktop-player">
+        <button
+          type="button"
+          class="vinyl-spin-btn"
+          :class="{ 'is-spinning': isPlaying }"
+          aria-label="Toggle background audio playback"
+          @click="togglePlay"
+        >
+          <svg class="mini-vinyl-disc" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="48" class="vinyl-rim" />
+            <circle cx="50" cy="50" r="38" class="vinyl-groove-line" />
+            <circle cx="50" cy="50" r="28" class="vinyl-groove-line" />
+            <circle cx="50" cy="50" r="16" class="vinyl-label-center" />
+            <circle cx="50" cy="50" r="4" class="vinyl-spindle-hole" />
+          </svg>
+        </button>
+
+        <div class="player-info-strip">
+          <span class="now-playing-kicker">
+            {{ isPlaying ? "NOW PLAYING" : "CLICK DISC TO PLAY" }}
+          </span>
+          <span class="track-identity">
+            Midnight Pan Grooves // Kenji Sato
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="volume-mute-btn"
+          aria-label="Toggle mute"
+          @click="toggleMute"
+        >
+          <Icon
+            :name="isMuted ? 'lucide:volume-x' : 'lucide:volume-2'"
+            class="vol-icon"
+          />
+        </button>
       </div>
 
       <div class="masthead-actions">
@@ -260,11 +332,7 @@ onBeforeUnmount(() => {
          ======================================================================= -->
     <div class="hero-content-layer">
       <div class="hero-copy-block">
-        <div class="headline-mask">
-          <!-- <p class="headline-mask-inner secondary-lead">
-            {{ hero.titleSecondary }}
-          </p> -->
-        </div>
+        <div class="headline-mask"></div>
 
         <h1 class="hero-headline font-display">
           <div class="headline-mask">
@@ -370,6 +438,50 @@ onBeforeUnmount(() => {
             </li>
           </ul>
 
+          <!-- MOBILE VINYL AUDIO PLAYER (PLACED DIRECTLY ABOVE DRAWER CTA) -->
+          <div class="masthead-player bg-border font-mono mobile-player">
+            <button
+              type="button"
+              class="vinyl-spin-btn"
+              :class="{ 'is-spinning': isPlaying }"
+              aria-label="Toggle background audio playback"
+              @click="togglePlay"
+            >
+              <svg
+                class="mini-vinyl-disc"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+              >
+                <circle cx="50" cy="50" r="48" class="vinyl-rim" />
+                <circle cx="50" cy="50" r="38" class="vinyl-groove-line" />
+                <circle cx="50" cy="50" r="28" class="vinyl-groove-line" />
+                <circle cx="50" cy="50" r="16" class="vinyl-label-center" />
+                <circle cx="50" cy="50" r="4" class="vinyl-spindle-hole" />
+              </svg>
+            </button>
+
+            <div class="player-info-strip">
+              <span class="now-playing-kicker">
+                {{ isPlaying ? "NOW PLAYING" : "CLICK DISC TO PLAY" }}
+              </span>
+              <span class="track-identity">
+                Midnight Pan Grooves // Kenji Sato
+              </span>
+            </div>
+
+            <button
+              type="button"
+              class="volume-mute-btn"
+              aria-label="Toggle mute"
+              @click="toggleMute"
+            >
+              <Icon
+                :name="isMuted ? 'lucide:volume-x' : 'lucide:volume-2'"
+                class="vol-icon"
+              />
+            </button>
+          </div>
+
           <div v-if="navbar.ctaAction" class="drawer-cta">
             <button
               type="button"
@@ -426,7 +538,6 @@ onBeforeUnmount(() => {
 /* =============================================================================
    1PX BEAUTIFUL DESIGN GUIDING LINES (SUBTLE TENSION FOR Noir GRIT)
    ============================================================================= */
-/* Base guide line token */
 .guide-line {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.08);
@@ -434,7 +545,6 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
-/* Full-bleed vector canvas sitting between the image scrim and content */
 .editorial-guide-canvas {
   position: absolute;
   inset: 0;
@@ -445,14 +555,12 @@ onBeforeUnmount(() => {
   overflow: visible;
 }
 
-/* Base line: crisp 1px stroke regardless of aspect ratio or screen size */
 .editorial-guide-canvas .guide-line {
   stroke: rgba(255, 255, 255, 0.04);
   stroke-width: 1px;
   vector-effect: non-scaling-stroke;
 }
 
-/* Secondary echo lines with slight opacity falloffs for depth */
 .editorial-guide-canvas .guide-line-ghost {
   stroke: rgba(255, 255, 255, 0.02);
 }
@@ -509,22 +617,21 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   MASTHEAD
+   STICKY MASTHEAD (FIXED OVER ENTIRE SITE)
    ============================================================================= */
 .masthead-floating {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: var(--layer-sticky, 20);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4) var(--layout-gutter);
-  background: transparent;
-  border: none;
-  pointer-events: none;
-  margin-inline: auto;
+  padding: var(--space-3) var(--layout-gutter);
+
+  pointer-events: auto;
+  box-sizing: border-box;
 }
 
 .masthead-brand,
@@ -553,12 +660,120 @@ onBeforeUnmount(() => {
   color: var(--color-text-primary);
 }
 
-.brand-sub {
-  font-family: var(--font-family-body);
+/* =============================================================================
+   HORIZONTAL AUDIO PLAYER MODULE
+   ============================================================================= */
+.masthead-player {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.35rem 0.85rem;
+  background-color: rgba(18, 18, 18, 0.65);
+}
+
+.vinyl-spin-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mini-vinyl-disc {
+  width: 28px;
+  height: 28px;
+  display: block;
+  transform-origin: 50% 50%;
+}
+
+.is-spinning .mini-vinyl-disc {
+  animation: vinyl-mini-spin 4s linear infinite;
+}
+
+@keyframes vinyl-mini-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-rim {
+  fill: #0d0d0d;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1.5;
+}
+
+.vinyl-groove-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+}
+
+.vinyl-label-center {
+  fill: var(--color-primary-1);
+}
+
+.vinyl-spindle-hole {
+  fill: #0a0a0a;
+}
+
+.player-info-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.now-playing-kicker {
+  font-size: 0.62rem;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-primary-1);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.track-identity {
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.volume-mute-btn {
+  background: transparent;
+  border: none;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.volume-mute-btn:hover {
+  color: var(--color-primary-1);
+  transform: scale(1.15);
+}
+
+.vol-icon {
+  font-size: 0.95rem;
+}
+
+/* Responsive visibility switching for the player */
+.desktop-player {
+  display: inline-flex;
+}
+
+.mobile-player {
+  display: none;
 }
 
 .masthead-actions {
@@ -575,7 +790,6 @@ onBeforeUnmount(() => {
   color: var(--color-text-primary);
 }
 
-/* Glowing Indicator Dot */
 .status-dot {
   width: 8px;
   height: 8px;
@@ -691,7 +905,7 @@ onBeforeUnmount(() => {
     calc(100% - (var(--layout-gutter) * 2))
   );
   margin-inline: auto;
-  padding-top: 4rem;
+  padding-top: 6rem;
   padding-bottom: var(--space-7);
   display: flex;
   flex-direction: column;
@@ -738,7 +952,7 @@ onBeforeUnmount(() => {
 }
 
 .title-roman {
-  font-weight: 400;
+  font-weight: 800;
 }
 
 .title-italic {
@@ -757,7 +971,6 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
-/* Actions Cluster */
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -765,7 +978,6 @@ onBeforeUnmount(() => {
   margin-top: var(--space-2);
 }
 
-/* 1. PATTERN ANIMATION FOR PRIMARY BUTTON (WITH 5-SECOND RETURNING ATTENTION PULSE) */
 .btn-primary {
   position: relative;
   display: inline-flex;
@@ -832,7 +1044,6 @@ onBeforeUnmount(() => {
   }
 }
 
-/* 2. SUBDUED ANIMATION FOR SECONDARY BUTTON */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -863,7 +1074,6 @@ onBeforeUnmount(() => {
   font-size: 1rem;
 }
 
-/* Responsive Stat Band (Flex wrapping) */
 .hero-stats {
   display: grid;
   gap: var(--space-3);
@@ -872,6 +1082,7 @@ onBeforeUnmount(() => {
   border-top: var(--border-width-hairline) solid var(--color-border-subtle);
   width: 100%;
 }
+
 @media (max-width: 639px) {
   .hero-stats {
     grid-template-columns: repeat(2, 1fr);
@@ -882,12 +1093,12 @@ onBeforeUnmount(() => {
   }
 }
 
-/* 640px and up: 3 equal columns in a single row */
 @media (min-width: 640px) {
   .hero-stats {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 .stat-item {
   width: 100%;
   flex-direction: column;
@@ -903,15 +1114,6 @@ onBeforeUnmount(() => {
   line-height: var(--leading-none);
 }
 
-.stat-heading {
-  font-family: var(--font-family-body);
-  font-size: var(--text-size-micro);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-text-primary);
-  margin-top: 4px;
-}
-
 .stat-caption {
   font-family: var(--font-family-body);
   font-size: var(--text-size-micro);
@@ -919,7 +1121,7 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   SIDEBAR DRAWER WITH MATCHING PRIMARY HOVER ANIMATION
+   SIDEBAR DRAWER
    ============================================================================= */
 .sidebar-drawer {
   position: fixed;
@@ -1017,7 +1219,7 @@ onBeforeUnmount(() => {
   padding: var(--space-6) var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-5);
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -1073,7 +1275,6 @@ onBeforeUnmount(() => {
   margin-top: auto;
 }
 
-/* Primary Sliding Hover Pattern on the Drawer CTA */
 .drawer-cta-action {
   position: relative;
   width: 100%;
@@ -1146,13 +1347,26 @@ onBeforeUnmount(() => {
 /* =============================================================================
    RESPONSIVE OVERRIDES
    ============================================================================= */
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .masthead-floating {
-    padding: var(--space-3) var(--layout-gutter);
+    padding: var(--space-2) var(--layout-gutter);
   }
 
   .status-indicator {
     display: none;
+  }
+
+  /* Hide Desktop Audio Player in Masthead, Show in Mobile Sidebar */
+  .desktop-player {
+    display: none;
+  }
+
+  .mobile-player {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
   }
 
   .hero-headline {
