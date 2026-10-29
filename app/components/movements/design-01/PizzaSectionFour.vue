@@ -8,49 +8,49 @@ const galleryImages = [
     id: 1,
     src: "/images/design01/extra-img-1.jpg",
     alt: "Cast-iron baked deep dish pizza slice on steel bar",
-    tag: "01 // CAST-IRON OVEN",
+    tag: "VINYL ROTATION",
   },
   {
     id: 2,
     src: "/images/design01/hero-img-pizza.jpg",
     alt: "Renovated steel counter and late-night patrons",
-    tag: "02 // MIDNIGHT SERVICE",
+    tag: "MIDNIGHT SERVICE",
   },
   {
     id: 3,
     src: "/images/design01/extra-img-3.jpg",
     alt: "Rich tomato sauce and thick cheese pull",
-    tag: "03 // STONE DECK HEAT",
+    tag: "NATURAL PAIRINGS",
   },
   {
     id: 4,
     src: "/images/design01/extra-img-4.jpg",
     alt: "Technics turntable with vinyl spinning under halogen beam",
-    tag: "04 // VINYL ROTATION",
+    tag: "FRESHLY BAKED",
   },
   {
     id: 5,
     src: "/images/design01/extra-img-5.jpg",
     alt: "Poured concrete bar, natural wine, and amaro pours",
-    tag: "05 // NATURAL PAIRINGS",
+    tag: "PERFECT TEXTURES",
   },
   {
     id: 6,
     src: "/images/design01/extra-img-6.jpg",
     alt: "Print menus and typographic details",
-    tag: "06 // PRINT ARTIFACTS",
+    tag: "LOCAL INGREDIENTS",
   },
   {
     id: 7,
     src: "/images/design01/extra-img-2.jpg",
     alt: "Direct-flash chiaroscuro photography of the interior",
-    tag: "07 // DIRECT FLASH",
+    tag: "MONTHLY VARIATIONS",
   },
   {
     id: 8,
     src: "/images/design01/sect-2-img.jpg",
     alt: "Final nightcap and quiet counter reflection",
-    tag: "08 // 02:00 CURFEW",
+    tag: "OUTDOOR SEATING",
   },
 ];
 
@@ -96,7 +96,7 @@ const initHorizontalScroll = async () => {
 
   await nextTick();
   if (gsapCtx) gsapCtx.revert();
-
+  if (!pinContainerRef.value) return;
   gsapCtx = gsap.context(() => {
     const track = horizontalTrackRef.value;
     const pinContainer = pinContainerRef.value;
@@ -234,7 +234,7 @@ onBeforeUnmount(() => {
           />
         </div>
         <div class="slide-scrim"></div>
-        <div class="slide-tag bg-border font-mono">{{ img.tag }}</div>
+        <div class="slide-tag bg-border">{{ img.tag }}</div>
       </div>
     </div>
 
@@ -243,11 +243,6 @@ onBeforeUnmount(() => {
          ======================================================================= -->
     <div class="static-overlay">
       <div class="center-content-lockup">
-        <!-- Brand Mark matched to SectionZero Masthead -->
-        <div class="brand-text bg-border">
-          <span class="brand-name">FOUNDRY</span>
-        </div>
-
         <!-- Deep Dish, By The Slice typography matching SectionZero Hero -->
         <h2 class="hero-headline font-display floating-bounce">
           <span class="title-roman">DEEP DISH,</span>
@@ -380,36 +375,19 @@ onBeforeUnmount(() => {
 }
 
 /* Nocturnal dark gradient scrim to protect centered typography readability */
-.slide-scrim {
-  position: absolute;
-
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(10, 10, 10, 0.5) 0%,
-      rgba(10, 10, 10, 0.5) 75%,
-      rgba(10, 10, 10, 0.5) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(10, 10, 10, 0.5) 0%,
-      rgba(10, 10, 10, 0.5) 40%,
-      rgba(10, 10, 10, 0.5) 60%,
-      rgba(10, 10, 10, 0.5) 100%
-    );
-  pointer-events: none;
-}
 
 .slide-tag {
   position: absolute;
-  top: clamp(1.25rem, 3vw, 2.5rem);
-  right: clamp(1.25rem, 3vw, 2.5rem);
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-family-body);
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
-  color: var(--color-text-muted);
+  color: var(--color-text-primary);
   text-transform: uppercase;
   z-index: 5;
+  height: fit-content;
 }
 
 /* =============================================================================
@@ -440,25 +418,13 @@ onBeforeUnmount(() => {
 }
 
 /* 1. Exact Navbar Brand Typography from PizzaSectionZero */
-.brand-text {
-  display: inline-flex;
-}
-
-.brand-name {
-  font-family: var(--font-family-body);
-  font-size: var(--text-size-xs);
-  font-weight: 700;
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-text-primary);
-}
 
 /* 2. Exact Headline Typography from PizzaSectionZero */
 .hero-headline {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: flex-start;
   font-family: var(--font-family-display);
   font-size: var(--text-size-hero);
   line-height: var(--leading-none);
@@ -759,11 +725,6 @@ onBeforeUnmount(() => {
   .anim-line-v-2,
   .drafting-cross {
     display: none;
-  }
-
-  .slide-tag {
-    top: 1rem;
-    right: 1rem;
   }
 
   .hero-headline {

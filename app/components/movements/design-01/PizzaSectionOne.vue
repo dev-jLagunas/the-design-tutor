@@ -23,7 +23,7 @@ const initAnimations = async () => {
 
   await nextTick();
   if (gsapCtx) gsapCtx.revert();
-
+  if (!sectionRef.value) return;
   gsapCtx = gsap.context(() => {
     // 1. Entrance timeline
     const enterTl = gsap.timeline({

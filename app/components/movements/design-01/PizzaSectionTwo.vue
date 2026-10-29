@@ -22,7 +22,7 @@ const initAnimations = async () => {
 
   await nextTick();
   if (gsapCtx) gsapCtx.revert();
-
+  if (!sectionRef.value) return;
   gsapCtx = gsap.context(() => {
     // 1. Entrance Trigger with Continuous Slow Background Zoom
     const enterTl = gsap.timeline({

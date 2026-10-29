@@ -10,6 +10,29 @@ const props = defineProps<{
   isEducational?: boolean;
 }>();
 
+// =============================================================================
+// AUDIO PLAYBACK STATE & TONEARM CONTROLS
+// =============================================================================
+const audioRef = ref<HTMLAudioElement | null>(null);
+const isPlaying = ref(false);
+
+const toggleAudio = () => {
+  if (!audioRef.value) return;
+  if (isPlaying.value) {
+    audioRef.value.pause();
+    isPlaying.value = false;
+  } else {
+    audioRef.value
+      .play()
+      .then(() => {
+        isPlaying.value = true;
+      })
+      .catch(() => {
+        isPlaying.value = false;
+      });
+  }
+};
+
 const sectionRef = ref<HTMLElement | null>(null);
 let gsapCtx: any = null;
 
@@ -22,11 +45,10 @@ const initAnimations = async () => {
 
   await nextTick();
   if (gsapCtx) gsapCtx.revert();
+  if (!sectionRef.value) return;
 
   gsapCtx = gsap.context(() => {
-    // -------------------------------------------------------------------------
-    // 1. SCROLL-TRIGGERED ENTRANCE TIMELINE
-    // -------------------------------------------------------------------------
+    // 1. Entrance timeline
     const enterTl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.value,
@@ -61,9 +83,7 @@ const initAnimations = async () => {
         "-=0.4",
       );
 
-    // -------------------------------------------------------------------------
-    // 2. PARALLAX DRIFT TIMELINE (Orbiting Text Floating Around Center)
-    // -------------------------------------------------------------------------
+    // 2. Parallax drift
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.value,
@@ -74,15 +94,16 @@ const initAnimations = async () => {
       },
     });
 
-    // Opposite vertical drifts create an optical circular float around the disc
     scrollTl.to(".orbit-left-quadrant", { yPercent: -14, ease: "none" }, 0);
     scrollTl.to(".orbit-right-quadrant", { yPercent: 12, ease: "none" }, 0);
-    scrollTl.to(".vinyl-disc", { rotate: "+=120", ease: "none" }, 0);
     scrollTl.to(".technical-bg-canvas", { yPercent: 8, ease: "none" }, 0);
   }, sectionRef.value);
 };
 
 onMounted(() => {
+  if (audioRef.value) {
+    audioRef.value.volume = 0.22;
+  }
   initAnimations();
 });
 
@@ -96,6 +117,9 @@ watch(
 
 onBeforeUnmount(() => {
   if (gsapCtx) gsapCtx.revert();
+  if (audioRef.value) {
+    audioRef.value.pause();
+  }
 });
 </script>
 
@@ -105,6 +129,14 @@ onBeforeUnmount(() => {
     :id="data.sectionAnchorId || 'section-sound'"
     class="vibe-stage"
   >
+    <!-- Hidden Audio Engine -->
+    <audio
+      ref="audioRef"
+      src="/sounds/bg-beats.mp3"
+      loop
+      preload="auto"
+    ></audio>
+
     <!-- =======================================================================
          1. PURE CSS RETICLE & FLOATING LINE BACKGROUND
          ======================================================================= -->
@@ -170,9 +202,6 @@ onBeforeUnmount(() => {
       <header class="section-header-block">
         <div class="eyebrow-row">
           <span class="eyebrow-badge bg-border">{{ data.eyebrow }}</span>
-          <span class="header-index bg-border"
-            >STAGE {{ data.sectionNumber }}</span
-          >
         </div>
 
         <h2 class="section-headline font-display">
@@ -189,83 +218,129 @@ onBeforeUnmount(() => {
            RADIAL VINYL ORBIT ARENA
            ===================================================================== -->
       <div class="orbit-arena">
-        <!-- Center Vinyl Disc (SVG with Pure CSS Microgrooves & Infinite Spin) -->
+        <!-- Center Vinyl Turntable Display with Mechanical Tonearm -->
         <div class="vinyl-stage" aria-label="Acoustic Vinyl Turntable Display">
-          <div class="vinyl-disc-wrap">
-            <svg
-              class="vinyl-disc"
-              viewBox="0 0 400 400"
-              xmlns="http://www.w3.org/2000/svg"
+          <div class="turntable-deck">
+            <div
+              class="vinyl-disc-wrap"
+              :class="{ 'is-active-spin': isPlaying }"
+              @click="toggleAudio"
+            >
+              <svg
+                class="vinyl-disc"
+                viewBox="0 0 400 400"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <!-- Outer Heavy Shell -->
+                <circle cx="200" cy="200" r="196" class="vinyl-outer-rim" />
+
+                <!-- Micro-Groove Layers -->
+                <circle cx="200" cy="200" r="182" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="168" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="154" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="140" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="126" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="112" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="98" class="vinyl-groove" />
+                <circle cx="200" cy="200" r="84" class="vinyl-groove" />
+
+                <!-- Run-Out Vinyl Band -->
+                <circle cx="200" cy="200" r="74" class="vinyl-runout" />
+
+                <!-- Center Paper Label -->
+                <circle cx="200" cy="200" r="62" class="vinyl-center-label" />
+                <circle cx="200" cy="200" r="60" class="vinyl-label-border" />
+
+                <!-- Center Brandmark & Calibration Monospace Text -->
+                <text
+                  x="200"
+                  y="170"
+                  text-anchor="middle"
+                  class="vinyl-label-title font-display"
+                >
+                  FOUNDRY
+                </text>
+                <text
+                  x="200"
+                  y="228"
+                  text-anchor="middle"
+                  class="vinyl-label-sub"
+                >
+                  33⅓ RPM // ANALOG
+                </text>
+                <text
+                  x="200"
+                  y="242"
+                  text-anchor="middle"
+                  class="vinyl-label-meta"
+                >
+                  KANAZAWA
+                </text>
+              </svg>
+
+              <!-- Central Play / Pause Controller Button -->
+              <button
+                type="button"
+                class="center-spindle-play-btn"
+                :aria-label="isPlaying ? 'Pause audio' : 'Play audio'"
+                @click.stop="toggleAudio"
+              >
+                <Icon
+                  :name="isPlaying ? 'lucide:pause' : 'lucide:play'"
+                  class="play-toggle-icon"
+                  :class="{ 'icon-offset': !isPlaying }"
+                />
+              </button>
+
+              <!-- Holographic Sheen Filter -->
+              <div class="vinyl-light-sheen"></div>
+            </div>
+
+            <!-- Stylus Tonearm Assembly -->
+            <div
+              class="tonearm-assembly"
+              :class="{ 'is-needle-dropped': isPlaying }"
               aria-hidden="true"
             >
-              <!-- Outer Heavy Shell -->
-              <circle cx="200" cy="200" r="196" class="vinyl-outer-rim" />
-
-              <!-- Micro-Groove Layers -->
-              <circle cx="200" cy="200" r="182" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="168" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="154" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="140" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="126" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="112" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="98" class="vinyl-groove" />
-              <circle cx="200" cy="200" r="84" class="vinyl-groove" />
-
-              <!-- Run-Out Vinyl Band -->
-              <circle cx="200" cy="200" r="74" class="vinyl-runout" />
-
-              <!-- Center Paper Label -->
-              <circle cx="200" cy="200" r="62" class="vinyl-center-label" />
-              <circle cx="200" cy="200" r="60" class="vinyl-label-border" />
-
-              <!-- Center Brandmark & Calibration Monospace Text -->
-              <text
-                x="200"
-                y="188"
-                text-anchor="middle"
-                class="vinyl-label-title font-display"
-              >
-                FOUNDRY
-              </text>
-              <text
-                x="200"
-                y="204"
-                text-anchor="middle"
-                class="vinyl-label-sub font-mono"
-              >
-                33⅓ RPM // ANALOG
-              </text>
-              <text
-                x="200"
-                y="218"
-                text-anchor="middle"
-                class="vinyl-label-meta font-mono"
-              >
-                KANAZAWA
-              </text>
-
-              <!-- Turntable Spindle Hole -->
-              <circle cx="200" cy="200" r="10" class="vinyl-spindle" />
-              <circle cx="200" cy="200" r="11" class="vinyl-spindle-edge" />
-            </svg>
-
-            <!-- Holographic Sheen Filter -->
-            <div class="vinyl-light-sheen"></div>
+              <div class="tonearm-pivot-base"></div>
+              <div class="tonearm-lever">
+                <div class="tonearm-cartridge">
+                  <div class="cartridge-stylus-pin"></div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- Turntable Status Tag -->
-          <div class="vinyl-hud-pill bg-border font-mono">
-            <span class="status-dot dot-spinning"></span>
-            <span>TECHNICS 1200MK7 ACTIVE</span>
-          </div>
+          <!-- Dynamic Status HUD Tag -->
+          <button
+            type="button"
+            class="vinyl-hud-pill bg-border"
+            @click="toggleAudio"
+          >
+            <span
+              class="status-dot"
+              :class="isPlaying ? 'dot-spinning' : 'dot-idle'"
+            ></span>
+            <span>
+              {{
+                isPlaying
+                  ? "CURRENTLY PLAYING // ANALOG VINYL"
+                  : "PLAY SONG // 33⅓ RPM"
+              }}
+            </span>
+          </button>
         </div>
 
         <!-- Left Orbit Quadrant: Lead Narrative & Vibe Pillar 01 -->
         <div class="orbit-left-quadrant">
-          <div v-if="data.leadCopy" class="orbit-lead-card bg-border">
-            <div class="card-meta-line font-mono">
+          <div
+            v-if="data.leadCopy"
+            class="orbit-lead-card bg-border special-border"
+          >
+            <div class="card-meta-line">
               <Icon name="lucide:disc-3" class="meta-icon" />
-              <span>THE ACOUSTIC PHILOSOPHY</span>
+              <span>ACOUSTIC PHILOSOPHY</span>
             </div>
             <p class="orbit-lead-text">{{ data.leadCopy }}</p>
           </div>
@@ -275,14 +350,10 @@ onBeforeUnmount(() => {
             class="orbit-pillar-card bg-border"
           >
             <div class="pillar-header">
-              <span class="pillar-num font-mono">{{
-                data.vibePillars[0].index
-              }}</span>
-              <span class="pillar-tag font-mono">{{
-                data.vibePillars[0].label
-              }}</span>
+              <span class="pillar-num">{{ data.vibePillars[0].index }}</span>
+              <span class="pillar-tag">{{ data.vibePillars[0].label }}</span>
             </div>
-            <h3 class="pillar-title font-display">
+            <h3 class="pillar-title">
               {{ data.vibePillars[0].title }}
             </h3>
             <p class="pillar-desc">{{ data.vibePillars[0].description }}</p>
@@ -296,12 +367,8 @@ onBeforeUnmount(() => {
             class="orbit-pillar-card bg-border"
           >
             <div class="pillar-header">
-              <span class="pillar-num font-mono">{{
-                data.vibePillars[1].index
-              }}</span>
-              <span class="pillar-tag font-mono">{{
-                data.vibePillars[1].label
-              }}</span>
+              <span class="pillar-num">{{ data.vibePillars[1].index }}</span>
+              <span class="pillar-tag">{{ data.vibePillars[1].label }}</span>
             </div>
             <h3 class="pillar-title font-display">
               {{ data.vibePillars[1].title }}
@@ -314,12 +381,8 @@ onBeforeUnmount(() => {
             class="orbit-pillar-card bg-border"
           >
             <div class="pillar-header">
-              <span class="pillar-num font-mono">{{
-                data.vibePillars[2].index
-              }}</span>
-              <span class="pillar-tag font-mono">{{
-                data.vibePillars[2].label
-              }}</span>
+              <span class="pillar-num">{{ data.vibePillars[2].index }}</span>
+              <span class="pillar-tag">{{ data.vibePillars[2].label }}</span>
             </div>
             <h3 class="pillar-title font-display">
               {{ data.vibePillars[2].title }}
@@ -331,11 +394,11 @@ onBeforeUnmount(() => {
 
       <!-- Footer Directive Note -->
       <footer v-if="data.footerNote" class="footer-note-block bg-border">
-        <div class="footer-note-indicator font-mono">
+        <div class="footer-note-indicator">
           <Icon name="lucide:volume-2" class="audio-icon" />
           <span>SESSION DIRECTIVE</span>
         </div>
-        <p class="footer-note-text font-mono">{{ data.footerNote }}</p>
+        <p class="footer-note-text">{{ data.footerNote }}</p>
       </footer>
     </div>
   </section>
@@ -354,7 +417,7 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   PURE CSS ARCHITECTURAL GRID BACKGROUND (FROM SECTION TWO PATTERN)
+   PURE CSS ARCHITECTURAL GRID BACKGROUND
    ============================================================================= */
 .technical-bg-canvas {
   position: absolute;
@@ -571,8 +634,7 @@ onBeforeUnmount(() => {
   gap: var(--space-2);
 }
 
-.eyebrow-badge,
-.header-index {
+.eyebrow-badge {
   display: inline-flex;
   align-items: center;
   padding: var(--space-1) var(--space-3);
@@ -598,6 +660,7 @@ onBeforeUnmount(() => {
   font-style: italic;
   font-weight: 300;
   color: var(--color-text-primary);
+  padding-left: 1rem;
 }
 
 .section-subtitle {
@@ -610,20 +673,20 @@ onBeforeUnmount(() => {
 }
 
 /* =============================================================================
-   RADIAL VINYL ORBIT ARENA (CENTER DISC + SURROUNDING FLOATING COPY)
+   RADIAL VINYL ORBIT ARENA
    ============================================================================= */
 .orbit-arena {
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr minmax(320px, 420px) 1fr;
+  grid-template-columns: 1fr minmax(340px, 440px) 1fr;
   align-items: center;
   gap: var(--space-6);
   min-height: 480px;
 }
 
 /* -----------------------------------------------------------------------------
-   CENTER VINYL DISC (SVG WITH ROTATING GROOVES)
+   TURNTABLE DECK & MECHANICAL TONEARM
    ----------------------------------------------------------------------------- */
 .vinyl-stage {
   display: flex;
@@ -635,6 +698,15 @@ onBeforeUnmount(() => {
   z-index: 2;
 }
 
+.turntable-deck {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .vinyl-disc-wrap {
   position: relative;
   width: 100%;
@@ -644,6 +716,8 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.85));
+  cursor: pointer;
+  user-select: none;
 }
 
 .vinyl-disc {
@@ -652,6 +726,12 @@ onBeforeUnmount(() => {
   display: block;
   transform-origin: 50% 50%;
   animation: vinyl-spin 18s linear infinite;
+  animation-play-state: paused;
+  transition: filter 0.3s ease;
+}
+
+.is-active-spin .vinyl-disc {
+  animation-play-state: running;
 }
 
 @keyframes vinyl-spin {
@@ -682,7 +762,7 @@ onBeforeUnmount(() => {
 }
 
 .vinyl-center-label {
-  fill: #1f1f1f;
+  fill: #1a1a1a;
 }
 
 .vinyl-label-border {
@@ -712,17 +792,46 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
 }
 
-.vinyl-spindle {
-  fill: var(--color-canvas);
+/* Center Spindle Play Button */
+.center-spindle-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(10, 10, 10, 0.9);
+  border: var(--border-width-hairline) solid rgba(255, 255, 255, 0.4);
+  color: var(--color-primary-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
-.vinyl-spindle-edge {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.35);
-  stroke-width: 0.75px;
+.center-spindle-play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+  background-color: var(--color-primary-1);
+  color: var(--color-canvas);
+  border-color: var(--color-primary-1);
 }
 
-/* Subtle Holographic Light Sheen */
+.play-toggle-icon {
+  font-size: 1.15rem;
+}
+
+.play-toggle-icon.icon-offset {
+  margin-left: 2px;
+}
+
+/* Light Sheen */
 .vinyl-light-sheen {
   position: absolute;
   inset: 0;
@@ -738,16 +847,94 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
-/* Turntable Status Tag */
+/* =============================================================================
+   MECHANICAL TONEARM (STYLUS NEEDLE ASSEMBLY)
+   ============================================================================= */
+.tonearm-assembly {
+  position: absolute;
+  top: 4px;
+  right: 18px;
+  width: 70px;
+  height: 220px;
+  z-index: 5;
+  pointer-events: none;
+  transform-origin: 35px 24px;
+  transform: rotate(0deg);
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tonearm-assembly.is-needle-dropped {
+  transform: rotate(28deg);
+}
+
+.tonearm-pivot-base {
+  position: absolute;
+  top: 10px;
+  left: 21px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: radial-gradient(circle, #3a3a3a 0%, #151515 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+.tonearm-lever {
+  position: absolute;
+  top: 24px;
+  left: 33px;
+  width: 3px;
+  height: 165px;
+  background: linear-gradient(180deg, #888 0%, #555 100%);
+  border-radius: 2px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.tonearm-cartridge {
+  position: absolute;
+  bottom: -4px;
+  left: -8px;
+  width: 14px;
+  height: 28px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 1px;
+  transform: rotate(18deg);
+  transform-origin: top center;
+}
+
+.cartridge-stylus-pin {
+  position: absolute;
+  bottom: -2px;
+  left: 5px;
+  width: 3px;
+  height: 4px;
+  background-color: var(--color-primary-1);
+  box-shadow: 0 0 4px var(--color-primary-1);
+}
+
+/* =============================================================================
+   TURNTABLE HUD STATUS PILL
+   ============================================================================= */
 .vinyl-hud-pill {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.3rem 0.7rem;
+  padding: 0.35rem 0.85rem;
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-text-primary);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.vinyl-hud-pill:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .status-dot {
@@ -761,6 +948,11 @@ onBeforeUnmount(() => {
   background-color: #22c55e;
   box-shadow: 0 0 8px #22c55e;
   animation: pulse-spin 1.8s infinite ease-in-out;
+}
+
+.dot-idle {
+  background-color: #71717a;
+  box-shadow: 0 0 4px rgba(113, 113, 122, 0.5);
 }
 
 @keyframes pulse-spin {
@@ -788,6 +980,10 @@ onBeforeUnmount(() => {
   z-index: 3;
 }
 
+.orbit-right-quadrant {
+  margin-top: -4rem;
+}
+
 .orbit-lead-card,
 .orbit-pillar-card {
   padding: var(--space-5);
@@ -812,6 +1008,10 @@ onBeforeUnmount(() => {
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
   color: var(--color-primary-1);
+}
+
+.special-border {
+  border: none;
 }
 
 .meta-icon {
@@ -841,7 +1041,7 @@ onBeforeUnmount(() => {
 .pillar-tag {
   font-size: var(--text-size-micro);
   letter-spacing: var(--tracking-widest);
-  color: var(--color-text-muted);
+  color: var(--color-highlight);
 }
 
 .pillar-title {
@@ -850,6 +1050,7 @@ onBeforeUnmount(() => {
   color: var(--color-text-primary);
   line-height: var(--leading-tight);
   margin: 0;
+  text-transform: uppercase;
 }
 
 .pillar-desc {
@@ -908,6 +1109,10 @@ onBeforeUnmount(() => {
 
   .vinyl-disc-wrap {
     max-width: 280px;
+  }
+
+  .tonearm-assembly {
+    display: none;
   }
 
   .anim-line-v-1,

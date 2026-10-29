@@ -339,44 +339,43 @@ export const editorialPizzaMovement: MovementDefinition = {
     section04: {
       sectionNumber: "03",
       sectionAnchorId: "section-sound",
-      eyebrow: "ANALOG SOUND // ROOM ATMOSPHERE",
-      title: "Needle on Wax,",
-      titleHighlight: "Poured Concrete.",
+      eyebrow: "THE SPACE & MUSIC",
+      title: "Good records,",
+      titleHighlight: "cold drinks, and hot pizza.",
       subtitle:
-        "We rebuilt the room around warm acoustic dispersion and uninterrupted vinyl sessions from 18:00 through the final 2:00 AM pour.",
+        "We set this place up to be more than just a quick bite—it's a relaxed late-night bar where you can have a drink and listen to great music.",
       leadCopy:
-        "The renovation stripped away the dining booths in favor of an intimate listening bar: custom low-end acoustic baffling, dual Technics 1200 turntables, and direct-flash 35mm prints along the back wall.",
+        "When we renovated the shop, we kept things simple and raw: poured concrete floors, warm dim lighting, and a long brushed steel counter with two turntables right behind the bar.",
       vibePillars: [
         {
           index: "01",
-          label: "AUDIO HARDWARE",
-          title: "Rotational Analog Sound",
+          label: "ON THE DECKS",
+          title: "All Vinyl, All Night",
           description:
-            "Original pressings of late-night jazz, dub, and ambient techno played through tube amps tuned for clear conversation without shouting.",
+            "No streaming playlists or random ads. We spin actual records from open to close—mostly classic jazz funk, dub, and late-night electronic grooves kept at a volume where you can still talk.",
         },
         {
           index: "02",
-          label: "COUNTER DISCIPLINE",
-          title: "Clean Air, Fast Flow",
+          label: "BEHIND THE BAR",
+          title: "Pours That Match the Pie",
           description:
-            "Strictly smoke-free indoors with an open stainless pass. Order at the grate, grab your pour, and settle into the physical sound.",
+            "Every slice has a drink to go with it. We keep a solid list of natural wines, local craft beers, and chilled highballs that cut right through rich cheese and tomato sauce.",
         },
         {
           index: "03",
-          label: "SPACE ARCHITECTURE",
-          title: "Steel, Stone & Halogen",
+          label: "THE ROOM",
+          title: "An 18-Seat Steel Counter",
           description:
-            "18 stools along a single continuous steel counter under focused amber pinpoints, framed by framed archival photography and exposed masonry.",
+            "Just 18 bar stools along one long counter, exposed brick, and low amber lights. Pull up a stool, order a slice, grab your drink, and settle in.",
         },
       ],
       media: {
         src: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=1200&q=80",
-        alt: "Vinyl record needle resting in the dark under a warm halogen pinpoint beam",
-        caption: "Analog playback station behind the beer taps.",
+        alt: "Vinyl record spinning on a turntable behind the bar counter",
+        caption: "Turntables behind the drink taps.",
         badge: "SOUND STATION",
       },
-      footerNote:
-        "No digital streaming playlists. Music runs continuously from physical vinyl until doors lock at 02:00.",
+      footerNote: "Records spin continuously until the doors lock at 2:00 AM.",
     },
 
     // --- Tier 5: Section 05 (Action Protocol & Arrival) -> Mounted at PizzaSectionTwo ---
