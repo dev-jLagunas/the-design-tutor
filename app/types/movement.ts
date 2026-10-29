@@ -8,8 +8,8 @@ export type ViewMode = "edu" | "live";
 
 export interface ActionLink {
   label: string;
-  href?: string; // External link or tel/mailto
-  targetId?: string; // Internal element anchor (e.g., "#section02")
+  href?: string;
+  targetId?: string;
   variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
   isExternal?: boolean;
 }
@@ -19,23 +19,23 @@ export interface MediaAsset {
   alt: string;
   caption?: string;
   badge?: string;
-  aspectRatio?: "16:9" | "4:3" | "1:1" | "3:4" | "21:9" | "auto";
-  focalPoint?: string; // e.g., "center center", "top right"
+  aspectRatio?: "16:9" | "4:3" | "1:1" | "3:4" | "21:9" | "auto" | string;
+  focalPoint?: string;
 }
 
 export interface MetricItem {
-  value: string; // e.g., "18", "450°F", "6.5 : 1", "98%"
-  label: string; // e.g., "Counter Seats", "Scale Ratio"
-  unit?: string; // e.g., "seats", "deg", "ratio"
-  description?: string; // Supporting sentence explaining the metric
+  value: string;
+  label: string;
+  unit?: string;
+  description?: string;
 }
 
 export interface TaggedItem {
   id?: string;
-  tag?: string; // Category or state: e.g., "DAILY", "RULE 01"
+  tag?: string;
   label: string;
   description?: string;
-  meta?: string; // Supporting micro-data: timestamp, author, etc.
+  meta?: string;
 }
 
 // =============================================================================
@@ -55,70 +55,73 @@ export interface ClientBrief {
 }
 
 // =============================================================================
-// 02. STRUCTURAL CONTENT SLOTS (THE 6-PART LIVING ANATOMY)
+// 02. STRUCTURAL CONTENT SLOTS
 // =============================================================================
 
 // --- Slot 00: Global Navbar ---
 export interface NavAnchorItem {
   label: string;
-  targetId: string; // e.g., "#hero", "#section02", "#section03"
-  indexNumber?: string; // e.g., "01", "02", "MENU", "CONCEPT"
-  badge?: string; // e.g., "NEW", "LIVE", "HOT"
+  targetId: string;
+  indexNumber?: string;
+  badge?: string;
 }
 
 export interface NavbarContent {
-  brandMark: string; // Trade name or stamped logo text
-  subBrandMark?: string; // Secondary descriptor or coordinates
-  statusBadge: string; // Live: "DOORS 18:00 - 02:00" | Edu: "SPEC-003 // VERIFIED"
-  navItems: NavAnchorItem[]; // Dynamic anchor links
-  ctaAction?: ActionLink; // Quick primary action button
+  brandMark: string;
+  subBrandMark?: string;
+  statusBadge: string;
+  navItems: NavAnchorItem[];
+  ctaAction?: ActionLink;
 }
 
 // --- Slot 01: Tier 1 Hero ---
 export interface HeroSectionContent {
-  eyebrow?: string; // Category / movement eyebrow
-  title: string; // Main display headline
-  titleItalic?: string; // High-contrast italic or accented word
-  titleSecondary?: string; // Second line / kicker phrase
-  subtitle: string; // Lead paragraph or thesis statement
-  leadParagraph?: string; // Optional long-form explanatory copy
-  statusBadge?: string; // Ticker or status pill
-  tags?: string[]; // Category or diagnosis tags
+  eyebrow?: string;
+  title: string;
+  titleItalic?: string;
+  titleSecondary?: string;
+  subtitle: string;
+  leadParagraph?: string;
+  statusBadge?: string;
+  tags?: string[];
   primaryAction: ActionLink;
   secondaryAction?: ActionLink;
   media?: MediaAsset;
-  liveStats?: MetricItem[]; // Real-time counter metrics or diagnostics
+  liveStats?: MetricItem[];
 }
 
-// --- Slot 02: Tier 2 Section 02 (The Story, Core Values & Social Dispatches) ---
+// --- Slot 02: Tier 2 Section 02 (The Story & Socials / Curriculum Anatomy) ---
 export interface CoreValueItem {
-  index: string; // "01", "02", "03"
-  label: string; // "DISCIPLINE", "TYPOGRAPHY", etc.
+  index: string;
+  label: string;
   title: string;
   description: string;
 }
 
 export interface SocialChannelItem {
-  platform: string; // "Instagram", "Spotify", "Substack"
-  handle: string; // "@foundrypizzabar"
-  label: string; // "DAILY ROTATIONS & BAKE DISPATCHES"
+  platform: string;
+  handle: string;
+  label: string;
   url: string;
 }
 
 export interface Section02Content {
-  sectionNumber: string; // e.g., "05" or "01"
-  sectionAnchorId: string; // e.g., "section02"
+  sectionNumber: string;
+  sectionAnchorId: string;
   eyebrow?: string;
   title: string;
   titleHighlight?: string;
   subtitle?: string;
-  // Refactored properties (Foundry Story & Noir Anatomy)
+  leadCopy?: string;
   storyParagraphs?: string[];
   coreValues?: CoreValueItem[];
   socialChannels?: SocialChannelItem[];
   closingManifesto?: string;
   media?: MediaAsset;
-  // Optional legacy properties preserved for backward compatibility
+  cards?: ShowcaseCard[]; // Permits SectionOne to render either section03 or section02
+  footerNote?: string;
+  globalAction?: ActionLink;
+  // Legacy fields
   paragraphs?: string[];
   featurePillars?: TaggedItem[];
   pullquote?: {
@@ -138,91 +141,72 @@ export interface SpecItem {
 
 export interface ShowcaseCard {
   id: string;
-  badge?: string; // "DAILY ROTATION" | "HIGH AFFINITY" | "AVOID"
+  badge?: string;
   title: string;
   subtitle?: string;
   category?: string;
   description: string;
-  specs?: SpecItem[]; // Fermentation, pairings, or cognitive risk factors
-  priceOrMetric?: string; // "¥850" or "AFFINITY: 98%"
+  specs?: SpecItem[];
+  priceOrMetric?: string;
   action?: ActionLink;
   media?: MediaAsset;
   tags?: string[];
 }
 
 export interface Section03Content {
-  sectionNumber: string; // e.g., "02"
-  sectionAnchorId: string; // e.g., "section03"
+  sectionNumber: string;
+  sectionAnchorId: string;
   eyebrow?: string;
   title: string;
   titleHighlight?: string;
   subtitle?: string;
   leadCopy?: string;
-  cards: ShowcaseCard[]; // 4-card grid
+  cards: ShowcaseCard[];
   footerNote?: string;
   globalAction?: ActionLink;
 }
 
 // --- Slot 04: Tier 4 Section 04 (Sound & Vibe / Room Atmosphere) ---
 export interface VibePillarItem {
-  index: string; // "01", "02", "03"
-  label: string; // "AUDIO HARDWARE", "TYPOGRAPHIC ORIGIN"
+  index: string;
+  label: string;
   title: string;
   description: string;
-}
-
-export interface PrimaryListItem {
-  index: string; // "01", "1788", "TRACK 01"
-  title: string;
-  secondaryTitle?: string;
-  description: string;
-  tag?: string;
-  media?: MediaAsset;
-  link?: ActionLink;
-}
-
-export interface SecondaryListItem {
-  title: string;
-  body: string;
-  authorOrMeta?: string;
-  badge?: string;
 }
 
 export interface Section04Content {
-  sectionNumber: string; // e.g., "03"
-  sectionAnchorId: string; // e.g., "section04"
+  sectionNumber: string;
+  sectionAnchorId: string;
   eyebrow?: string;
   title: string;
   titleHighlight?: string;
   subtitle?: string;
-  // Refactored properties (Sound & Room Vibe layout)
   leadCopy?: string;
   vibePillars?: VibePillarItem[];
   footerNote?: string;
   media?: MediaAsset;
-  // Optional legacy stream properties preserved for backward compatibility
   primaryStreamTitle?: string;
   primaryStreamSubtitle?: string;
-  primaryItems?: PrimaryListItem[];
+  primaryItems?: any[];
   secondaryStreamTitle?: string;
   secondaryStreamSubtitle?: string;
-  secondaryItems?: SecondaryListItem[];
+  secondaryItems?: any[];
 }
 
-// --- Slot 05: Tier 5 Section 05 (Action Protocol & Implementation Cheat Sheet) ---
+// --- Slot 05: Tier 5 Section 05 (Action Protocol & Arrival / Telemetry) ---
 export interface StepProtocolItem {
-  stepNumber: string; // "#01", "#02", "#03"
+  stepNumber: string;
   title: string;
-  directive: string; // The immediate instruction or rule
-  details?: string; // Supporting guidance, edge cases, or code hints
+  directive: string;
+  details?: string;
   tag?: string;
 }
 
 export interface TerminalBlock {
-  eyebrow: string; // "LIVE COORDINATES & STATUS" | "CSS TOKENS & SPECS"
+  eyebrow: string;
   headline: string;
   subheadline?: string;
-  codeLines: string[]; // Address, schedule, tokens, or configuration strings
+  codeLines: string[];
   action?: ActionLink;
   statusIndicator?: {
     label: string;
@@ -231,14 +215,14 @@ export interface TerminalBlock {
 }
 
 export interface Section05Content {
-  sectionNumber: string; // e.g., "04"
-  sectionAnchorId: string; // e.g., "section05"
+  sectionNumber: string;
+  sectionAnchorId: string;
   eyebrow?: string;
   title: string;
   titleHighlight?: string;
   subtitle?: string;
-  steps: StepProtocolItem[]; // Step-by-step boxed rules
-  terminal: TerminalBlock; // Terminal card / Map / Spec box
+  steps: StepProtocolItem[];
+  terminal: TerminalBlock;
   alertBanner?: {
     level: "info" | "warning" | "highlight";
     message: string;
@@ -249,16 +233,17 @@ export interface Section05Content {
 export interface ResourceLink {
   label: string;
   url: string;
-  tag?: string; // "SPECIMEN", "ARCHIVE", "EXTERNAL", "MAP"
+  tag?: string;
   description?: string;
 }
 
 export interface FooterContent {
-  brandColophon: string; // "FOUNDRY PIZZA BAR © 2026 // KATAMACHI"
+  brandColophon: string;
   legalNotice?: string;
-  operationalDetails?: string[]; // Operating days, hours, contact strings
-  resourceLinks?: ResourceLink[]; // "In the Wild" real-world references
-  secondaryLinks?: ActionLink[]; // Standard privacy, terms, colophon links
+  operationalDetails?: string[];
+  resourceLinks?: ResourceLink[];
+  secondaryLinks?: ActionLink[];
+  backToTopText?: string;
 }
 
 // =============================================================================
@@ -276,7 +261,7 @@ export interface MovementSections {
 }
 
 // =============================================================================
-// 04. ROOT MOVEMENT DEFINITION (CATALOG & ROUTING)
+// 04. ROOT MOVEMENT DEFINITION
 // =============================================================================
 
 export interface SectionDesignRationale {
@@ -308,16 +293,16 @@ export interface CaseStudyRationale {
 }
 
 export interface MovementDefinition {
-  id: string; // Unique ID: "editorial-noir-foundry"
-  slug: string; // Route param: "editorial-noir"
-  title: string; // Display name: "Downtown Editorial Noir"
-  subtitle?: string; // Secondary descriptor
-  category: string; // Catalog filter tag: "Editorial", "Brutalism", etc.
-  tags: string[]; // Search keywords: ["New York", "Didone", "Late-Night"]
-  era: string; // Historical lineage: "Late 1970s Soho — 1990s Indie Print"
-  summary: string; // Catalog card pitch (1-2 sentences)
-  brief: ClientBrief; // Phase 01: Client intake dossier data
-  live: MovementSections; // Phase 02: Live commercial landing page content
-  educational: MovementSections; // Phase 03: Educational in-situ curriculum content
-  caseStudy?: CaseStudyRationale; // Phase 04: Designer's UX & strategic rationale (optional)
+  id: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  category: string;
+  tags: string[];
+  era: string;
+  summary: string;
+  brief: ClientBrief;
+  live: MovementSections;
+  educational: MovementSections;
+  caseStudy?: CaseStudyRationale;
 }

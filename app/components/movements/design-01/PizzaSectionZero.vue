@@ -11,8 +11,8 @@ import {
 import type { MovementDefinition } from "~/types/movement";
 
 const props = defineProps<{
-  navbar: MovementDefinition["live"]["navbar"];
-  hero: MovementDefinition["live"]["hero"];
+  navbar: NavbarContent;
+  hero: HeroSectionContent;
 }>();
 
 // Navigation drawer state
@@ -25,7 +25,8 @@ const closeNav = () => {
 };
 
 // Smooth scroll to sections
-const scrollToTarget = (targetId: string) => {
+const scrollToTarget = (targetId?: string) => {
+  if (!targetId) return;
   closeNav();
   const el = document.querySelector(targetId);
   if (el) {
@@ -85,7 +86,7 @@ const initAnimations = async () => {
 
   await nextTick();
   if (gsapCtx) gsapCtx.revert();
-
+  if (!sectionRef.value) return;
   gsapCtx = gsap.context(() => {
     // 1. Entrance timeline
     const enterTl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -395,7 +396,7 @@ onBeforeUnmount(() => {
     <aside
       class="sidebar-drawer"
       :class="{ 'is-open': isNavOpen }"
-      aria-hidden="!isNavOpen"
+      :aria-hidden="!isNavOpen"
     >
       <div class="drawer-canvas-frame">
         <img
