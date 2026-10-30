@@ -30,7 +30,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "en",
       },
-      title: "The Design Tutor — Visual Web Movements Built From Scratch",
+      title: "The Design Tutor | Visual Designs Explained",
       titleTemplate: "%s | The Design Tutor",
       meta: [
         { charset: "utf-8" },
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "Taking web design styles from a blank page to working code. Real layouts built from scratch with every design decision and CSS architecture explained.",
+            "Practical visual designs, analyzed and explained. Building for real-world needs and sharing the lessons behind every choice.",
         },
         { name: "author", content: "Juan Angel Lagunas" },
         { name: "theme-color", content: "#101010" },
@@ -49,17 +49,16 @@ export default defineNuxtConfig({
         { property: "og:url", content: "https://thedesigntutor.netlify.app" },
         {
           property: "og:title",
-          content: "The Design Tutor — Visual Web Movements Built From Scratch",
+          content: "The Design Tutor | Visual Designs Explained",
         },
         {
           property: "og:description",
           content:
-            "Taking web design styles from a blank page to working code. Real layouts built from scratch with every design decision and CSS architecture explained.",
+            "Practical visual designs, analyzed and explained. Building for real-world needs and sharing the lessons behind every choice.",
         },
         {
           property: "og:image",
-          content:
-            "https://thedesigntutor.netlify.app/images/brand/og-share-card.png",
+          content: "https://i.imgur.com/vPy3BGx.png",
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
@@ -74,17 +73,16 @@ export default defineNuxtConfig({
         { name: "twitter:creator", content: "@dev_jlagunas" },
         {
           name: "twitter:title",
-          content: "The Design Tutor — Visual Web Movements Built From Scratch",
+          content: "The Design Tutor | Visual Designs Explained",
         },
         {
           name: "twitter:description",
           content:
-            "Taking web design styles from a blank page to working code. Real layouts built from scratch with every design decision and CSS architecture explained.",
+            "Practical visual designs, analyzed and explained. Building for real-world needs and sharing the lessons behind every choice.",
         },
         {
           name: "twitter:image",
-          content:
-            "https://thedesigntutor.netlify.app/images/brand/og-share-card.png",
+          content: "https://i.imgur.com/vPy3BGx.png",
         },
       ],
       link: [
