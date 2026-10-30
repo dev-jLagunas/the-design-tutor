@@ -43,6 +43,18 @@ const catalogMeta: MovementMetaCard[] = [
     image: "/images/design01/design-01-screenshot.png",
     icon: "lucide:disc",
   },
+  // {
+  //   id: "editorial-noir-foundry-02",
+  //   slug: "editorial-nail-studio",
+  //   vol: "Style 02",
+  //   edition: "November 2026",
+  //   category: "Editorial",
+  //   title: "Minimalist Studio & Precision Craft",
+  //   description:
+  //     "Monochrome framing, hairline borders, and high-fashion editorial typography applied to a boutique private studio.",
+  //   image: "/images/design02/placeholder.png",
+  //   icon: "lucide:sparkles",
+  // },
 ];
 
 export const useShowcaseStore = defineStore("showcase", () => {

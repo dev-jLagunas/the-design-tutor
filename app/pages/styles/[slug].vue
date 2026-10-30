@@ -23,5 +23,10 @@ onMounted(() => {
     <MovementsDesign01EditorialPizzaLanding
       v-if="route.params.slug === 'editorial-pizza'"
     />
+
+    <!-- Design 02 (Your New Fake Project) -->
+    <!-- <MovementsDesign02Design02Landing
+      v-else-if="route.params.slug === 'editorial-nail-studio'"
+    /> -->
   </main>
 </template>

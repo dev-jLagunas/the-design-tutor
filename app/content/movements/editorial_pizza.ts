@@ -30,24 +30,22 @@ export const editorialPizzaMovement: MovementDefinition = {
     industry: "Late-Night Craft Pizzeria & Vinyl Bar",
     location: "Katamachi, Kanazawa, Ishikawa Prefecture",
     targetAudience:
-      "Design-conscious night owls, creative professionals, vinyl listeners, and modern foodies seeking a chic late-night counter hangout.",
+      "Neighborhood night owls, music heads, and late-night diners looking for a comfortable counter spot to grab a bite and a drink after hours.",
     aestheticGoal:
-      "A sleek, nocturnal, downtown New York editorial vibe that merges raw renovated industrial textures (brushed steel, dark poured concrete) with late-night warmth and modern typographic precision.",
-    brandTone: ["Nocturnal", "Chic", "Industrial", "Unapologetic"],
+      "A late-night downtown editorial look blending raw textures like brushed steel and concrete with warm lighting, high-contrast flash photos, and crisp print-inspired typography.",
+    brandTone: ["Late-Night", "Unpretentious", "Warm", "Direct"],
     providedAssets: [
-      "Brushed metal wordmark & stamped sub-mark vector",
-      "Flash 35mm editorial photography of renovated interior",
-      "High-contrast macro shots of deep dish crust & cheese pull",
-      "Curated vinyl night DJ schedule and beverage pairings",
+      "Flash photography of customers and late-night counter service",
+      "High-contrast product shots of whole cast-iron pies and fresh slices",
     ],
     coreChallenge:
-      "Reframing traditionally heavy, slow-bake deep dish into a fast, chic, by-the-slice counter ritual that fits naturally into Kanazawa's vibrant late-night bar culture.",
+      "Showing that deep dish doesn't have to mean sitting around for a slow 45-minute bake, but can be a fast, casual by-the-slice option that fits into a night out in Katamachi.",
     deliverables: [
-      "Nocturnal hero brand hook announcing the renovated space and 6PM–2AM service",
-      "Renovation narrative detailing the 2-year evolution, steel counter build, and music ethos",
-      "Curated 4-slice rotating deep dish showcase with tasting notes and beverage pairings",
-      "Night-owl sensory dispatches, acoustic specifications, and bar atmosphere rules",
-      "Counter walk-in protocol, midnight slice availability tracker, and location coords",
+      "Mobile-first single-page landing site covering hours, location, and walk-in policies",
+      "Tonight's slice lineup with descriptions, pricing, and current oven status",
+      "Interactive vinyl music player module linking to the bar's Spotify playlist",
+      "Background story detailing the dough process, local ingredients, and shop vibe",
+      "Photo gallery and customer FAQ addressing late-night seating and takeaway",
     ],
   },
 
