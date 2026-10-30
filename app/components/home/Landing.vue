@@ -14,7 +14,7 @@ function handleRandomStyle() {
       word1="Learn"
       word2="Visual"
       word3="Design"
-      tagline="Explore historical and modern web design movements through interactive, living case studies and technical breakdowns."
+      tagline="Explore historical and modern web design styles through interactive, living case studies and  breakdowns."
     >
       <template #actions>
         <UiActionPair

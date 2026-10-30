@@ -34,6 +34,11 @@ const filteredDesigns = computed(() => {
   });
 });
 
+const resultsCountText = computed(() => {
+  const count = filteredDesigns.value.length;
+  return `${count} ${count === 1 ? "DESIGN" : "DESIGNS"} FOUND`;
+});
+
 // Typewriter Placeholder Logic
 const fullPlaceholder = "START TYPING...";
 const currentPlaceholder = ref("");
@@ -51,6 +56,10 @@ const typeWriter = () => {
       typeWriter();
     }, 2200);
   }
+};
+
+const clearSearch = () => {
+  searchQuery.value = "";
 };
 
 onMounted(() => {
@@ -75,12 +84,33 @@ onMounted(() => {
         <div class="search-field-wrap relative">
           <input
             v-model="searchQuery"
-            type="search"
+            type="text"
             :placeholder="currentPlaceholder"
             aria-label="Search design movements"
             class="search-giant-input font-display"
           />
-          <Icon name="lucide:search" class="search-giant-icon" />
+
+          <!-- Action Cluster: Clear button + Live Count Pill -->
+          <div class="search-controls-cluster">
+            <button
+              v-if="searchQuery"
+              type="button"
+              class="btn-clear-search flex-center"
+              aria-label="Clear search query"
+              @click="clearSearch"
+            >
+              <Icon name="lucide:x" class="clear-icon" />
+            </button>
+
+            <span
+              v-if="searchQuery"
+              class="results-count-badge flex-center font-b-group"
+            >
+              {{ resultsCountText }}
+            </span>
+
+            <Icon v-else name="lucide:search" class="search-giant-icon" />
+          </div>
         </div>
 
         <nav
@@ -198,7 +228,7 @@ onMounted(() => {
 
           <div class="card-actions-group flex-col">
             <NuxtLink
-              to="/contact"
+              to="/about"
               class="btn-card-action btn-gold font-body flex-center transition-smooth"
             >
               <span>Learn More</span>
@@ -206,7 +236,7 @@ onMounted(() => {
             </NuxtLink>
 
             <NuxtLink
-              to="/about"
+              to="/contact"
               class="btn-card-action btn-ghost font-body flex-center transition-smooth"
             >
               <Icon name="lucide:book-open" class="action-icon-sm" />
@@ -256,23 +286,11 @@ onMounted(() => {
   color: var(--shell-muted);
 }
 
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 14px;
-  width: 14px;
-  background-color: var(--shell-accent-coral);
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
-    no-repeat center;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
-    no-repeat center;
-  cursor: pointer;
-}
-
 .search-field-wrap {
   width: 100%;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .search-giant-input {
@@ -284,7 +302,7 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 1;
   color: var(--shell-text);
   letter-spacing: -0.04em;
-  padding-right: var(--space-6);
+  padding-right: clamp(170px, 24vw, 290px);
 }
 
 .search-giant-input::placeholder {
@@ -292,9 +310,49 @@ input[type="search"]::-webkit-search-cancel-button {
   opacity: 0.2;
 }
 
-.search-giant-icon {
+/* Controls Cluster (Clear button + Live Count pill) */
+.search-controls-cluster {
   position: absolute;
   right: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.btn-clear-search {
+  width: 36px;
+  height: 36px;
+  background-color: var(--shell-surface);
+  border: 1px solid var(--shell-border);
+  border-radius: 6px;
+  color: var(--shell-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-clear-search:hover {
+  background-color: var(--shell-accent-coral);
+  border-color: var(--shell-accent-coral);
+  color: #121212;
+}
+
+.clear-icon {
+  font-size: 1.25rem;
+}
+
+.results-count-badge {
+  background-color: var(--shell-contrast-bg);
+  border: 1px solid var(--shell-border);
+  color: var(--shell-contrast-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.85rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.search-giant-icon {
   font-size: clamp(2rem, 5vw, 4rem);
   color: var(--shell-muted);
   opacity: 0.2;
@@ -334,7 +392,6 @@ input[type="search"]::-webkit-search-cancel-button {
    ========================================================================== */
 .cards-layout {
   display: grid;
-  /* Swapped min 360px for min 0 so cards collapse cleanly on mobile */
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: var(--space-6);
   width: 100%;
@@ -342,7 +399,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .design-card {
   width: 100%;
-  min-width: 0; /* Prevents flex children from pushing width */
+  min-width: 0;
   box-sizing: border-box;
   background-color: var(--shell-surface);
   border: 1px solid var(--shell-border);
@@ -404,7 +461,7 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Media Showcase */
 .card-image-stage {
   width: 100%;
-  aspect-ratio: 16 / 10; /* Removed fixed height: 220px to prevent overflow */
+  aspect-ratio: 16 / 10;
   border-radius: 4px;
   border: 1px solid var(--shell-border);
   background-color: var(--shell-bg);
@@ -540,6 +597,25 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .search-giant-input {
     font-size: clamp(2rem, 10vw, 3.5rem);
+    padding-right: 175px;
+  }
+
+  .search-controls-cluster {
+    gap: 0.4rem;
+  }
+
+  .btn-clear-search {
+    width: 32px;
+    height: 32px;
+  }
+
+  .clear-icon {
+    font-size: 1.1rem;
+  }
+
+  .results-count-badge {
+    font-size: 0.62rem;
+    padding: 0.35rem 0.55rem;
   }
 
   .search-giant-icon {

@@ -30,11 +30,9 @@ const isEdu = computed(() => store.isEduMode);
 <template>
   <div v-if="sections" class="foundry-landing-root">
     <PizzaSection0 :navbar="sections.navbar" :hero="sections.hero" />
+
     <!-- Section 1: The Slices (Live) or Core Characteristics (Edu) -->
-    <PizzaSectionOne
-      :data="isEdu ? sections.section02 : sections.section03"
-      :is-educational="isEdu"
-    />
+    <PizzaSectionOne :data="sections.section03" :is-educational="isEdu" />
     <!-- Section 2: Visitor Protocol & Telemetry (Live) or Implementation Cheat Sheet (Edu) -->
     <PizzaSectionTwo :data="sections.section05" :is-educational="isEdu" />
 

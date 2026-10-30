@@ -4,237 +4,372 @@ import { useShowcaseStore } from "~/stores/useShowcaseStore";
 
 const store = useShowcaseStore();
 const brief = computed(() => store.activeBrief);
+
+const closeOnEsc = (e: KeyboardEvent) => {
+  if (e.key === "Escape" && store.isBriefOpen) {
+    store.closeBrief();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", closeOnEsc);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", closeOnEsc);
+});
 </script>
 
 <template>
   <Teleport to="body">
-    <Transition name="fade">
-      <div
-        v-if="store.isBriefOpen"
-        class="brief-backdrop fixed cover-absolute"
-        @click="store.closeBrief"
-      ></div>
-    </Transition>
-
-    <Transition name="slide">
+    <div
+      v-if="store.isBriefOpen"
+      class="brief-modal-backdrop"
+      @click="store.closeBrief"
+    >
       <aside
-        v-if="store.isBriefOpen"
-        class="brief-drawer fixed flex-col"
+        class="brief-drawer-panel"
         role="dialog"
         aria-modal="true"
         aria-label="Client Brief"
+        @click.stop
       >
         <!-- Header -->
-        <header class="drawer-header flex-between">
-          <div class="brief-title-wrap flex-col">
-            <span class="text-micro-caps eyebrow-tag">Design Assignment</span>
-            <h2 class="font-display drawer-title">Client Brief</h2>
+        <header class="drawer-header">
+          <div class="header-titles">
+            <span class="eyebrow">DESIGN ASSIGNMENT</span>
+            <h2 class="drawer-title font-display">Client Brief</h2>
           </div>
+
           <button
             type="button"
-            class="close-btn flex-center"
-            aria-label="Close Brief"
+            class="btn-close"
+            aria-label="Close Client Brief"
             @click="store.closeBrief"
           >
             <Icon name="lucide:x" class="close-icon" />
           </button>
         </header>
 
-        <!-- Body Content -->
-        <div v-if="brief" class="drawer-scroll-body flex-col font-body">
-          <!-- Client & Scope -->
-          <div class="brief-section flex-col">
-            <span class="brief-label text-micro-caps">The Client</span>
-            <h3 class="brief-client-name font-display">
-              {{ brief.clientName }}
-            </h3>
-            <p class="brief-text">
-              {{ brief.industry }} • {{ brief.location }}
-            </p>
-          </div>
+        <!-- Body -->
+        <div v-if="brief" class="drawer-body">
+          <!-- 01. The Client -->
+          <section class="drawer-section">
+            <span class="eyebrow">THE CLIENT</span>
+            <div class="client-meta">
+              <h3 class="client-name font-display">{{ brief.clientName }}</h3>
+              <p class="body-small client-context">
+                {{ brief.industry }} · {{ brief.location }}
+              </p>
+            </div>
+          </section>
 
-          <!-- Aesthetic Goal -->
-          <div class="brief-section flex-col">
-            <span class="brief-label text-micro-caps">Aesthetic Direction</span>
-            <p class="brief-text highlight-box">{{ brief.aestheticGoal }}</p>
-          </div>
+          <hr class="section-divider" />
 
-          <!-- Core Challenge -->
-          <div class="brief-section flex-col">
-            <span class="brief-label text-micro-caps">The Challenge</span>
-            <p class="brief-text">{{ brief.coreChallenge }}</p>
-          </div>
+          <!-- 02. Aesthetic Direction -->
+          <section class="drawer-section">
+            <span class="eyebrow">AESTHETIC DIRECTION</span>
+            <div class="takeaway-banner">
+              <p class="body-standard">{{ brief.aestheticGoal }}</p>
+            </div>
+          </section>
 
-          <!-- Brand Tone Tags -->
-          <div class="brief-section flex-col">
-            <span class="brief-label text-micro-caps">Brand Tone</span>
-            <div class="tone-tag-row flex-center">
+          <hr class="section-divider" />
+
+          <!-- 03. The Challenge -->
+          <section class="drawer-section">
+            <span class="eyebrow">THE CORE CHALLENGE</span>
+            <p class="body-lead">{{ brief.coreChallenge }}</p>
+          </section>
+
+          <hr class="section-divider" />
+
+          <!-- 04. Brand Tone -->
+          <section
+            v-if="brief.brandTone && brief.brandTone.length"
+            class="drawer-section"
+          >
+            <span class="eyebrow">BRAND TONE</span>
+            <div class="tone-tags-wrap">
               <span
                 v-for="tone in brief.brandTone"
                 :key="tone"
-                class="tone-pill text-micro-caps"
+                class="tone-pill"
               >
                 {{ tone }}
               </span>
             </div>
-          </div>
+          </section>
 
-          <!-- Deliverables Checklist -->
-          <div class="brief-section flex-col">
-            <span class="brief-label text-micro-caps"
-              >Required Deliverables</span
-            >
-            <ul class="deliverables-list flex-col">
-              <li
+          <hr class="section-divider" />
+
+          <!-- 05. Required Deliverables -->
+          <section
+            v-if="brief.deliverables && brief.deliverables.length"
+            class="drawer-section"
+          >
+            <span class="eyebrow">REQUIRED DELIVERABLES</span>
+            <div class="deliverables-stack">
+              <div
                 v-for="(item, idx) in brief.deliverables"
                 :key="idx"
-                class="deliverable-item flex-between"
+                class="deliverable-card"
               >
-                <span>{{ item }}</span>
+                <div class="deliverable-lead">
+                  <span class="accent-index">{{
+                    String(idx + 1).padStart(2, "0")
+                  }}</span>
+                  <span class="body-standard">{{ item }}</span>
+                </div>
                 <Icon name="lucide:check" class="check-icon" />
-              </li>
-            </ul>
-          </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Fallback -->
+        <div v-else class="drawer-empty">
+          <p class="body-standard">No client brief loaded for this movement.</p>
         </div>
       </aside>
-    </Transition>
+    </div>
   </Teleport>
 </template>
 
 <style scoped>
-.brief-backdrop {
-  z-index: 98;
-  background-color: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
-}
-
-.brief-drawer {
+.brief-modal-backdrop {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.72);
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.brief-drawer-panel {
   width: 100%;
-  max-width: 480px;
-  background-color: var(--shell-surface);
-  border-left: 1px solid var(--shell-border);
-  z-index: 99;
-  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.5);
+  max-width: 560px;
+  height: 100%;
+  background-color: #191919;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Header */
 .drawer-header {
-  padding: var(--space-5);
-  border-bottom: 1px solid var(--shell-border);
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
 }
 
-.eyebrow-tag {
-  color: var(--shell-accent-gold);
+.header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .drawer-title {
-  font-size: var(--text-2xl);
-  color: var(--shell-text);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.close-btn {
-  background: var(--shell-bg);
-  border: 1px solid var(--shell-border);
-  color: var(--shell-text);
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
+.btn-close {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d4a373;
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.close-btn:hover {
-  background-color: var(--shell-border);
+.btn-close:hover {
+  border-color: #d4a373;
+  color: #ffffff;
 }
 
-.drawer-scroll-body {
-  padding: var(--space-5);
-  gap: var(--space-5);
+.close-icon {
+  font-size: 1.1rem;
+}
+
+/* Scroll Area */
+.drawer-body {
+  padding: 1.75rem;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
 
-.brief-section {
-  gap: var(--space-2);
+.drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.brief-label {
-  color: var(--shell-muted);
+/* Divider */
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin: 0;
 }
 
-.brief-client-name {
-  font-size: var(--text-xl);
-  color: var(--shell-text);
+/* Shared Typography Scale */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d4a373;
+  font-weight: 600;
 }
 
-.brief-text {
-  font-size: var(--text-sm);
-  color: var(--shell-muted);
+.body-lead {
+  font-size: 0.95rem;
   line-height: 1.6;
+  color: #ffffff;
 }
 
-.highlight-box {
-  background-color: var(--shell-bg);
-  border: 1px solid var(--shell-border);
-  padding: var(--space-3);
-  border-radius: 6px;
-  color: var(--shell-text);
+.body-standard {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #f0f0f0;
 }
 
-.tone-tag-row {
-  gap: var(--space-2);
+.body-small {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #f0f0f0;
+}
+
+/* Client Block */
+.client-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.client-name {
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.client-context {
+  color: #aaa;
+}
+
+/* Accent Banner */
+.takeaway-banner {
+  background-color: #161616;
+  border-left: 3px solid #d4a373;
+  border-radius: 0 4px 4px 0;
+  padding: 1rem 1.1rem;
+}
+
+/* Tone Tag Pills */
+.tone-tags-wrap {
+  display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  gap: 0.5rem;
 }
 
 .tone-pill {
-  padding: 0.3rem 0.65rem;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  background-color: var(--shell-bg);
-  border: 1px solid var(--shell-border);
-  font-size: 0.68rem;
-  color: var(--shell-text);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  color: #f0f0f0;
 }
 
-.deliverables-list {
-  list-style: none;
-  gap: var(--space-2);
+/* Deliverable Cards */
+.deliverables-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
-.deliverable-item {
-  font-size: var(--text-sm);
-  padding: var(--space-2) var(--space-3);
-  background-color: var(--shell-bg);
-  border: 1px solid var(--shell-border);
+.deliverable-card {
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 4px;
-  color: var(--shell-text);
-  line-height: 1.4;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.deliverable-lead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.accent-index {
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: #d4a373;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .check-icon {
-  color: #10b981;
+  font-size: 1rem;
+  color: #d4a373;
   flex-shrink: 0;
-  margin-left: var(--space-2);
 }
 
-/* Animations */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.25s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.drawer-empty {
+  padding: 2.5rem;
 }
 
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateX(100%);
+/* Responsive */
+@media (max-width: 640px) {
+  .brief-drawer-panel {
+    max-width: 100%;
+    border-left: none;
+  }
+
+  .drawer-header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .drawer-body {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
 }
 </style>

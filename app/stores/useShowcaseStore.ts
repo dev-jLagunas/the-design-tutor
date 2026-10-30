@@ -37,9 +37,9 @@ const catalogMeta: MovementMetaCard[] = [
     vol: "Style 01",
     edition: "October 31, 2026",
     category: "Editorial",
-    title: "Downtown Editorial Noir & Cast-Iron Craft",
+    title: "Editorial Noir Foundry Pizza Bar",
     description:
-      "Severe Didone serifs, brushed steel textures, and high-contrast flash photography applied to a late-night Katamachi pizza and vinyl counter.",
+      "Bold serif headlines, raw flash photography, and a dark tactile grid designed for a late-night pizza counter and vinyl bar in Katamachi.",
     image: "/images/design01/design-01-screenshot.webp",
     icon: "lucide:disc",
   },

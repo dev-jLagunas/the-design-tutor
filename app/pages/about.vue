@@ -154,7 +154,7 @@ onBeforeUnmount(() => {
           word1="What"
           word2="IsThis"
           word3="Project?"
-          tagline="Deconstructing the architectural logic, motion standards, and design systems of our scalable visual ecosystem."
+          tagline="Real visual styles built for practical needs. I design them, analyze why they work, and share what I learn along the way."
         >
           <template #actions>
             <UiActionPair

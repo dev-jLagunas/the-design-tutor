@@ -473,9 +473,9 @@ export const editorialPizzaMovement: MovementDefinition = {
   educational: {
     // --- Navbar ---
     navbar: {
-      brandMark: "CURRICULUM SPEC // EDITORIAL NOIR",
+      brandMark: "EDITORIAL NOIR",
       subBrandMark: "SPEC-003 // VERIFIED ACADEMIC STANDARD",
-      statusBadge: "ACADEMIC ANALYSIS // 6-BEAT BREAKDOWN",
+      statusBadge: "6-BEAT BREAKDOWN",
       navItems: [
         {
           label: "CHARACTERISTICS",
@@ -513,8 +513,8 @@ export const editorialPizzaMovement: MovementDefinition = {
     // --- Tier 1: Hero ---
     hero: {
       eyebrow: "DESIGN MOVEMENT // LATE 20TH CENTURY POST-MODERN EDITORIAL",
-      title: "THE TENSION OF",
-      titleItalic: "REFINEMENT & GRIT.",
+      title: "A MIX OF",
+      titleItalic: "POLISH & EDGE.",
       titleSecondary: "DECONSTRUCTING DOWNTOWN EDITORIAL NOIR.",
       subtitle:
         "Editorial Noir pairs the severe, high-contrast elegance of Didone display serifs with raw, low-light industrial surfaces. It relies on typographic scale contrast and dark-gamut tonal layering to establish intimacy, cultural exclusivity, and nocturnal mood without sacrificing structural clarity.",
@@ -562,10 +562,48 @@ export const editorialPizzaMovement: MovementDefinition = {
         },
       ],
     },
-
-    // --- Tier 2: Section 02 -> Mounted at PizzaSectionOne in Edu Mode AND PizzaSectionFive ---
-    // --- Tier 2: Section 02 (The Core Characteristics) -> Mounted at PizzaSectionOne in Edu Mode ---
+    // --- Tier 2: Section 02 (Application Matrix & Fit) -> Mounted at PizzaSectionFive ---
     section02: {
+      sectionNumber: "05",
+      sectionAnchorId: "section-story",
+      eyebrow: "02 // APPLICATION MATRIX",
+      title: "Strategic Selection.",
+      titleHighlight: "When to Deploy vs. Avoid.",
+      subtitle:
+        "Design movements are strategic tools. Deploying Editorial Noir in the wrong commercial vertical damages readability and user flow.",
+      storyParagraphs: [
+        "Aesthetic decisions are commercial decisions. Editorial Noir intentionally creates friction, exclusivity, and cultural mood—making it powerful for experiential brands, but actively harmful for quick transactional workflows.",
+        "Rule of thumb: If your user is savoring an experience, exploring culture, or seeking atmosphere, embrace it. If your user is in a rush, stressed, or completing an operational chore, pick a different style.",
+      ],
+      coreValues: [
+        {
+          index: "01",
+          label: "HIGH AFFINITY",
+          title: "Nightlife, Hospitality & Cultural Brands",
+          description:
+            "Cocktail bars, vinyl listening lounges, boutique late counters, and indie fashion labels. Atmospheric low-light palettes and direct-flash photography immerse users into the physical room before they step through the door.",
+        },
+        {
+          index: "02",
+          label: "ANTI-PATTERN",
+          title: "Enterprise SaaS, Data & Complex Dashboards",
+          description:
+            "Avoid in high-density data environments. High-contrast Didone serifs cause optical shimmer ('dazzle') when scanning tables or numbers, and harsh 1px steel dividers add unnecessary clutter to complex workflows.",
+        },
+        {
+          index: "03",
+          label: "ACCESSIBILITY RISK",
+          title: "Mass Utilities, Healthcare & Public Transit",
+          description:
+            "Avoid where universal accessibility and rapid glanceability are non-negotiable. Low-key dark gamuts and delicate hairline serifs fail outdoors in direct sunlight and create high visual fatigue during critical tasks.",
+        },
+      ],
+      closingManifesto:
+        "Style should never fight the user's intent: use mood to build culture, never to hide basic utility.",
+    },
+
+    // --- Tier 3: Section 03 (The 4 Design System Rules) -> Mounted at PizzaSectionOne ---
+    section03: {
       sectionNumber: "01",
       sectionAnchorId: "section-slices",
       eyebrow: "01 // ANATOMY OF EDITORIAL NOIR",
@@ -689,155 +727,6 @@ export const editorialPizzaMovement: MovementDefinition = {
         variant: "secondary",
       },
     },
-
-    // --- Tier 3: Section 03 (Application Matrix) ---
-    section03: {
-      sectionNumber: "02",
-      sectionAnchorId: "section-matrix",
-      eyebrow: "02 // APPLICATION MATRIX",
-      title: "Strategic Selection.",
-      titleHighlight: "Aligning Style with Mental Models.",
-      subtitle:
-        "Design movements are strategic tools. Deploying Editorial Noir in the wrong commercial vertical damages usability and conversions.",
-      leadCopy:
-        "Before choosing this aesthetic, analyze whether your user desires cultural immersion and connoisseurship, or high-speed utility and universal accessibility.",
-      cards: [
-        {
-          id: "use-01",
-          badge: "HIGH AFFINITY // SCORE: 98%",
-          title: "Nocturnal Venues & Counter Hospitality",
-          subtitle:
-            "Cocktail bars, vinyl listening lounges, boutique late counters",
-          category: "OPTIMAL USE CASE",
-          description:
-            "Physical hospitality brands operating after dark benefit enormously from low-key lighting palettes and flash photography, immersing customers into the physical mood before they arrive.",
-          specs: [
-            { label: "USER MOOD", value: "Curiosity, Leisure, Social Ritual" },
-            { label: "READING SPEED", value: "Slow, atmospheric, exploratory" },
-            {
-              label: "CORE BENEFIT",
-              value: "Reframes everyday food/drink into culture",
-            },
-          ],
-          priceOrMetric: "AFFINITY: 98%",
-          action: {
-            label: "VIEW LIVE IMPLEMENTATION",
-            targetId: "#section-slices",
-            variant: "link",
-          },
-          media: {
-            src: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=800&q=80",
-            alt: "Dimly lit cocktail bar counter with warm incandescent bulbs and bottles",
-            caption: "Atmospheric hospitality alignment.",
-          },
-          tags: ["Hospitality", "Nightlife", "Boutique"],
-        },
-        {
-          id: "use-02",
-          badge: "HIGH AFFINITY // SCORE: 94%",
-          title: "Independent Publishing & Craft Labels",
-          subtitle: "Record labels, architectural studios, fashion lookbooks",
-          category: "OPTIMAL USE CASE",
-          description:
-            "Brands whose products are collectible, artisanal, or heavily curated. High-fashion Didone typography signals elite taste and serious creative integrity.",
-          specs: [
-            {
-              label: "USER MOOD",
-              value: "Connoisseurship, aesthetic evaluation",
-            },
-            { label: "READING SPEED", value: "Methodical, visual-first" },
-            {
-              label: "CORE BENEFIT",
-              value: "Justifies premium pricing through prestige",
-            },
-          ],
-          priceOrMetric: "AFFINITY: 94%",
-          action: {
-            label: "VIEW LIVE IMPLEMENTATION",
-            targetId: "#section-slices",
-            variant: "link",
-          },
-          media: {
-            src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
-            alt: "Art gallery poster typography exhibition on dark walls",
-            caption: "Editorial publishing alignment.",
-          },
-          tags: ["Publishing", "Fashion", "Record Labels"],
-        },
-        {
-          id: "avoid-01",
-          badge: "CRITICAL CONFLICT // AVOID",
-          title: "Enterprise B2B SaaS & Analytics",
-          subtitle: "Financial tables, dense dashboards, management tools",
-          category: "ANTI-PATTERN",
-          description:
-            "Severe Didone serifs become illegible at small UI sizes, causing optical vibration ('dazzle') when scanning dense tabular figures or complex charts.",
-          specs: [
-            { label: "USER MOOD", value: "Urgent productivity, data scanning" },
-            {
-              label: "READING SPEED",
-              value: "Rapid, glanceable, high-frequency",
-            },
-            {
-              label: "RISK FACTOR",
-              value: "High eye fatigue and misread numeric data",
-            },
-          ],
-          priceOrMetric: "FAILURE RISK: HIGH",
-          action: {
-            label: "READ TYPOGRAPHIC RULES",
-            targetId: "#section-protocol",
-            variant: "link",
-          },
-          media: {
-            src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-            alt: "Dense computer analytics screen showing graphs and data tables",
-            caption: "Incompatible high-density data environment.",
-          },
-          tags: ["SaaS", "Analytics", "Productivity"],
-        },
-        {
-          id: "avoid-02",
-          badge: "CRITICAL CONFLICT // AVOID",
-          title: "Mass-Market Public Utilities",
-          subtitle: "Healthcare portals, public transit, government tools",
-          category: "ANTI-PATTERN",
-          description:
-            "The low-key contrast ratios, delicate hairline strokes, and dark palette fail WCAG AAA standards across varying monitor calibrations and bright daylight viewports.",
-          specs: [
-            { label: "USER MOOD", value: "Need-based, stressful, task-driven" },
-            {
-              label: "READING SPEED",
-              value: "Emergency or non-negotiable access",
-            },
-            {
-              label: "RISK FACTOR",
-              value: "Excludes users with low vision or glare",
-            },
-          ],
-          priceOrMetric: "FAILURE RISK: SEVERE",
-          action: {
-            label: "READ TYPOGRAPHIC RULES",
-            targetId: "#section-protocol",
-            variant: "link",
-          },
-          media: {
-            src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
-            alt: "Bright sterile medical clinic with bright lighting and medical clipboards",
-            caption: "Incompatible public accessibility environment.",
-          },
-          tags: ["Healthcare", "Government", "Mass Transit"],
-        },
-      ],
-      footerNote:
-        "Rule of thumb: If the user is trying to finish a chore, avoid this style. If the user is savoring an experience, embrace it.",
-      globalAction: {
-        label: "GO TO DEVELOPER CHEAT SHEET",
-        targetId: "#section-protocol",
-        variant: "secondary",
-      },
-    },
-
     // --- Tier 4: Section 04 (Historical Roots, Lineage & Trivia) -> Mounted at PizzaSectionThree ---
     section04: {
       sectionNumber: "03",
@@ -937,7 +826,7 @@ export const editorialPizzaMovement: MovementDefinition = {
           "--transition: 200ms cubic-bezier(0.16, 1, 0.3, 1);",
         ],
         action: {
-          label: "COPY CSS TOKENS",
+          label: "CSS TOKENS",
           targetId: "#hero",
           variant: "outline",
         },
@@ -993,119 +882,78 @@ export const editorialPizzaMovement: MovementDefinition = {
   // 04. EXTRA: CASE STUDY BREAKDOWN
   // ===========================================================================
   caseStudy: {
-    businessGoal:
-      "Drive late-night physical foot traffic and rapid 18-seat counter turnover in Katamachi between 18:00 and 02:00 by reframing Chicago deep dish as a fast, chic, by-the-slice counter ritual paired with natural wine and analog vinyl sound.",
-    targetUserMindset:
-      "Design-conscious night owls, creative professionals, and music lovers browsing on mobile while en route through Katamachi, seeking immediate answers: Are they open right now? Can I get a hot slice immediately? Can I just walk in?",
-    competitorComparison: {
-      standardIndustryNorms:
-        "Bright red-and-white checkered layouts, generic cheese-pull stock photography, clunky multi-page PDF menus, aggressive delivery app banners, and coupon popups that dilute brand value.",
-      ourStrategicChoice:
-        "Downtown Editorial Noir: low-key chiaroscuro color palette, 35mm raw flash photography, real-time oven status indicators, an omakase-style 4-slice board with beverage pairings, and upfront walk-in arrival directives.",
+    angle:
+      "A late-night deep-dish counter and vinyl listening bar in Katamachi operating from 18:00 to 02:00. We skipped the usual checkered-tablecloth pizzeria look for a moody, high-contrast editorial style—blending a warm analog music vibe with quick, practical details for people checking the menu on their phones.",
+    decisions: [
+      {
+        area: "Photo Rhythm & Spacing",
+        choice:
+          "Alternated full-screen photos with clean, structured text and menu sections.",
+        rationale:
+          "Full-bleed photography pulls you right into the room's atmosphere, while the structured sections give your eyes a break so prices, hours, and slice details are effortless to read.",
+      },
+      {
+        area: "Consistent Photo Grading (Darktable)",
+        choice:
+          "Hand-graded every photo in Darktable with direct-flash contrast, warm indoor lighting, and real 35mm grain.",
+        rationale:
+          "Makes the entire site feel like one real night out in Katamachi, rather than a patchwork of random stock photos.",
+      },
+      {
+        area: "Interactive Vinyl Player",
+        choice:
+          "Added an interactive spinning record player and a music indicator in the top bar.",
+        rationale:
+          "Shows immediately that this is a genuine listening bar with turntables behind the counter, not just another spot grabbing a slice.",
+      },
+      {
+        area: "Visual Storytelling (Pies & Records)",
+        choice:
+          "Matched the round shape and spin of the cast-iron pizza pans with the 33⅓ RPM vinyl records.",
+        rationale:
+          "Subtly links the kitchen craft to the music culture throughout the page without needing a giant wall of text to explain the concept.",
+      },
+      {
+        area: "Clear Text over Dark Photos",
+        choice:
+          "Placed subtle dark backing panels and thin border frames behind the text blocks.",
+        rationale:
+          "Keeps every headline and paragraph easy to read on bright screens without washing out or covering up the background photos.",
+      },
+      {
+        area: "Live Status Badges",
+        choice:
+          "Included dynamic status dots that turn green when doors open at 18:00, alongside current oven temps and available slices.",
+        rationale:
+          "Answers the most common questions before anyone even arrives: Are they open right now? Is there pizza ready? Can I just walk in?",
+      },
+    ],
+    scrapped: [
+      "Tested borderless, see-through text boxes early on, but the words blended into the photos and were tough to read; added thin borders and slightly darker backing cards to fix it.",
+      "Considered autoplaying background music, but scrapped it because sudden audio on phones is annoying; letting visitors click to spin the record gives them control.",
+    ],
+    takeaway:
+      "Good design balances mood and clarity. Custom photos and interactive details give a space real character, while simple spacing and clear typography make sure nobody has to hunt for the basic facts.",
+    hypothesis: {
+      primaryGoal:
+        "Establish Foundry as Katamachi's go-to late-night hangout and turn quick mobile visits into real walk-in customers.",
+      signals: [
+        {
+          vector: "Less Confusion at the Door",
+          expectedOutcome:
+            "By showing live 'DOORS OPEN' dots and a plain 3-step walk-in guide up front, people know they can just walk in without needing a reservation or calling ahead.",
+        },
+        {
+          vector: "Faster Ordering",
+          expectedOutcome:
+            "By keeping the menu to 4 rotating slices with prices and live availability right there, customers can decide what they want before they even step up to the counter.",
+        },
+        {
+          vector: "Stronger Local Buzz",
+          expectedOutcome:
+            "By pairing real 35mm photography with a playful vinyl player, the site feels memorable and distinct, encouraging people to share it and visit for the music as much as the food.",
+        },
+      ],
     },
-    industrySources: [
-      {
-        source:
-          "National Restaurant Association — State of the Restaurant Industry Report",
-        insight:
-          "Over 72% of casual dining visitors consult mobile menus while en route. Replacing PDF downloads with native scannable boards cuts mobile bounce rates by over 40%.",
-      },
-      {
-        source:
-          "Cornell Hospitality Research (Sheryl E. Kimes) — Counter Revenue Management",
-        insight:
-          "Eliminating bake-time ambiguity and proving immediate availability ('by the slice') substantially increases walk-in conversion for late-night counter-service venues.",
-      },
-      {
-        source:
-          "Toast POS Hospitality Benchmarking Index — Nightlife Dining Trends",
-        insight:
-          "Displaying curated beverage pairings alongside high-craft food items drives attach rates up by 28% in focused counter dining formats.",
-      },
-    ],
-    sectionRationales: [
-      {
-        slot: "navbar",
-        intent:
-          "Immediate operational orientation for mobile nightlife traffic.",
-        keyDecisions: [
-          "Prominent live status badge ('DOORS OPEN 18:00 - 02:00')",
-          "Minimal single-page anchor jumps rather than multi-page navigation",
-          "One-tap CTA jumping straight to the active slice board",
-        ],
-        pitfallToAvoid:
-          "Nested dropdown menus or distracting delivery app buttons.",
-      },
-      {
-        slot: "hero",
-        intent:
-          "Shatter the 45-minute deep-dish bake wait misconception within 3 seconds.",
-        keyDecisions: [
-          "Heavy typographic emphasis on 'BY THE SLICE' using high-contrast italic serifs",
-          "Live oven status pill ('OVEN 450°F // ROTATING PAN ACTIVE')",
-          "Direct-flash 35mm photo showing real crust texture on the raw steel counter",
-        ],
-        pitfallToAvoid:
-          "Vague, decorative slogans that fail to state what, when, and where the venue operates.",
-      },
-      {
-        slot: "section02",
-        intent:
-          "Establish craft credibility and celebrate the 2-year physical renovation.",
-        keyDecisions: [
-          "2-column magazine spread balancing short narrative paragraphs with a founder pullquote",
-          "3-metric stat strip (18 Seats, 48-HR Ferment, 2-MIN Delivery) for rapid scanning",
-          "Feature pillar cards detailing cast-iron seasoning, vinyl sound, and natural pours",
-        ],
-        pitfallToAvoid:
-          "Walls of dense text that look like an executive corporate history.",
-      },
-      {
-        slot: "section03",
-        intent:
-          "Eliminate ordering friction and maximize beverage attach rates.",
-        keyDecisions: [
-          "Strict limit of 4 discrete slice cards to eliminate decision paralysis",
-          "Explicit inclusion of fermentation time, crust profile, and exact pricing (¥850-¥950)",
-          "Dedicated wine or beer pairing recommendation on every card",
-        ],
-        pitfallToAvoid:
-          "Hiding ingredients behind nested modal popups or multi-page PDF downloads.",
-      },
-      {
-        slot: "section04",
-        intent:
-          "Differentiate the venue as a hi-fi acoustic destination, not just a food counter.",
-        keyDecisions: [
-          "Tonight's Spin List highlighting specific vinyl pressings, artists, and record labels",
-          "House rules framed as welcoming acoustic etiquette ('Respect the Needle', 'Counter Flow')",
-          "Direct-flash macro photo of the analog turntable tonearm",
-        ],
-        pitfallToAvoid:
-          "Autoplaying background music or making the venue feel like an exclusionary nightclub.",
-      },
-      {
-        slot: "section05",
-        intent:
-          "Remove all arrival anxiety and clarify logistics before the customer walks in.",
-        keyDecisions: [
-          "3-step numbered protocol making walk-in policy and payment methods crystal clear",
-          "Terminal card with exact Katamachi 2-Chome coordinates, transit pins, and curfew hours",
-          "Direct link to Google Maps for effortless walking navigation",
-        ],
-        pitfallToAvoid:
-          "Burying the walk-in policy and causing customers to hesitate over table reservations.",
-      },
-      {
-        slot: "footer",
-        intent: "Clean, distraction-free colophon and quick viewport reset.",
-        keyDecisions: [
-          "One-tap 'BACK TO TOP ↑' button for mobile ease",
-          "Clear operating day breakdown (Wed-Mon, closed Tuesdays)",
-          "Monospaced hairline typography matching the industrial counter aesthetic",
-        ],
-        pitfallToAvoid: "Bloated multi-column corporate sitemaps.",
-      },
-    ],
   },
 };

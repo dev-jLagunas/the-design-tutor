@@ -264,32 +264,26 @@ export interface MovementSections {
 // 04. ROOT MOVEMENT DEFINITION
 // =============================================================================
 
-export interface SectionDesignRationale {
-  slot:
-    | "navbar"
-    | "hero"
-    | "section02"
-    | "section03"
-    | "section04"
-    | "section05"
-    | "footer";
-  intent: string;
-  keyDecisions: string[];
-  pitfallToAvoid: string;
+export interface KeyDecision {
+  area: string; // e.g., "Hero & Composition", "Typography Pair", "Atmospheric Audio"
+  choice: string; // What was implemented
+  rationale: string; // The direct reason behind the choice
+}
+
+export interface CommercialHypothesis {
+  primaryGoal: string; // The core business intent
+  signals: {
+    vector: string; // e.g., "Operational Efficiency", "Direct Conversion", "Foot Traffic"
+    expectedOutcome: string; // The practical, measurable change
+  }[];
 }
 
 export interface CaseStudyRationale {
-  businessGoal: string;
-  targetUserMindset: string;
-  competitorComparison: {
-    standardIndustryNorms: string;
-    ourStrategicChoice: string;
-  };
-  sectionRationales: SectionDesignRationale[];
-  industrySources: {
-    source: string;
-    insight: string;
-  }[];
+  angle: string;
+  decisions: KeyDecision[];
+  scrapped: string[];
+  takeaway: string;
+  hypothesis: CommercialHypothesis;
 }
 
 export interface MovementDefinition {

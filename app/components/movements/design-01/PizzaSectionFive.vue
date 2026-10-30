@@ -6,7 +6,7 @@ import type { MovementDefinition } from "~/types/movement";
 const props = defineProps<{
   data:
     | MovementDefinition["live"]["section02"]
-    | MovementDefinition["educational"]["section02"];
+    | MovementDefinition["educational"]["section02"]; // <-- Changed to section01
   isEducational?: boolean;
 }>();
 
