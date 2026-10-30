@@ -1,7 +1,10 @@
-<!-- components/home/Landing.vue -->
 <script setup lang="ts">
+import { useShowcaseStore } from "~/stores/useShowcaseStore";
+
+const store = useShowcaseStore();
+
 function handleRandomStyle() {
-  console.log("Random style triggered");
+  store.navigateToRandomMovement();
 }
 </script>
 

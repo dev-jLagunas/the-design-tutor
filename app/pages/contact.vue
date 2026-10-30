@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
               icon: 'lucide:arrow-down-right',
             }"
             :secondary="{
-              label: 'View Dossier',
+              label: 'View About Me',
               icon: 'lucide:chevron-down',
               title: 'Scroll to contact canvas',
             }"
@@ -242,7 +242,7 @@ onBeforeUnmount(() => {
               class="img-cover profile-frame-image"
             />
             <div class="portrait-meta-tag text-micro-caps">
-              <span>FOUNDER // TDT</span>
+              <span>MYSELF</span>
             </div>
           </div>
         </div>
@@ -271,12 +271,15 @@ onBeforeUnmount(() => {
               >Primary Engineering & Design Stack</span
             >
             <div class="stack-row flex-center">
+              <span class="stage-pill">Figma</span>
               <span class="stage-pill">Vue 3</span>
               <span class="stage-pill">Nuxt 3</span>
               <span class="stage-pill">GSAP</span>
-              <span class="stage-pill">Design Tokens</span>
               <span class="stage-pill">TypeScript</span>
               <span class="stage-pill">Tailwind</span>
+              <span class="stage-pill">Claude</span>
+              <span class="stage-pill">Chat GPT</span>
+              <span class="stage-pill">Affinity</span>
             </div>
           </div>
         </div>

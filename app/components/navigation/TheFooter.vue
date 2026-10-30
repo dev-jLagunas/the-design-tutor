@@ -71,8 +71,8 @@ function getLetterColorClass(index: number, char: string) {
             >
           </NuxtLink>
           <p class="brand-description font-body">
-            An open educational index deconstructing modern UI movements,
-            structural CSS architectures, and interactive design systems.
+            Building web styles from scratch, figuring out what works, and
+            explaining why.
           </p>
         </div>
 
@@ -81,13 +81,13 @@ function getLetterColorClass(index: number, char: string) {
           <span class="column-eyebrow text-micro-caps">Directory</span>
           <nav class="footer-nav flex-col" aria-label="Footer Main Navigation">
             <NuxtLink to="/" class="nav-item font-body transition-smooth"
-              >Index</NuxtLink
+              >Designs</NuxtLink
             >
             <NuxtLink to="/about" class="nav-item font-body transition-smooth"
-              >About The System</NuxtLink
+              >About The Project</NuxtLink
             >
             <NuxtLink to="/contact" class="nav-item font-body transition-smooth"
-              >Creator Dossier</NuxtLink
+              >About Me</NuxtLink
             >
           </nav>
         </div>
@@ -246,6 +246,7 @@ function getLetterColorClass(index: number, char: string) {
   font-size: var(--text-sm);
   color: var(--shell-muted);
   line-height: 1.6;
+  width: 90%;
 }
 
 /* Link Columns */

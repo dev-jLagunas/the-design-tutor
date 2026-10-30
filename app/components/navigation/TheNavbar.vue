@@ -1,19 +1,58 @@
+<!-- components/TheNavbar.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
 
 const isDrawerOpen = ref(false);
-const searchQuery = ref("");
 const { isDark, toggleTheme } = useTheme();
 
 function closeDrawer() {
   isDrawerOpen.value = false;
 }
 
-function handleSearch() {
-  if (!searchQuery.value.trim()) return;
-  console.log("Execute search:", searchQuery.value);
-  closeDrawer();
-}
+const channels = [
+  {
+    name: "GitHub",
+    category: "Repo",
+    icon: "lucide:github",
+    url: "https://github.com/dev-jLagunas",
+    boxClass: "box-coral",
+  },
+  {
+    name: "Medium",
+    category: "Writing",
+    icon: "lucide:pen-tool",
+    url: "https://medium.com/@dev.jlagunas",
+    boxClass: "box-gold",
+  },
+  {
+    name: "LinkedIn",
+    category: "Network",
+    icon: "lucide:linkedin",
+    url: "https://www.linkedin.com/in/juan-lagunas/",
+    boxClass: "box-cyan",
+  },
+  {
+    name: "UX Portfolio",
+    category: "Works",
+    icon: "lucide:briefcase",
+    url: "https://juan-lagunas.com/#/",
+    boxClass: "box-gold",
+  },
+  {
+    name: "Kids Books",
+    category: "Books",
+    icon: "lucide:book-marked",
+    url: "https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AJoe%2BLapalo&s=relevancerank&language=en&text=Joe+Lapalo&ref=dp_byline_sr_ebooks_1",
+    boxClass: "box-cyan",
+  },
+  {
+    name: "Instagram",
+    category: "Log",
+    icon: "lucide:instagram",
+    url: "https://www.instagram.com/j.lag_works/",
+    boxClass: "box-coral",
+  },
+];
 </script>
 
 <template>
@@ -40,33 +79,16 @@ function handleSearch() {
         </div>
       </NuxtLink>
 
-      <!-- Interactive Group: Search, Nav Links, Theme & Mobile Controls -->
+      <!-- Interactive Group: Nav Links, Theme & Mobile Controls -->
       <div class="nav-utility-group flex-center">
-        <!-- Desktop Search Bar (>= 768px) -->
-        <div class="nav-search-desktop">
-          <form
-            class="search-input-wrapper flex-between"
-            @submit.prevent="handleSearch"
-          >
-            <input
-              v-model="searchQuery"
-              type="search"
-              placeholder="Search Styles..."
-              aria-label="Search design styles"
-            />
-            <button
-              v-if="searchQuery.trim().length > 0"
-              type="submit"
-              class="search-submit-btn text-micro-caps transition-smooth"
-            >
-              Search
-            </button>
-            <span v-else class="search-icon">⚲</span>
-          </form>
-        </div>
-
         <!-- Desktop Navigation Links (>= 1024px) -->
         <nav class="desktop-links" aria-label="Main Navigation">
+          <NuxtLink
+            to="/"
+            class="nav-link nav-link-home font-b-group transition-smooth"
+          >
+            Home
+          </NuxtLink>
           <NuxtLink
             to="/about"
             class="nav-link nav-link-about font-b-group transition-smooth"
@@ -124,7 +146,17 @@ function handleSearch() {
     <Transition name="drawer-slide">
       <div v-if="isDrawerOpen" class="mobile-drawer flex-col bg-dots">
         <div class="drawer-top flex-col">
-          <nav class="drawer-nav flex-col" aria-label="Mobile Navigation">
+          <nav
+            class="drawer-nav drawer-link-home flex-col"
+            aria-label="Mobile Navigation"
+          >
+            <NuxtLink
+              to="/"
+              class="drawer-link drawer-link-home font-b-group"
+              @click="closeDrawer"
+            >
+              <span>Home</span>
+            </NuxtLink>
             <NuxtLink
               to="/about"
               class="drawer-link drawer-link-about font-b-group"
@@ -143,26 +175,30 @@ function handleSearch() {
         </div>
 
         <div class="drawer-bottom flex-col">
-          <form
-            class="drawer-search-wrapper flex-between"
-            @submit.prevent="handleSearch"
-          >
-            <input
-              v-model="searchQuery"
-              type="search"
-              placeholder="Search Styles..."
-              aria-label="Search design styles mobile"
-              class="font-body"
-            />
-            <button
-              v-if="searchQuery.trim().length > 0"
-              type="submit"
-              class="drawer-search-btn text-micro-caps transition-smooth"
+          <!-- Public Channels & Works Compact Grid -->
+          <div class="drawer-channels-section flex-col">
+            <span class="drawer-section-label text-micro-caps"
+              >Channels & Works</span
             >
-              Search
-            </button>
-            <span v-else class="search-icon-lg">⚲</span>
-          </form>
+            <div class="drawer-channels-grid">
+              <a
+                v-for="item in channels"
+                :key="item.name"
+                :href="item.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="channel-pill"
+                :class="item.boxClass"
+              >
+                <div class="channel-pill-left flex-center">
+                  <Icon :name="item.icon" class="channel-icon" />
+                  <span class="channel-name font-body">{{ item.name }}</span>
+                </div>
+                <Icon name="lucide:arrow-up-right" class="channel-arrow" />
+              </a>
+            </div>
+          </div>
+
           <p class="drawer-credit">Visual designs analyzed and explained.</p>
         </div>
       </div>
@@ -239,83 +275,18 @@ function handleSearch() {
 }
 
 /* ==========================================================================
-   INTERACTIVE UTILITY GROUP (SEARCH + LINKS + CONTROLS)
+   INTERACTIVE UTILITY GROUP
    ========================================================================== */
-/* Where you adjust the "x" cancel button: */
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 14px;
-  width: 14px;
-  background-color: var(--shell-accent-coral);
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
-    no-repeat center;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>")
-    no-repeat center;
-  cursor: pointer;
-}
 .nav-utility-group {
   gap: var(--space-5);
   flex-shrink: 0;
-}
-
-/* Desktop Search Bar */
-.nav-search-desktop {
-  display: none;
-  width: 300px;
-}
-
-.search-input-wrapper {
-  width: 100%;
-  border-bottom: 1px solid var(--shell-contrast-border);
-  padding-bottom: var(--space-1);
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.search-input-wrapper input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--shell-contrast-text); /* Fixed font color bug */
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  letter-spacing: 0.04em;
-}
-
-.search-input-wrapper input::placeholder {
-  color: var(--shell-contrast-muted);
-}
-
-.search-submit-btn {
-  background-color: var(--shell-contrast-text);
-  color: var(--shell-contrast-bg);
-  border: none;
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
-  cursor: pointer;
-  line-height: 1;
-  font-size: 0.65rem;
-  flex-shrink: 0;
-}
-
-.search-submit-btn:hover {
-  opacity: 0.85;
-}
-
-.search-icon {
-  font-size: var(--text-sm);
-  opacity: 0.5;
-  transform: rotate(-45deg);
-  display: inline-block;
-  margin-left: var(--space-2);
 }
 
 /* Desktop Nav Links */
 .desktop-links {
   display: none;
   align-items: center;
+  justify-content: space-evenly;
   gap: var(--space-5);
 }
 
@@ -328,7 +299,9 @@ input[type="search"]::-webkit-search-cancel-button {
 .nav-link-about:hover {
   color: var(--shell-accent-gold);
 }
-
+.nav-link-home:hover {
+  color: var(--shell-accent-coral);
+}
 .nav-link-contact:hover {
   color: var(--shell-accent-cyan);
 }
@@ -444,15 +417,12 @@ input[type="search"]::-webkit-search-cancel-button {
   justify-content: space-between;
   background-color: var(--shell-surface);
   color: inherit;
-}
-
-.drawer-badge {
-  color: var(--shell-accent-coral);
+  overflow-y: auto;
 }
 
 .drawer-nav {
-  margin-top: var(--space-4);
-  gap: var(--space-4);
+  margin-top: var(--space-2);
+  gap: var(--space-3);
   align-items: flex-start;
 }
 
@@ -461,7 +431,7 @@ input[type="search"]::-webkit-search-cancel-button {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  font-size: var(--text-display-size);
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
   color: var(--shell-text);
   padding: 0.2rem 0;
   z-index: 1;
@@ -484,6 +454,9 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: var(--shell-accent-gold);
 }
 
+.drawer-link-home::before {
+  background-color: var(--shell-accent-coral);
+}
 .drawer-link-contact::before {
   background-color: var(--shell-accent-cyan);
 }
@@ -499,56 +472,81 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .drawer-bottom {
   border-top: 1px solid var(--shell-border);
-  padding-top: var(--space-5);
+  padding-top: var(--space-4);
   gap: var(--space-4);
 }
 
-.drawer-search-wrapper {
-  border-bottom: 1px solid var(--shell-border);
-  padding-bottom: var(--space-3);
-  align-items: center;
-  gap: var(--space-3);
+.drawer-channels-section {
+  gap: var(--space-2);
 }
 
-.drawer-search-wrapper input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: var(--text-2xl);
-  color: var(--shell-text); /* Fixed font color */
-}
-
-.drawer-search-wrapper input::placeholder {
+.drawer-section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   color: var(--shell-muted);
 }
 
-.drawer-search-btn {
-  background-color: var(--shell-text);
-  color: var(--shell-bg);
-  border: none;
-  padding: 0.45rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+.drawer-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.channel-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.2s ease;
+}
+
+.channel-pill:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.channel-pill-left {
+  gap: 0.45rem;
+}
+
+.channel-icon {
+  font-size: 1rem;
+}
+
+.channel-name {
+  font-size: 0.85rem;
+  font-family: var(--font-body);
   line-height: 1;
-  font-size: 0.75rem;
-  flex-shrink: 0;
 }
 
-.drawer-search-btn:hover {
-  opacity: 0.85;
+.channel-arrow {
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 
-.search-icon-lg {
-  font-size: 1.5rem;
-  opacity: 0.5;
-  transform: rotate(-45deg);
-  display: inline-block;
+/* Color Tokens matching contact.vue */
+.box-cyan {
+  background-color: var(--shell-accent-cyan);
+  color: #131314;
+}
+
+.box-gold {
+  background-color: var(--shell-accent-gold);
+  color: #131314;
+}
+
+.box-coral {
+  background-color: var(--shell-accent-coral);
+  color: #131314;
 }
 
 .drawer-credit {
   color: var(--shell-muted);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
 }
 
 /* Drawer Transitions */
@@ -579,13 +577,9 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 }
 
-@media (min-width: 768px) {
-  .nav-search-desktop {
-    display: block;
-  }
-
-  .drawer-link {
-    font-size: 4rem;
+@media (min-width: 640px) {
+  .drawer-channels-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

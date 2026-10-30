@@ -158,6 +158,23 @@ export const useShowcaseStore = defineStore("showcase", () => {
     isCaseStudyOpen.value = !isCaseStudyOpen.value;
   }
 
+  // Random Style Navigator
+  function navigateToRandomMovement() {
+    // 1. Get all available slugs from catalogMeta (or allMovements)
+    const availableSlugs = catalogMeta.map((item) => item.slug);
+
+    if (availableSlugs.length === 0) {
+      router.push("/styles/editorial-pizza?view=live");
+      return;
+    }
+
+    // 2. Pick a random index
+    const randomIndex = Math.floor(Math.random() * availableSlugs.length);
+    const chosenSlug = availableSlugs[randomIndex];
+
+    // 3. Navigate directly to the live UI
+    router.push(`/styles/${chosenSlug}?view=live`);
+  }
   return {
     allMovements,
     currentMovement,
@@ -178,5 +195,6 @@ export const useShowcaseStore = defineStore("showcase", () => {
     openCaseStudy,
     closeCaseStudy,
     toggleCaseStudy,
+    navigateToRandomMovement,
   };
 });

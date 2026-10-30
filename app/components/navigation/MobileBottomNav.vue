@@ -1,9 +1,12 @@
+<!-- components/MobileBottomNav.vue -->
 <script setup lang="ts">
+import { useShowcaseStore } from "~/stores/useShowcaseStore";
+
 const route = useRoute();
+const store = useShowcaseStore();
 
 function handleRandom() {
-  // Stubbed for future random-routing logic
-  console.log("Triggered random design navigation");
+  store.navigateToRandomMovement();
 }
 </script>
 
@@ -30,7 +33,7 @@ function handleRandom() {
         <span class="dock-label text-micro-caps">About</span>
       </NuxtLink>
 
-      <!-- 3. Random Button (Interactive Stub) -->
+      <!-- 3. Random Button -->
       <button
         type="button"
         class="dock-item dock-btn flex-col flex-center transition-smooth"
@@ -118,7 +121,7 @@ function handleRandom() {
    HOVER & ACTIVE STATES (ACCENT TOKENS)
    ========================================================================== */
 .dock-item:hover {
-  color: var(--shell-text);
+  color: var(--shell-contrast-text);
 }
 
 .dock-item:hover .dock-icon {
