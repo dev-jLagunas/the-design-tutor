@@ -161,7 +161,7 @@ onBeforeUnmount(() => {
          ======================================================================= -->
     <div class="section-canvas-frame">
       <img
-        src="/images/design01/sect-2-img.jpg"
+        src="/images/design01/sect-2-img.webp"
         alt="Foundry Katamachi Nightlife Room Atmosphere"
         class="section-bg-image"
       />
@@ -252,7 +252,7 @@ onBeforeUnmount(() => {
 
           <!-- Terminal Right: Monospaced Telemetry / Spec Sheet -->
           <div class="terminal-log-block">
-            <ul class="terminal-lines font-mono" aria-label="Venue Logistics">
+            <ul class="terminal-lines font-body" aria-label="Venue Logistics">
               <li
                 v-for="(line, lIdx) in data.terminal.codeLines"
                 :key="lIdx"
@@ -268,7 +268,7 @@ onBeforeUnmount(() => {
 
       <!-- Optional Alert Banner -->
       <div v-if="data.alertBanner" class="alert-banner-block bg-border">
-        <div class="alert-indicator font-mono">
+        <div class="alert-indicator font-body">
           <Icon name="lucide:info" class="alert-icon" />
           <span>DIRECTIVE NOTICE</span>
         </div>

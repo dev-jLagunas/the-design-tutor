@@ -240,7 +240,7 @@ onBeforeUnmount(() => {
          ======================================================================= -->
     <div class="hero-canvas-frame">
       <img
-        src="/images/design01/hero-img-pizza.jpg"
+        src="/images/design01/hero-img-pizza.webp"
         alt="Foundry Katamachi Nightlife"
         class="hero-bg-image"
       />
@@ -264,7 +264,7 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- DESKTOP AUDIO PLAYER (HORIZONTAL VINYL + TELEMETRY) -->
-      <div class="masthead-player bg-border font-mono desktop-player">
+      <div class="masthead-player bg-border font-body desktop-player">
         <button
           type="button"
           class="vinyl-spin-btn"
@@ -400,7 +400,7 @@ onBeforeUnmount(() => {
     >
       <div class="drawer-canvas-frame">
         <img
-          src="/images/design01/hero-img-pizza.jpg"
+          src="/images/design01/hero-img-pizza.webp"
           alt="Drawer Background"
           class="drawer-bg-image"
         />
@@ -440,7 +440,7 @@ onBeforeUnmount(() => {
           </ul>
 
           <!-- MOBILE VINYL AUDIO PLAYER (PLACED DIRECTLY ABOVE DRAWER CTA) -->
-          <div class="masthead-player bg-border font-mono mobile-player">
+          <div class="masthead-player bg-border font-body mobile-player">
             <button
               type="button"
               class="vinyl-spin-btn"

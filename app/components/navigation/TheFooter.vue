@@ -60,8 +60,8 @@ function getLetterColorClass(index: number, char: string) {
             <img
               :src="
                 isDark
-                  ? '/images/brand/tdt-logo-transparent-dark.png'
-                  : '/images/brand/tdt-logo-transparent.png'
+                  ? '/images/brand/tdt-logo-transparent-dark.webp'
+                  : '/images/brand/tdt-logo-transparent.webp'
               "
               alt="The Design Tutor"
               class="footer-logo"

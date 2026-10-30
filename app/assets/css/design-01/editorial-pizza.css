@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-
 .foundry-landing-root {
   /* ===========================================================================
      1. NEUTRAL COLOR PALETTE (Dark-to-Light scale)
@@ -42,7 +40,6 @@
      =========================================================================== */
   --font-family-display: "Bodoni Moda", Georgia, serif;
   --font-family-body: "Space Grotesk", sans-serif;
-  --font-family-mono: "Space Mono", monospace;
 
   /* Font Sizing Hierarchy */
   --text-size-hero: clamp(2.75rem, 9vw, 8rem);

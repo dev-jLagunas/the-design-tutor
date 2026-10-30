@@ -101,7 +101,7 @@ onUnmounted(() => {
                 class="source-card flex-col"
               >
                 <div class="source-header flex-between">
-                  <span class="source-name font-mono">{{ item.source }}</span>
+                  <span class="source-name font-body">{{ item.source }}</span>
                 </div>
                 <p class="source-insight font-body">{{ item.insight }}</p>
               </article>
@@ -123,7 +123,7 @@ onUnmounted(() => {
                 class="rationale-item flex-col"
               >
                 <div class="slot-badge-bar flex-between">
-                  <span class="slot-tag font-mono text-micro-caps">
+                  <span class="slot-tag font-body text-micro-caps">
                     {{ slotData.slot }}
                   </span>
                 </div>
@@ -151,7 +151,7 @@ onUnmounted(() => {
                   <span class="pitfall-label text-micro-caps"
                     >Pitfall Avoided</span
                   >
-                  <p class="pitfall-text font-mono">
+                  <p class="pitfall-text font-body">
                     {{ slotData.pitfallToAvoid }}
                   </p>
                 </div>
@@ -162,7 +162,7 @@ onUnmounted(() => {
 
         <!-- Fallback if caseStudy object is missing -->
         <div v-else class="drawer-empty flex-center">
-          <p class="font-mono">
+          <p class="font-body">
             No case study rationale defined for this design.
           </p>
         </div>

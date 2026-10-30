@@ -205,7 +205,7 @@ onBeforeUnmount(() => {
         <div class="pie-stage" aria-label="Rotating Whole Pan Deep Dish Pizza">
           <div class="pie-disc-wrap">
             <img
-              src="/images/design01/whole-pizza-img.png"
+              src="/images/design01/whole-pizza-img.webp"
               alt="Freshly baked cast-iron 14-inch whole deep dish pizza viewed from top"
               class="spinning-pie-img"
             />

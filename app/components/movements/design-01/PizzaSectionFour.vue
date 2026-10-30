@@ -6,49 +6,49 @@ import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 const galleryImages = [
   {
     id: 1,
-    src: "/images/design01/extra-img-1.jpg",
+    src: "/images/design01/extra-img-1.webp",
     alt: "Cast-iron baked deep dish pizza slice on steel bar",
     tag: "VINYL ROTATION",
   },
   {
     id: 2,
-    src: "/images/design01/hero-img-pizza.jpg",
+    src: "/images/design01/hero-img-pizza.webp",
     alt: "Renovated steel counter and late-night patrons",
     tag: "MIDNIGHT SERVICE",
   },
   {
     id: 3,
-    src: "/images/design01/extra-img-3.jpg",
+    src: "/images/design01/extra-img-3.webp",
     alt: "Rich tomato sauce and thick cheese pull",
     tag: "NATURAL PAIRINGS",
   },
   {
     id: 4,
-    src: "/images/design01/extra-img-4.jpg",
+    src: "/images/design01/extra-img-4.webp",
     alt: "Technics turntable with vinyl spinning under halogen beam",
     tag: "FRESHLY BAKED",
   },
   {
     id: 5,
-    src: "/images/design01/extra-img-5.jpg",
+    src: "/images/design01/extra-img-5.webp",
     alt: "Poured concrete bar, natural wine, and amaro pours",
     tag: "PERFECT TEXTURES",
   },
   {
     id: 6,
-    src: "/images/design01/extra-img-6.jpg",
+    src: "/images/design01/extra-img-6.webp",
     alt: "Print menus and typographic details",
     tag: "LOCAL INGREDIENTS",
   },
   {
     id: 7,
-    src: "/images/design01/extra-img-2.jpg",
+    src: "/images/design01/extra-img-2.webp",
     alt: "Direct-flash chiaroscuro photography of the interior",
     tag: "MONTHLY VARIATIONS",
   },
   {
     id: 8,
-    src: "/images/design01/sect-2-img.jpg",
+    src: "/images/design01/sect-2-img.webp",
     alt: "Final nightcap and quiet counter reflection",
     tag: "OUTDOOR SEATING",
   },
@@ -289,7 +289,7 @@ onBeforeUnmount(() => {
         <button
           v-if="activeIndex < galleryImages.length - 1"
           type="button"
-          class="skip-photos-btn font-mono"
+          class="skip-photos-btn font-body"
           aria-label="Skip to final slide"
           @click="skipToEnd"
         >

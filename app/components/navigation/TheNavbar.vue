@@ -63,8 +63,8 @@ const channels = [
         <img
           :src="
             isDark
-              ? '/images/brand/tdt-logo-transparent.png'
-              : '/images/brand/tdt-logo-transparent-dark.png'
+              ? '/images/brand/tdt-logo-transparent.webp'
+              : '/images/brand/tdt-logo-transparent-dark.webp'
           "
           alt="The Design Tutor Logo"
           class="brand-logo"

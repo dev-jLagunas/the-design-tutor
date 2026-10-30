@@ -181,8 +181,8 @@ onMounted(() => {
             <img
               :src="
                 isDark
-                  ? '/images/brand/tdt-logo-transparent-dark.png'
-                  : '/images/brand/tdt-logo-transparent.png'
+                  ? '/images/brand/tdt-logo-transparent-dark.webp'
+                  : '/images/brand/tdt-logo-transparent.webp'
               "
               alt="The Design Tutor Logo"
               class="card-image-stage brand-logo"

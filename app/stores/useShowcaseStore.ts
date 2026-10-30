@@ -40,7 +40,7 @@ const catalogMeta: MovementMetaCard[] = [
     title: "Downtown Editorial Noir & Cast-Iron Craft",
     description:
       "Severe Didone serifs, brushed steel textures, and high-contrast flash photography applied to a late-night Katamachi pizza and vinyl counter.",
-    image: "/images/design01/design-01-screenshot.png",
+    image: "/images/design01/design-01-screenshot.webp",
     icon: "lucide:disc",
   },
   // {
@@ -52,7 +52,7 @@ const catalogMeta: MovementMetaCard[] = [
   //   title: "Minimalist Studio & Precision Craft",
   //   description:
   //     "Monochrome framing, hairline borders, and high-fashion editorial typography applied to a boutique private studio.",
-  //   image: "/images/design02/placeholder.png",
+  //   image: "/images/design02/placeholder.webp",
   //   icon: "lucide:sparkles",
   // },
 ];

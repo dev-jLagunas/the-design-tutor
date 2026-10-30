@@ -22,7 +22,7 @@ const scrollToTop = () => {
     <!-- Background Frame with Scrim Overlay -->
     <div class="footer-bg-frame">
       <img
-        src="/images/design01/hero-img-pizza.jpg"
+        src="/images/design01/hero-img-pizza.webp"
         alt="Foundry Katamachi Team and Counter Atmosphere"
         class="footer-bg-image"
       />
@@ -61,8 +61,8 @@ const scrollToTop = () => {
       <div class="footer-main-grid">
         <!-- Col 1: Operational Meta Details -->
         <div class="footer-col">
-          <span class="col-heading font-mono">OPERATIONAL DATA</span>
-          <ul class="col-list font-mono" aria-label="Operational details">
+          <span class="col-heading font-body">OPERATIONAL DATA</span>
+          <ul class="col-list font-body" aria-label="Operational details">
             <li
               v-for="(detail, dIdx) in data.operationalDetails"
               :key="dIdx"
@@ -76,7 +76,7 @@ const scrollToTop = () => {
 
         <!-- Col 2: Secondary / Resource Links -->
         <div class="footer-col">
-          <span class="col-heading font-mono">
+          <span class="col-heading font-body">
             {{ isEducational ? "ACADEMIC ARCHIVES" : "DISPATCHES & AUDIO" }}
           </span>
 
@@ -96,12 +96,12 @@ const scrollToTop = () => {
                 rel="noopener noreferrer"
                 class="footer-link-card bg-border"
               >
-                <div class="link-meta font-mono">
+                <div class="link-meta font-body">
                   <span>{{ res.tag }}</span>
                   <Icon name="lucide:arrow-up-right" class="link-arrow" />
                 </div>
                 <span class="link-label font-display">{{ res.label }}</span>
-                <span v-if="res.description" class="link-desc font-mono">
+                <span v-if="res.description" class="link-desc font-body">
                   {{ res.description }}
                 </span>
               </a>
@@ -121,7 +121,7 @@ const scrollToTop = () => {
                 :rel="link.isExternal ? 'noopener noreferrer' : undefined"
                 class="footer-link-card bg-border"
               >
-                <div class="link-meta font-mono">
+                <div class="link-meta font-body">
                   <span>NETWORK</span>
                   <Icon name="lucide:arrow-up-right" class="link-arrow" />
                 </div>
@@ -133,7 +133,7 @@ const scrollToTop = () => {
                 class="footer-link-card bg-border"
                 @click="scrollToTop"
               >
-                <div class="link-meta font-mono">
+                <div class="link-meta font-body">
                   <span>ANCHOR</span>
                   <Icon name="lucide:arrow-up" class="link-arrow" />
                 </div>
@@ -146,7 +146,7 @@ const scrollToTop = () => {
 
       <!-- Bottom Bar: Legal & Attribution Notice -->
       <div class="footer-bottom-bar bg-border">
-        <p class="legal-notice font-mono">{{ data.legalNotice }}</p>
+        <p class="legal-notice font-body">{{ data.legalNotice }}</p>
       </div>
     </div>
   </footer>

@@ -237,7 +237,7 @@ onBeforeUnmount(() => {
         <div class="stage-portrait anim-mobile relative">
           <div class="portrait-card relative">
             <img
-              src="/images/profile.jpg"
+              src="/images/profile.webp"
               alt="Juan Angel Lagunas"
               class="img-cover profile-frame-image"
             />

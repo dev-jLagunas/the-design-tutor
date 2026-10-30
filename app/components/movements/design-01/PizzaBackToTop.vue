@@ -33,7 +33,7 @@ onBeforeUnmount(() => {
     aria-label="Back to top"
     @click="scrollToTop"
   >
-    <span class="btn-label font-mono">TOP</span>
+    <span class="btn-label font-body">TOP</span>
     <Icon name="lucide:arrow-up" class="btn-icon" />
   </button>
 </template>

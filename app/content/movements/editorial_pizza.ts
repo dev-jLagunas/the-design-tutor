@@ -239,7 +239,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/pizza-one.png",
+            src: "/images/design01/pizza-one.webp",
             alt: "Katamachi Classic deep dish slice with thick tomato sauce and fennel sausage",
             caption: "Katamachi Classic slice.",
           },
@@ -265,7 +265,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/pizza-two.png",
+            src: "/images/design01/pizza-two.webp",
             alt: "Golden four cheese deep dish slice with caramelized frico cheese crown",
             caption: "Quadruple Formaggi slice.",
           },
@@ -291,7 +291,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/pizza-three.png",
+            src: "/images/design01/pizza-three.webp",
             alt: "Cupping pepperoni deep dish slice glistening with hot honey and red chili oil",
             caption: "Midnight Pepperoni slice.",
           },
@@ -317,7 +317,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/pizza-four.png",
+            src: "/images/design01/pizza-four.webp",
             alt: "Rustic deep dish slice covered in roasted wild mushrooms and herbs",
             caption: "King Oyster Mushroom slice.",
           },
@@ -596,7 +596,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/extra-img-6.jpg",
+            src: "/images/design01/extra-img-6.webp",
             alt: "Extreme stroke modulation on Didone serif letterforms",
             caption: "Bodoni display specimen.",
           },
@@ -622,7 +622,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/extra-img-2.jpg",
+            src: "/images/design01/extra-img-2.webp",
             alt: "Architectural 1px lines and crisp edges without rounded radii",
             caption: "Zero-radius framing rules.",
           },
@@ -648,7 +648,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/extra-img-4.jpg",
+            src: "/images/design01/extra-img-4.webp",
             alt: "Low-key charcoal tones lit by warm incandescent halogen light",
             caption: "Low-light chromatic balance.",
           },
@@ -674,7 +674,7 @@ export const editorialPizzaMovement: MovementDefinition = {
             variant: "link",
           },
           media: {
-            src: "/images/design01/hero-img-pizza.jpg",
+            src: "/images/design01/hero-img-pizza.webp",
             alt: "Direct flash capture of counter dining with harsh shadows",
             caption: "Chiaroscuro photo technique.",
           },

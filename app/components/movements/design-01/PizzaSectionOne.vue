@@ -174,7 +174,7 @@ onBeforeUnmount(() => {
 
         <p class="section-subtitle">{{ data.subtitle }}</p>
         <!-- 
-        <p v-if="data.leadCopy" class="section-lead-copy font-mono">
+        <p v-if="data.leadCopy" class="section-lead-copy font-body">
           {{ data.leadCopy }}
         </p> -->
       </header>
@@ -191,7 +191,7 @@ onBeforeUnmount(() => {
           <!-- Media Plate -->
           <div class="entity-image-stage">
             <img
-              :src="card.media?.src || '/images/design01/hero-img-pizza.jpg'"
+              :src="card.media?.src || '/images/design01/hero-img-pizza.webp'"
               :alt="card.media?.alt || card.title"
               class="entity-img"
               loading="lazy"
@@ -200,7 +200,7 @@ onBeforeUnmount(() => {
 
             <!-- Top Overlay Indicators -->
             <div class="entity-status-overlay">
-              <span class="status-indicator-pill bg-border font-mono">
+              <span class="status-indicator-pill bg-border font-body">
                 <span
                   class="status-dot"
                   :class="
@@ -224,7 +224,7 @@ onBeforeUnmount(() => {
 
               <span
                 v-if="!isEducational && idx === 0"
-                class="badge-popular bg-border font-mono"
+                class="badge-popular bg-border font-body"
               >
                 <span class="status-dot dot-popular"></span>
                 <span>SIGNATURE</span>
@@ -234,7 +234,7 @@ onBeforeUnmount(() => {
             <!-- Price or Metric Stamp -->
             <span
               v-if="card.priceOrMetric"
-              class="entity-price bg-border font-mono"
+              class="entity-price bg-border font-body"
             >
               {{ card.priceOrMetric }}
             </span>
@@ -242,20 +242,20 @@ onBeforeUnmount(() => {
 
           <!-- Card Content Body -->
           <div class="entity-content-block">
-            <div class="entity-meta-top font-mono">
+            <div class="entity-meta-top font-body">
               <span class="entity-category">{{ card.category }}</span>
               <span class="entity-badge">{{ card.badge }}</span>
             </div>
 
             <h3 class="entity-title font-display">{{ card.title }}</h3>
-            <span v-if="card.subtitle" class="entity-subtitle font-mono">
+            <span v-if="card.subtitle" class="entity-subtitle font-body">
               {{ card.subtitle }}
             </span>
 
             <p class="entity-desc">{{ card.description }}</p>
 
             <!-- Specs Grid -->
-            <div v-if="card.specs?.length" class="entity-specs-list font-mono">
+            <div v-if="card.specs?.length" class="entity-specs-list font-body">
               <div
                 v-for="(spec, sIdx) in card.specs"
                 :key="sIdx"
@@ -274,7 +274,7 @@ onBeforeUnmount(() => {
            =================================================================== -->
       <footer
         v-if="data.footerNote || data.globalAction"
-        class="footer-directive-strip bg-border font-mono"
+        class="footer-directive-strip bg-border font-body"
       >
         <div v-if="data.footerNote" class="directive-note">
           <Icon name="lucide:info" class="note-icon" />
